@@ -24,10 +24,13 @@ app.set('view engine', 'hbs');
 
 
 
+//entry route
 app.get('/', (req, res) => {
     res.render('home');
 });
 
+
+//404 route
 app.get('*', (req, res) => {
 	res.render('error', {
 		title: '404 Error',
