@@ -1,9 +1,3 @@
-
-/* 
-mongo "mongodb+srv://cluster0.fx7fb.gcp.mongodb.net/nookzada" --username angels
-
-password: ccapdev
-*/
 const express = require('express');
 const path = require('path');
 const exphbs = require('express-handlebars');
@@ -11,44 +5,31 @@ const bodyParser = require('body-parser');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt')
 
 require('dotenv').config();
+const app = express();
 
-const app = express()
+const PORT = process.env.PORT || 3000;
 
-const PORT = process.env.PORT || 8080;
+const urlencoder = bodyParser.urlencoded({
+    extended: false
+})
 
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
 
 
 //DB CONNECTION
-mongoose.connect('mongodb+srv://angels:ccapdev@cluster0.fx7fb.gcp.mongodb.net/nookzada?retryWrites=true&w=majority', {useNewUrlParser: true}, (err)=>{
-	if(err)
-		console.error(err)
-	else
-		console.log("Connection successful")
-});
+mongoose.connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_KEY}@cluster0.fx7fb.gcp.mongodb.net/nookzada?retryWrites=true&w=majority`, {useNewUrlParser: true, useUnifiedTopology: true})
+.then(()=> console.log("Database connection successful!"))
+.catch(err => console.error(err));
 
+const {userModel} = require('./model/user');
+
+app.use(bodyParser.json());
 //ITEMS COLLECTION
 let itemsModel = mongoose.model('items', ({}, {strict: false})) 
-itemsModel.find({},(err, item)=>{
-	if(err)
-		console.log(err)
-	else
-		console.log(item)
-})
 
 //USERS COLLECTION
-let usersModel = mongoose.model('users', ({}, {strict: false})) 
-usersModel.find({},(err, item)=>{
-	if(err)
-		console.log(err)
-	else
-		usersModel.count({}, (err, count)=>{
-			console.log(count);
-		})
-})
 
 
 /*app.engine('hbs', exphbs({
@@ -65,6 +46,82 @@ app.get('/', (req, res) => {
     res.render('home');
 });
 
+//adds a user to the database
+app.post('/user/signup', urlencoder, (req,res)=>{
+
+	let user = new userModel({
+		name: req.body.name,
+		password: req.body.password,
+		email: req.body.email,
+		userType: 'User',
+		reviewList: []
+	}).save((err,response)=>{
+		if(err)
+			res.status(400).send(err)
+		res.status(200).send(response)
+	})
+})
+
+app.post('/user/login', urlencoder, (req,res)=>{
+	userModel.findOne({'email': req.body.email}, (err, user)=>{
+		if(!user) res.json({message: 'Login failed, user not found!'})
+
+		user.comparePassword(req.body.password, (err, isMatch)=>{
+			if(err) console.error(err);
+			if(!isMatch) return res.status(400).json({
+				message: 'Wrong Password'
+			});
+			res.status(200).send('Logged in Successfully')
+			})
+	})
+})
+//adds an item to the database
+app.post('/addItem', urlencoder, (req,res)=>{
+	let name = req.body.name;
+	let price = req.body.price;
+	let description = req.body.desc;
+	let image = req.body.image;
+	let stock = req.body.stock;
+
+	let item = new itemsModel({
+		name: name,
+		price: price,
+		description: description,
+		itemList: [],
+		image: image,
+		stock: stock,
+		timesSold: 0
+	})
+
+	item.save((err, item)=>{
+		if(err)
+			return console.error(err)
+		else{
+			res.redirect('/')
+			console.log(`${item.name} added`)
+		}
+	})
+})
+
+//search 
+app.get('/', (req,res)=>{
+	let search = new RegExp (req.query.search, "i");
+
+	itemsModel.aggregate([{$match: {name: search}}], (err, data)=>{
+		if (data === undefined)
+			console.log('ops wala')
+		else{
+			res.render('index', {
+				searchname: JSON.parse(JSON.stringify(data))
+			})
+		}
+	})
+})
+
+
+app.post('/login', urlencoder, (req,res)=>{
+
+})
 
 //404 route
 app.get('*', (req, res) => {
