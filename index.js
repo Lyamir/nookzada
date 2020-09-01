@@ -21,7 +21,6 @@ mongoose.connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_KEY}@clu
 .then(()=> console.log("Database connection successful!"))
 .catch(err => console.error(err));
 
-
 const {userModel} = require('./model/user');
 
 app.use(bodyParser.json());
@@ -36,9 +35,14 @@ let itemsModel = mongoose.model('items', ({}, {strict: false}))
     extname: '.hbs'
 }));*/
 
+//setting up session
+app.use(session({
+	secret: 'very super secret',
+	resave: false,
+	saveUninitialized: true
+}));
+
 app.set('view engine', 'hbs');
-
-
 
 //entry route
 app.get('/', (req, res) => {
@@ -144,13 +148,16 @@ app.delete('deleteitem/:id', (req,res)=>{
 	})
 })
 
-//user logout (not yet done)
-app.post('/user/signout', (req,res)=>{
-	userModel.findByIdAndRemove(req.body.id, (err,res)=>{
-		if(err)
-			console.log("Error: " + err)
-		console.log("User successfully signed out!")
-	})
+//user logout
+app.get('/user/logout', function(req, res, next){
+	if(req.session){
+		req.session.destroy((err)=>{
+			if(err)
+				return next(err)
+			else
+				return res.redirect('/')
+		})
+	}
 })
 
 //editing items
