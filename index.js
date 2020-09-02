@@ -17,7 +17,7 @@ const urlencoder = bodyParser.urlencoded({
 })
 
 //DB CONNECTION
-let db = mongoose.connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_KEY}@cluster0.fx7fb.gcp.mongodb.net/nookzada?retryWrites=true&w=majority`, {useNewUrlParser: true, useUnifiedTopology: true})
+mongoose.connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_KEY}@cluster0.fx7fb.gcp.mongodb.net/nookzada?retryWrites=true&w=majority`, {useNewUrlParser: true, useUnifiedTopology: true})
 .then(()=> console.log("Database connection successful!"))
 .catch(err => console.error(err));
 
