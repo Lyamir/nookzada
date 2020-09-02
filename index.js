@@ -25,11 +25,6 @@ const {userModel} = require('./model/user');
 const {itemModel} = require('./model/item.js');
 
 app.use(bodyParser.json());
-//ITEMS COLLECTION
-
-//USERS COLLECTION
-
-
 /*app.engine('hbs', exphbs({
     defaultLayout: 'main',
     extname: '.hbs'
