@@ -17,15 +17,15 @@ const urlencoder = bodyParser.urlencoded({
 })
 
 //DB CONNECTION
-mongoose.connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_KEY}@cluster0.fx7fb.gcp.mongodb.net/nookzada?retryWrites=true&w=majority`, {useNewUrlParser: true, useUnifiedTopology: true})
+let db = mongoose.connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_KEY}@cluster0.fx7fb.gcp.mongodb.net/nookzada?retryWrites=true&w=majority`, {useNewUrlParser: true, useUnifiedTopology: true})
 .then(()=> console.log("Database connection successful!"))
 .catch(err => console.error(err));
 
 const {userModel} = require('./model/user');
+const {itemModel} = require('./model/item.js');
 
 app.use(bodyParser.json());
 //ITEMS COLLECTION
-let itemsModel = mongoose.model('items', ({}, {strict: false})) 
 
 //USERS COLLECTION
 
@@ -85,8 +85,17 @@ app.post('/addItem', urlencoder, (req,res)=>{
 	let description = req.body.desc;
 	let image = req.body.image;
 	let stock = req.body.stock;
+	let id;
+	itemModel.countDocuments({}, function(err, result) {
+		if (err) {
+		  console.log(err);
+		} else {
+		  id = result+1;
+		}
+	  });
 
-	let item = new itemsModel({
+	let item = new itemModel({
+		_id: id,
 		name: name,
 		price: price,
 		description: description,
