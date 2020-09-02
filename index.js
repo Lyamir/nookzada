@@ -126,17 +126,24 @@ app.post('/login', urlencoder, (req,res)=>{
 
 })
 
+//deleting an item (admin)
+/*app.post('/deleteitem/:id', (req,res)=>{
+	itemsModel.findByIdAndDelete(req.body.id,function(err){
+		if(err)
+			console.log("Error: " + err)
+		console.log("Item with id: " + req.body.id + "successfully deleted")
+	})
+})*/
+
 //delete an item (admin feature)
-app.delete('/items/deleteItem/:item_id', function(req, res) {
-	let id = req.params.item_id;
-	itemsModel.remove({
-		_id : id
-	}, function(err) {
-		if (err)
-			console.log("Error" + err)
-		else{
-			res.send('Item successfully deleted!')
-			res.redirect('/')
+app.delete('deleteitem/:id', (req,res)=>{
+	itemsModel.deleteOne({_id:req.params.id},(err)=>{
+		if(err){
+			res.status(400).json({
+				error:err
+			});
+		}else{
+			res.status(200).send("Item successfully deleted!")
 		}
 	})
 })
@@ -146,43 +153,34 @@ app.get('/user/logout', function(req, res, next){
 	if(req.session){
 		req.session.destroy((err)=>{
 			if(err)
-				console.log("Error: " + err)
+				return next(err)
 			else
-				res.redirect('/')
+				return res.redirect('/')
 		})
 	}
 })
 
-//edit an item (admin feature)
-app.put('items/editItem/:item_id', function(req, res) {
-	let id = req.params.item_id;
-	var item = {
+//editing items
+app.put('/edititem/:id',(req,res)=>{
+	const item = new itemsModel({
+		_id: req.params.id,
 		name: req.body.name,
 		price: req.body.price,
 		description: req.body.desc,
 		itemList: [],
 		image: req.body.image,
 		stock: req.body.stock,
-		timesSold: req.body.timesSold
-	}
-	itemsModel.findByIdAndUpdate(id, item, function(err, item) {
-		if (err) {
-			console.log("Error: " + err)
-			throw err;
+		timesSold: 0
+	});
+	itemsModel.updateOne({_id:req.params.id}, (err,item)=>{
+		if(err){
+			res.status(400).json({
+				error:err
+			})
 		}else{
-			res.send('Item informations successfully updated!')
+			res.status(200).send("Item successfully updated")
 			res.redirect('/')
 		}
-	})
-})
-
-//display all items
-app.get('/items', function(req, res) {
-	itemsModel.find(function(err, items) {
-		if (err)
-			console.log("Error" + err)
-		else
-			res.json(items);
 	})
 })
 
