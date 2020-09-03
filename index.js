@@ -23,6 +23,7 @@ mongoose.connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_KEY}@clu
 
 const {userModel} = require('./model/user');
 const {itemModel} = require('./model/item.js');
+const {orderModel} = require('./model/order');
 
 app.use(bodyParser.json());
 /*app.engine('hbs', exphbs({
@@ -69,6 +70,7 @@ app.post('/user/login', urlencoder, (req,res)=>{
 			if(!isMatch) return res.status(400).json({
 				message: 'Wrong Password'
 			});
+			req.session.user = user
 			res.status(200).send('Logged in Successfully')
 			})
 	})
@@ -145,9 +147,10 @@ app.delete('/items/deleteItem/:item_id', function(req, res) {
 	})
 })
 
+
 //user logout
 app.get('/user/logout', function(req, res, next){
-	if(req.session){
+	if(req.session.user){
 		req.session.destroy((err)=>{
 			if(err)
 				console.log("Error: " + err)
@@ -182,13 +185,33 @@ app.put('items/editItem/:item_id', function(req, res) {
 
 //display all items
 app.get('/items', function(req, res) {
-	itemsModel.find(function(err, items) {
+	itemModel.find(function(err, items) {
 		if (err)
 			console.log("Error" + err)
 		else
 			res.json(items)
 	})
 })
+
+//adds an order
+app.post('/order/addOrder', urlencoder, (req,res)=>{
+	let userID = req.session.user._id;
+
+	let order = new orderModel({
+		userID: userID,
+		items: []
+	})
+
+	order.save((err, order)=>{
+		if(err)
+			return console.error(err)
+		else{
+			res.redirect('/')
+			console.log(`Order added`)
+		}
+	})
+})
+
 
 //404 route
 app.get('*', (req, res) => {
