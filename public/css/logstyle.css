@@ -1,0 +1,270 @@
+body {
+    margin: 0;
+    padding: 0;
+    background: url(../images/login.jpg) no-repeat 0px 0px;
+    
+    min-height: 100vh;
+    background-size: cover;
+    font-family: Barlow;
+}
+
+
+.space{
+    padding: 80px;
+}
+
+.five{
+    padding: 10px;
+}
+
+h2 {
+    margin-left: 10px;
+    color: black;
+    font-size: 35px;
+    font-display: bold;
+    text-align: left;
+    padding-bottom: 10px;
+    font-family: 'Barlow Semi Condensed', sans-serif;
+    font-weight: 600;
+}
+
+p.w3l-register-p {
+    color: black;
+    font-size: 14px;
+    text-align: left;
+    border-radius: 3px;
+    font-family: 'Barlow', sans-serif;
+    font-weight: 400;
+}
+
+.w3l-login-form {
+    background: white;
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 1.5em 3em 3em 3em;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.group {
+    display: flex;
+    padding: 15px 5px;
+    border-radius: 3px;
+}
+
+.group i {
+    color: #0499F2;
+    font-size: 20px;
+    padding: 0 10px;
+}
+
+.w3l-form-group {
+    margin: 5px 0 0 0;
+}
+
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    border: none;
+    box-sizing: border-box;
+    color: #000;
+    background-color: #D3F5FD;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus {
+    outline: none;
+    background-color: #D3F5FD;
+}
+
+button {
+    background: #0499F2;
+    color: #ffffff;
+    font-size: 18px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: none;
+    padding: 10px 15px 10px 15px;
+    cursor: pointer;
+    width: 100%;
+    border-radius: 5px;
+    font-weight: 600;
+    font-family: 'Barlow', sans-serif;
+}
+
+button:hover {
+    background-color: #2CEF91;
+    transition-duration: 0.3s;
+}
+
+.forgot {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 10px;
+}
+
+a {
+    color: black;
+    font-size: 14px;
+    text-decoration: none;
+    font-family: 'Barlow', sans-serif;
+}
+
+.forgot p {
+    color: black;
+    text-align: center;
+    font-size: 14px;
+    font-family: 'Barlow', sans-serif;
+}
+
+.forgot a:hover{
+    text-decoration-line: underline;
+}
+
+.reg {
+    background: lightpink;
+    color: #ffffff;
+    font-size: 18px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: none;
+    padding: 10px 15px 10px 15px;
+    cursor: pointer;
+    width: 100%;
+    border-radius: 5px;
+    font-weight: 600;
+    font-family: 'Barlow', sans-serif;
+}
+
+.reg:hover {
+    background-color: #2CEF91;
+    transition-duration: 0.3s;
+}
+
+/* social links */
+
+.social-links {
+	position: absolute;
+	right: 39px;
+	top: 240px;
+	z-index: 99;
+}
+
+.social-links a {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	align-items: center;
+	-webkit-box-pack: center;
+	-ms-flex-pack: center;
+	justify-content: center;
+	width: 48px;
+	height: 48px;
+	margin-bottom: 22px;
+	color: #fff;
+	font-size: 13px;
+	border-radius: 50%;
+	background: pink;
+}
+
+.social-links a:hover{
+    color: #0499F2;
+}
+.social-links {
+  top: 120px;
+}
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .social-links {
+    top: 120px;
+    right: 15px;
+}
+}
+@media only screen and (max-width: 767px) {
+  .social-links {
+		width: 100%;
+		top: 0;
+		left: 0;
+		text-align: center;
+		top: 80px;
+	}
+	.social-links a {
+		display: -webkit-inline-box;
+		display: -ms-inline-flexbox;
+		display: inline-flex;
+		margin-right: 10px;
+		margin-bottom: 0;
+	}
+}
+
+
+/*-- /responsive design --*/
+
+@media(max-width:768px) {
+    h1 {
+        font-size: 47px;
+    }
+}
+
+@media(max-width:667px) {
+    h1 {
+        font-size: 45px;
+    }
+}
+
+@media(max-width:640px) {
+    p.copyright-agileinfo {
+        letter-spacing: 1px;
+    }
+    h1 {
+        font-size: 43px;
+    }
+}
+
+@media(max-width:568px) {
+    h1 {
+        font-size: 40px;
+    }
+    p.copyright-agileinfo {
+        font-size: 14px;
+    }
+}
+
+@media(max-width:480px) {
+    .w3l-login-form {
+    margin: 0 3vw;
+}
+    h1 {
+        font-size: 38px;
+    }
+    p.copyright-agileinfo {
+        line-height: 1.8em;
+    }
+}
+
+@media(max-width:414px) {
+    h1 {
+        font-size: 34px;
+    }
+}
+
+@media(max-width:384px) {
+    h1 {
+        font-size: 30px;
+    }
+}
+
+@media(max-width:320px) {
+    h1 {
+        font-size: 25px;
+    }
+    .forgot p {
+        text-align: left;
+    }
+    .forgot {
+        display: block;
+    }
+}
+
+/*-- /responsive design --*/

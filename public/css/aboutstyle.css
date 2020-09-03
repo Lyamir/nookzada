@@ -1,0 +1,144 @@
+.w3l-about {
+    margin: 0;
+    padding: 0;
+    background: url(../images/bg.jpg) no-repeat 0px 0px;
+    
+    min-height: 100vh;
+    background-size: cover;
+    font-family: Barlow;
+}
+
+
+.space{
+    padding: 50px;
+}
+
+/* social links */
+
+.social-links {
+	position: absolute;
+	right: 39px;
+	top: 240px;
+	z-index: 99;
+}
+
+.social-links a {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	align-items: center;
+	-webkit-box-pack: center;
+	-ms-flex-pack: center;
+	justify-content: center;
+	width: 48px;
+	height: 48px;
+	margin-bottom: 22px;
+	color: #fff;
+	font-size: 13px;
+	border-radius: 50%;
+	background: #43b14b;
+}
+
+.social-links a:hover{
+    color: #2CEF91;
+}
+.social-links {
+  top: 120px;
+}
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .social-links {
+    top: 120px;
+    right: 15px;
+}
+}
+@media only screen and (max-width: 767px) {
+  .social-links {
+		width: 100%;
+		top: 0;
+		left: 0;
+		text-align: center;
+		top: 80px;
+	}
+	.social-links a {
+		display: -webkit-inline-box;
+		display: -ms-inline-flexbox;
+		display: inline-flex;
+		margin-right: 10px;
+		margin-bottom: 0;
+	}
+}
+
+
+/*-- /responsive design --*/
+
+@media(max-width:768px) {
+    h1 {
+        font-size: 47px;
+    }
+}
+
+@media(max-width:667px) {
+    h1 {
+        font-size: 45px;
+    }
+}
+
+@media(max-width:640px) {
+    p.copyright-agileinfo {
+        letter-spacing: 1px;
+    }
+    h1 {
+        font-size: 43px;
+    }
+}
+
+@media(max-width:568px) {
+    h1 {
+        font-size: 40px;
+    }
+    p.copyright-agileinfo {
+        font-size: 14px;
+    }
+}
+
+@media(max-width:480px) {
+    .w3l-about {
+    margin: 0 3vw;
+}
+    h1 {
+        font-size: 38px;
+    }
+    p.copyright-agileinfo {
+        line-height: 1.8em;
+    }
+}
+
+@media(max-width:414px) {
+    h1 {
+        font-size: 34px;
+    }
+}
+
+@media(max-width:384px) {
+    h1 {
+        font-size: 30px;
+    }
+}
+
+@media(max-width:320px) {
+    h1 {
+        font-size: 25px;
+    }
+    .forgot p {
+        text-align: left;
+    }
+    .forgot {
+        display: block;
+    }
+}
+
+/*-- /responsive design --*/
+
+/* carousel */

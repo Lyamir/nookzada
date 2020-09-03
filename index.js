@@ -38,11 +38,13 @@ app.use(session({
 	saveUninitialized: true
 }));
 
+app.use(express.static(path.join(__dirname, 'public')));
+
 app.set('view engine', 'hbs');
 
 //entry route
 app.get('/', (req, res) => {
-    res.render('home');
+    res.render('index');
 });
 
 //adds a user to the database
