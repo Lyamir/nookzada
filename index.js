@@ -209,10 +209,10 @@ app.post('/addOrder', urlencoder, (req,res)=>{
 
 	order.save((err, order)=>{
 		if(err)
-			return console.error(err)
+			console.log("Error: " + err)
 		else{
 			res.redirect('/')
-			console.log(`Item successfully added to cart!`)
+			console.log('Order successfully added to cart!')
 		}
 	})
 })
@@ -228,6 +228,17 @@ app.get('/deleteOrder/:id', function(req, res){
 	});
 });
 
+//filter items by popularity
+app.get('/sort', function(req, res){
+	itemModel.find({}).sort({timesSold: -1}).exec(function(err, docs) { 
+		if(err){
+			console.log("Error: " + err)
+			throw(err)
+		}else{
+			res.json(docs)
+		}
+	});
+})
 
 //404 route
 app.get('*', (req, res) => {
@@ -237,8 +248,6 @@ app.get('*', (req, res) => {
 		errormsg: 'Page not found'
 	});
 });
-
-
 
 app.listen(PORT, () => {
 	console.log(`Listening to localhost on port ${PORT}`);
