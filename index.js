@@ -137,6 +137,10 @@ app.post('/login', urlencoder, (req,res)=>{
 //delete an item (admin feature)
 app.get('/delete/:id', function(req, res){
 	itemModel.remove({_id:req.params.id}, function(err, delItem){
+		if(err){
+			console.log("Error: " + err)
+			throw(err)
+		}
 		res.redirect('/')
 	});
 });
@@ -154,7 +158,7 @@ app.get('/user/logout', function(req, res, next){
 })
 
 //edit an item (admin feature)
-app.put('/editItem/:id', function(req, res) {
+app.get('/editItem/:id', function(req, res) {
 	let id = req.params.id;
 
 	var item = {
@@ -166,7 +170,8 @@ app.put('/editItem/:id', function(req, res) {
 		stock: req.body.stock,
 		timesSold: req.body.timesSold
 	}
-	itemsModel.findByIdAndUpdate(id, item, function(err, item) {
+
+	itemModel.findByIdAndUpdate(id, item, function(err, item) {
 		if (err) {
 			console.log("Error: " + err)
 			throw err;
