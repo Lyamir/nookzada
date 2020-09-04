@@ -44,7 +44,7 @@ app.set('view engine', 'hbs');
 
 //entry route
 app.get('/', (req, res) => {
-    res.render('index');
+	 res.render('index');
 });
 
 //adds a user to the database
@@ -135,20 +135,11 @@ app.post('/login', urlencoder, (req,res)=>{
 })
 
 //delete an item (admin feature)
-app.delete('/items/deleteItem/:item_id', function(req, res) {
-	let id = req.params.item_id;
-	itemsModel.remove({
-		_id : id
-	}, function(err) {
-		if (err)
-			console.log("Error" + err)
-		else{
-			res.send('Item successfully deleted!')
-			res.redirect('/')
-		}
-	})
-})
-
+app.get('/delete/:id', function(req, res){
+	itemModel.remove({_id:req.params.id}, function(err, delItem){
+		res.redirect('/')
+	});
+});
 
 //user logout
 app.get('/user/logout', function(req, res, next){
@@ -163,8 +154,9 @@ app.get('/user/logout', function(req, res, next){
 })
 
 //edit an item (admin feature)
-app.put('items/editItem/:item_id', function(req, res) {
-	let id = req.params.item_id;
+app.put('/editItem/:id', function(req, res) {
+	let id = req.params.id;
+
 	var item = {
 		name: req.body.name,
 		price: req.body.price,
@@ -198,8 +190,18 @@ app.get('/items', function(req, res) {
 //adds an order
 app.post('/order/addOrder', urlencoder, (req,res)=>{
 	let userID = req.session.user._id;
+	let id;
+
+	orderModel.countDocuments({}, function(err, result) {
+		if (err) {
+		  console.log(err);
+		} else {
+		  id = result+1;
+		}
+	  });
 
 	let order = new orderModel({
+		_id: id,
 		userID: userID,
 		items: []
 	})
