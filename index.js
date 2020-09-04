@@ -23,7 +23,7 @@ mongoose.connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_KEY}@clu
 
 const {userModel} = require('./model/user');
 const {itemModel} = require('./model/item.js');
-const {orderModel} = require('./model/order');
+const {orderModel} = require('./model/order.js');
 
 app.use(bodyParser.json());
 /*app.engine('hbs', exphbs({
@@ -189,9 +189,9 @@ app.get('/items', function(req, res) {
 })
 
 //adds an order
-app.post('/order/addOrder', urlencoder, (req,res)=>{
-	let userID = req.session.user._id;
+app.post('/addOrder', urlencoder, (req,res)=>{
 	let id;
+	let userID = req.session.user._id;
 
 	orderModel.countDocuments({}, function(err, result) {
 		if (err) {
@@ -212,10 +212,21 @@ app.post('/order/addOrder', urlencoder, (req,res)=>{
 			return console.error(err)
 		else{
 			res.redirect('/')
-			console.log(`Order added`)
+			console.log(`Item successfully added to cart!`)
 		}
 	})
 })
+
+//delete order
+app.get('/deleteOrder/:id', function(req, res){
+	orderModel.remove({_id:req.params.id}, function(err, delOrder){
+		if(err){
+			console.log("Error: " + err)
+			throw(err)
+		}
+		res.redirect('/')
+	});
+});
 
 
 //404 route

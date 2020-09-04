@@ -1,8 +1,13 @@
 const mongoose = require('mongoose')
 const orderSchema = mongoose.Schema({
+        _id: {
+            type: Number,
+            required: true
+        },
         userID: {
             type: String,
-            required: true
+            required: true,
+            unique: false
         },
         items: {
             type: []
