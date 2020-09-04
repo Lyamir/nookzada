@@ -158,10 +158,9 @@ app.get('/user/logout', function(req, res, next){
 })
 
 //edit an item (admin feature)
-app.get('/editItem/:id', function(req, res) {
-	let id = req.params.id;
-
-	var item = {
+app.get('/edit/:id', function(req, res) {
+	var id = req.params.id;
+	var item = new itemModel({
 		name: req.body.name,
 		price: req.body.price,
 		description: req.body.desc,
@@ -169,18 +168,15 @@ app.get('/editItem/:id', function(req, res) {
 		image: req.body.image,
 		stock: req.body.stock,
 		timesSold: req.body.timesSold
-	}
-
-	itemModel.findByIdAndUpdate(id, item, function(err, item) {
-		if (err) {
-			console.log("Error: " + err)
-			throw err;
-		}else{
-			res.send('Item informations successfully updated!')
-			res.redirect('/')
-		}
 	})
-})
+	itemModel.findByIdAndUpdate(id, item, function(err, item){
+		if(err){
+			console.log("Error: " + err)
+			throw(err)
+		}
+		res.redirect('/')
+	});
+});
 
 //display all items
 app.get('/items', function(req, res) {
