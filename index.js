@@ -80,7 +80,7 @@ app.get('/register', (req, res)=>{
 //adds a user to the database
 app.post('/user/signup', urlencoder, (req,res)=>{
 	let user = new userModel({
-		name: req.body.name,
+		username: req.body.name,
 		password: req.body.password,
 		email: req.body.email,
 		userType: 'User',

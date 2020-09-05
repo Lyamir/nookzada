@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
 let SALT = 10
 const userSchema = mongoose.Schema({
-        name: {
+        username: {
             type: String,
             required: true
         },
