@@ -80,7 +80,13 @@ app.get('/register', (req, res)=>{
 
 //adds a user to the database
 app.post('/user/register', urlencoder, (req,res)=>{
-
+	userModel.findOne({'email': req.body.email}, (err, user)=>{
+		if(user){
+			res.render('register', {
+				error: "Email already exist!"
+			})
+		}
+	})
 	if(req.body.password != req.body.confirmpassword){
 		res.render('register', {
 			error: "Passwords do not match!"
@@ -88,34 +94,48 @@ app.post('/user/register', urlencoder, (req,res)=>{
 	}
 	else{
 		let user = new userModel({
-			username: req.body.name,
+			username: req.body.username,
 			password: req.body.password,
 			email: req.body.email,
 			userType: 'User',
 			reviewList: []
 		}).save((err,response)=>{
-			if(err)
-				res.status(400).send(err)
-			res.status(200).send(response)
+			if(err){
+				res.render('register', {
+					error: "Error: " + err
+				})
+			}else{
+				res.render('login')
+			}
 		})	
 	}
-	
 })
+
 //user login
 app.post('/user/login', urlencoder, (req,res)=>{
 	userModel.findOne({'email': req.body.email}, (err, user)=>{
-		if(!user) res.json({message: 'Login failed, user not found!'})
-
+		if(!user){
+			res.render('login', {
+				error: "Login failed, user not found!"
+			})
+		}
 		user.comparePassword(req.body.password, (err, isMatch)=>{
-			if(err) console.error(err);
-			if(!isMatch) return res.status(400).json({
-				message: 'Wrong Password'
-			});
+			if(err){
+				res.render('login', {
+					error: "Error: " + err
+				})
+			}
+			if(!isMatch){
+				res.render('login', {
+					error: "Wrong password!"
+				})
+			}
 			req.session.user = user
-			res.status(200).send('Logged in Successfully')
+			res.render('index')
 			})
 	})
 })
+
 //adds an item to the database
 app.post('/addItem', urlencoder, (req,res)=>{
 	let name = req.body.name;
