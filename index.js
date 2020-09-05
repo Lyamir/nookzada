@@ -47,9 +47,33 @@ app.get('/', (req, res) => {
 	 res.render('index');
 });
 
+//about route
+app.get('/about', (req, res)=>{
+	res.render('about');
+})
+
+//contact route
+app.get('/contact', (req, res)=>{
+	res.render('contact');
+})
+
+//shop route
+app.get('/shop', (req, res)=>{
+	res.render('shop')
+})
+
+//sign-in route
+app.get('/login', (req, res)=>{
+	res.render('login')
+})
+
+//index route
+app.get('/index', (req, res)=>{
+	res.render('index')
+})
+
 //adds a user to the database
 app.post('/user/signup', urlencoder, (req,res)=>{
-
 	let user = new userModel({
 		name: req.body.name,
 		password: req.body.password,
