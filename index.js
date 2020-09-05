@@ -5,7 +5,6 @@ const bodyParser = require('body-parser');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
-const bcrypt = require('bcrypt')
 
 require('dotenv').config();
 const app = express();
@@ -32,6 +31,7 @@ app.use(bodyParser.json());
 }));*/
 
 //setting up session
+app.use(cookieParser())
 app.use(session({
 	secret: 'very super secret',
 	resave: false,
@@ -171,6 +171,7 @@ app.post('/addItem', urlencoder, (req,res)=>{
 		}
 	})
 })
+
 //search 
 app.get('/', (req,res)=>{
 	let search = new RegExp (req.query.search, "i");
@@ -185,9 +186,7 @@ app.get('/', (req,res)=>{
 		}
 	})
 })
-app.post('/login', urlencoder, (req,res)=>{
 
-})
 //delete an item (admin feature)
 app.get('/delete/:id', function(req, res){
 	itemModel.remove({_id:req.params.id}, function(err, delItem){
