@@ -72,6 +72,11 @@ app.get('/index', (req, res)=>{
 	res.render('index')
 })
 
+//register route
+app.get('/register', (req, res)=>{
+	res.render('register')
+})
+
 //adds a user to the database
 app.post('/user/signup', urlencoder, (req,res)=>{
 	let user = new userModel({
@@ -86,7 +91,7 @@ app.post('/user/signup', urlencoder, (req,res)=>{
 		res.status(200).send(response)
 	})
 })
-
+//user login
 app.post('/user/login', urlencoder, (req,res)=>{
 	userModel.findOne({'email': req.body.email}, (err, user)=>{
 		if(!user) res.json({message: 'Login failed, user not found!'})
@@ -137,7 +142,6 @@ app.post('/addItem', urlencoder, (req,res)=>{
 		}
 	})
 })
-
 //search 
 app.get('/', (req,res)=>{
 	let search = new RegExp (req.query.search, "i");
@@ -152,12 +156,9 @@ app.get('/', (req,res)=>{
 		}
 	})
 })
-
-
 app.post('/login', urlencoder, (req,res)=>{
 
 })
-
 //delete an item (admin feature)
 app.get('/delete/:id', function(req, res){
 	itemModel.remove({_id:req.params.id}, function(err, delItem){
@@ -168,7 +169,6 @@ app.get('/delete/:id', function(req, res){
 		res.redirect('/')
 	});
 });
-
 //user logout
 app.get('/user/logout', function(req, res, next){
 	if(req.session.user){
@@ -180,7 +180,6 @@ app.get('/user/logout', function(req, res, next){
 		})
 	}
 })
-
 //edit an item (admin feature)
 app.get('/edit/:id', function(req, res) {
 	var id = req.params.id;
@@ -201,7 +200,6 @@ app.get('/edit/:id', function(req, res) {
 		res.redirect('/')
 	});
 });
-
 //display all items
 app.get('/items', function(req, res) {
 	itemModel.find(function(err, items) {
@@ -211,7 +209,6 @@ app.get('/items', function(req, res) {
 			res.json(items)
 	})
 })
-
 //adds an order
 app.post('/addOrder', urlencoder, (req,res)=>{
 	let id;
@@ -240,7 +237,6 @@ app.post('/addOrder', urlencoder, (req,res)=>{
 		}
 	})
 })
-
 //delete order
 app.get('/deleteOrder/:id', function(req, res){
 	orderModel.remove({_id:req.params.id}, function(err, delOrder){
@@ -251,7 +247,6 @@ app.get('/deleteOrder/:id', function(req, res){
 		res.redirect('/')
 	});
 });
-
 //filter items by popularity
 app.get('/sort', function(req, res){
 	itemModel.find({}).sort({timesSold: -1}).exec(function(err, docs) { 
@@ -263,7 +258,6 @@ app.get('/sort', function(req, res){
 		}
 	});
 })
-
 //404 route
 app.get('*', (req, res) => {
 	res.render('error', {
@@ -272,7 +266,7 @@ app.get('*', (req, res) => {
 		errormsg: 'Page not found'
 	});
 });
-
+//listen to port 3000
 app.listen(PORT, () => {
 	console.log(`Listening to localhost on port ${PORT}`);
 });
