@@ -24,7 +24,6 @@ mongoose.connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_KEY}@clu
 const {userModel} = require('./model/user');
 const {itemModel} = require('./model/item.js');
 const {orderModel} = require('./model/order.js');
-const user = require('./model/user');
 
 app.use(bodyParser.json());
 /*app.engine('hbs', exphbs({
