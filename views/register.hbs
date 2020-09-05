@@ -20,7 +20,7 @@
   <link rel="preload" type = "text/css" as="style" href="/mobirise/css/mbr-additional.css">
   <link rel="stylesheet" href="/mobirise/css/mbr-additional.css" type="text/css">
   <!-- custom style sheet -->
-  <link href="css/regstyle.css" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" type="text/css" href="/css/regstyle.css">
   <script src="https://kit.fontawesome.com/917f90ecf4.js" crossorigin="anonymous"></script>
   <!-- google fonts-->
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@600&family=Barlow:wght@400;600&display=swap" rel="stylesheet">
@@ -70,23 +70,28 @@
 <!-- Register -->
 <div class=" w3l-reg-form">
     <h2>Registration</h2>
-    <form action="#" method="POST">
+    <form action="/user/register" method="POST">
         <!-- username -->
             <div class="group">
-                <input type="text" class="form-control" placeholder="Username" required="required" />
+                <input type="text" name="username" class="form-control" placeholder="Username" required="required" />
             </div>
         <!-- email -->
             <div class="group">
-                <input type="email" class="form-control" placeholder="Email" required="required" />
+                <input type="email" name="email"class="form-control" placeholder="Email" required="required" />
             </div>
         <!-- password -->
             <div class="group">
-                <input type="password" class="form-control" placeholder="Password" required="required" />
+                <input type="password" name="password"class="form-control" placeholder="Password" required="required" />
             </div>
         <!-- confirm password -->
             <div class="group">
-                <input type="password" class="form-control" placeholder="Confirm password" required="required" />
+                <input type="password" name="confirmpassword" class="form-control" placeholder="Confirm password" required="required" />
             </div>
+            {{#if error}}
+                <div class="alert alert-danger" role="alert">
+                    {{error}}
+                </div>
+            {{/if}}
         <br>
         <button type="submit">Submit</button>
     </form>

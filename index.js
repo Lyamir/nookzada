@@ -24,6 +24,7 @@ mongoose.connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_KEY}@clu
 const {userModel} = require('./model/user');
 const {itemModel} = require('./model/item.js');
 const {orderModel} = require('./model/order.js');
+const user = require('./model/user');
 
 app.use(bodyParser.json());
 /*app.engine('hbs', exphbs({
@@ -78,18 +79,27 @@ app.get('/register', (req, res)=>{
 })
 
 //adds a user to the database
-app.post('/user/signup', urlencoder, (req,res)=>{
-	let user = new userModel({
-		username: req.body.name,
-		password: req.body.password,
-		email: req.body.email,
-		userType: 'User',
-		reviewList: []
-	}).save((err,response)=>{
-		if(err)
-			res.status(400).send(err)
-		res.status(200).send(response)
-	})
+app.post('/user/register', urlencoder, (req,res)=>{
+
+	if(req.body.password != req.body.confirmpassword){
+		res.render('register', {
+			error: "Passwords do not match!"
+		})
+	}
+	else{
+		let user = new userModel({
+			username: req.body.name,
+			password: req.body.password,
+			email: req.body.email,
+			userType: 'User',
+			reviewList: []
+		}).save((err,response)=>{
+			if(err)
+				res.status(400).send(err)
+			res.status(200).send(response)
+		})	
+	}
+	
 })
 //user login
 app.post('/user/login', urlencoder, (req,res)=>{
