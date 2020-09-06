@@ -16,7 +16,7 @@
 /* social links */
 
 .social-links {
-	position: absolute;
+	position: fixed;
 	right: 39px;
 	top: 240px;
 	z-index: 99;
