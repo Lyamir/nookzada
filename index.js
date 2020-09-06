@@ -77,6 +77,22 @@ app.get('/register', (req, res)=>{
 	res.render('register')
 })
 
+//logout route
+app.get('logout', (req, res)=>{
+	if(req.session.user){
+		req.session.destroy((err)=>{
+			if(err){
+				res.render('index', {
+					error: "Error in logging out!"
+				})
+			}
+			else{
+				res.render('index')
+			}
+		})
+	}
+})
+
 //adds a user to the database
 app.post('/user/register', urlencoder, (req,res)=>{
 	userModel.findOne({'email': req.body.email}, (err, user)=>{
@@ -198,10 +214,14 @@ app.get('/delete/:id', function(req, res){
 app.get('/user/logout', function(req, res, next){
 	if(req.session.user){
 		req.session.destroy((err)=>{
-			if(err)
-				console.log("Error: " + err)
-			else
-				res.redirect('/')
+			if(err){
+				res.render('index', (req, res)=>{
+					error: "Error: " + err
+				})
+			}
+			else{
+				res.render('index')
+			}
 		})
 	}
 })
