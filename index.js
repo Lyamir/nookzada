@@ -111,27 +111,24 @@ app.post('/user/register', urlencoder, (req,res)=>{
 })
 
 //user login
-app.post('/user/login', urlencoder, (req,res)=>{
+app.post('/user/login', urlencoder, (req, res)=>{
 	userModel.findOne({'email': req.body.email}, (err, user)=>{
 		if(!user){
 			res.render('login', {
 				error: "Login failed, user not found!"
 			})
-		}
-		user.comparePassword(req.body.password, (err, isMatch)=>{
-			if(err){
-				res.render('login', {
-					error: "Error: " + err
-				})
-			}
-			if(!isMatch){
-				res.render('login', {
-					error: "Wrong password!"
-				})
-			}
-			req.session.user = user
-			res.render('index')
+		}else{
+			user.comparePassword(req.body.password, (err, isMatch)=>{
+				if(!isMatch){
+					res.render('login', {
+						error: "Wrong password!"
+					})
+				}else{
+					req.session.user = user
+					res.render('index')
+				}
 			})
+		}
 	})
 })
 
