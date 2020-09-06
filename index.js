@@ -62,6 +62,10 @@ app.get('/shop', (req, res)=>{
 	res.render('shop')
 })
 
+app.get('/cart', (req, res)=>{
+	res.render('cart')
+})
+
 //sign-in route
 app.get('/login', (req, res)=>{
 	res.render('login')
