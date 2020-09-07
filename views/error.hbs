@@ -1,12 +1,72 @@
-<div class="row">
-	<div class="container bg-light col text-center">
-		<h1 style="font: 30px">
-			{{status}}
-		</h1>
-		<h1>
-			{{errormsg}}
-		</h1>
-		<br> <br>
-		<a href="/"> Back to Home </a>
-	</div>
-</div>
+<!DOCTYPE html>
+<html lang>
+
+<head>
+    <title>Error 404</title>
+    <!-- Meta tag Keywords -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8" />
+    <!-- google fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Work+Sans:400,700&display=swap" rel="stylesheet">
+
+    <!--/Style-CSS -->
+    <link rel="stylesheet" type="text/css" href="/css/404style.css"  media="all" />
+    <!--//Style-CSS -->
+
+    <!--/fontAwesome-CSS -->
+    <link rel="stylesheet" type="text/css" href="/css/fontAwesome.css"  media="all" />
+</head>
+
+<body>
+    <div class="w3l-error-block">
+        <div class="page">
+            <div class="content">
+                <br>
+                <div class="w3l-error-grid">
+                    <h1>404</h1>
+                    <h2>Page not found</h2>
+                    <p>Oh no! You got lost. Good thing Ankha found you!</p>
+                    <a href="index" class="home">Go back Home</a>
+                </div>
+            </div>
+            <img src="/images/ankha2.jpg" class="img-responsive" style="filter: brightness(50%);"/>
+        </div>
+
+        <script src="/web/assets/jquery/jquery.min.js"></script>
+        <script>
+            var lFollowX = 0,
+                lFollowY = 0,
+                x = 0,
+                y = 0,
+                friction = 1 / 30;
+
+            function animate() {
+                x += (lFollowX - x) * friction;
+                y += (lFollowY - y) * friction;
+
+                translate = 'translate(' + x + 'px, ' + y + 'px) scale(1.1)';
+
+                $('img').css({
+                    '-webit-transform': translate,
+                    '-moz-transform': translate,
+                    'transform': translate
+                });
+
+                window.requestAnimationFrame(animate);
+            }
+
+            $(window).on('mousemove click', function (e) {
+
+                var lMouseX = Math.max(-100, Math.min(100, $(window).width() / 2 - e.clientX));
+                var lMouseY = Math.max(-100, Math.min(100, $(window).height() / 2 - e.clientY));
+                lFollowX = (20 * lMouseX) / 100; // 100 : 12 = lMouxeX : lFollow
+                lFollowY = (10 * lMouseY) / 100;
+
+            });
+
+            animate();
+        </script>
+    </div>
+</body>
+
+</html>

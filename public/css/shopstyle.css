@@ -1,7 +1,7 @@
 ﻿body {
   margin: 0;
   padding: 0;
- 
+  background-color: rgb(100, 164, 251);
   min-height: 100vh;
   background-size: cover;
 }
@@ -12,6 +12,11 @@
  background-image: url(../images/summer.jpg);
   min-height: 100vh;
   background-size: cover;
+}
+.all_prod{
+ margin: 1em 0 1em 3px; 
+ text-align:center; 
+ color: white;
 }
 /* buttons */
 .update {
@@ -325,7 +330,8 @@ h1, .h1, h2, .h2 {
   font-weight: 700; }
 
 h3, .h3, h4, .h4 {
-  font-weight: 700; }
+  font-weight: 400; 
+  padding-bottom: 10px;}
 
 h5, .h5, h6, .h6 {
   font-weight: 700; }
@@ -2539,13 +2545,14 @@ nav.menu {
   position: relative;
   z-index: 9956748; }
 .modal-body {
-  padding: 20px;
+  padding: 30px;
 }
 .modal-dialog.modal__container {
   max-width: 1170px;
   background: #fff; }
 .modal-product {
-  display: flex; }
+  display: flex;
+  }
 .product-images {
   max-width: 50%;
   padding-right: 50px; }
@@ -2560,7 +2567,7 @@ nav.menu {
 .review a {
   color: #333; }
 .s-price-box span.new-price {
-  color: #e59285;
+  color: #333;
   font-size: 23px;
   margin-right: 5px; }
 .s-price-box span.old-price {
@@ -2644,9 +2651,10 @@ h3.widget-title-modal {
   margin-top: 66px;
   text-align: left; }
 .addtocart-btn a {
-  background: #333 none repeat scroll 0 0;
+  background: #0499F2;
   color: #fff;
   display: inline-block;
+  border-radius: 5px;
   font-size: 18px;
   height: 50px;
   line-height: 50px;
@@ -2655,7 +2663,7 @@ h3.widget-title-modal {
   transition: all 0.5s ease 0s;
 }
 .addtocart-btn a:hover {
-  background: #e59285;
+  background: #2CEF91;
   color: #fff; }
 
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
@@ -2767,7 +2775,6 @@ h3.widget-title-modal {
 }
    .newsletter__block .newsletter__box button {
   background: transparent none repeat scroll 0 0;
-  border: medium none;
   color: #333;
   display: inline-block;
   font-size: 14px;
@@ -2788,22 +2795,20 @@ h3.widget-title-modal {
         color: #e59285; }
 .newsletter__yellow .newsletter__block .newsletter__box button {
   background: #2e2e2e none repeat scroll 0 0;
-  border: 1px solid #2e2e2e; }
+   }
   .newsletter__yellow .newsletter__block .newsletter__box button:hover {
     background: #ffa800 none repeat scroll 0 0;
-    border: 1px solid #ffa800; }
+    }
 .brown--color .newsletter__block .newsletter__box button {
   background: #2e2e2e none repeat scroll 0 0;
-  border: 1px solid #2e2e2e; }
+   }
   .brown--color .newsletter__block .newsletter__box button:hover {
-    background: #ce7852 none repeat scroll 0 0;
-    border: 1px solid #ce7852; }
+    background: #ce7852 none repeat scroll 0 0;}
 .color--pink .newsletter__block .newsletter__box button {
   background: #2e2e2e none repeat scroll 0 0;
-  border: 1px solid #2e2e2e; }
+   }
   .color--pink .newsletter__block .newsletter__box button:hover {
-    background: #da7187 none repeat scroll 0 0;
-    border: 1px solid #da7187; }
+    background: #da7187 none repeat scroll 0 0;}
 @media only screen and (min-width: 768px) and (max-width: 991px) {
   .main-page-content {
     padding-left: 30px;
@@ -3810,7 +3815,7 @@ h3.widget-title-modal {
   .product__info__main .product-reviews-summary .rating-summary {
     margin-right: 8px; }
 .product__info__main .product-reviews-summary .rating-summary li i {
-  color: #e59285;
+  color: #ffa800;
   font-size: 18px;
   margin-right: 4px;
 }
@@ -3864,16 +3869,18 @@ h3.widget-title-modal {
     margin: 0 10px 0 0;
     text-transform: capitalize; }
   .product__info__main .box-tocart .input-text {
-    border: 1px solid #ebebeb;
-    color: #616161;
+    color: black;
+    background-color: #D3F5FD;
+    border: none;
     font-size: 14px;
+    font-weight: 500;
     height: 40px;
     text-align: center;
-    width: 100px;
+    width: 70px;
     margin: 0 15px 15px 0; }
 .product__info__main .box-tocart .addtocart__actions .tocart {
-  background: #e59285 none repeat scroll 0 0;
-  border: 0 none;
+  background: #0499F2 none repeat scroll 0 0;
+  border-radius: 3px;
   color: #fff;
   font-size: 14px;
   font-weight: 600;
@@ -3911,8 +3918,8 @@ h3.widget-title-modal {
   margin-top: 25px;
 }
     .product__info__main .box-tocart .addtocart__actions .tocart:hover {
-      background-color: #e59285;
-      border-color: #e59285; }
+      background-color: #2CEF91;
+      transition-duration: 0.3s; }
 .product__info__main .product-addto-links a {
   border: 2px solid #ebebeb;
   border-radius: 100%;
@@ -3942,13 +3949,13 @@ h3.widget-title-modal {
   margin: 20px 0 0;
   padding: 30px 0; }
  .product__info__main .product__overview p {
-  color: #333;
+  color: black;
   font-size: 14px;
   font-weight: 400;
   margin-bottom: 10px;
 }
 .product__info__main .product__overview .pro__attribute li {
-  color: #333;
+  color: black;
   font-size: 14px;
   font-weight: 400;
 }
@@ -3992,7 +3999,7 @@ h3.widget-title-modal {
     .product__info__detailed .pro_details_nav a.nav-item.active, .product__info__detailed .pro_details_nav a.nav-item:hover {
       color: #333; }
 .product__info__detailed .description__attribute p {
-  color: #333;
+  color: black;
   font-size: 14px;
   font-weight: 400;
   line-height: 24px;
@@ -4023,7 +4030,7 @@ h3.widget-title-modal {
     line-height: 28px;
     padding: 0 10px 0 0; }
   .product__info__detailed .review__attribute .review__ratings__type .review-ratings .rating-summary .rating li i {
-    color: #ff5501;
+    color: #ffa800;
     font-size: 18px;
     height: 28px;
     line-height: 28px; }
@@ -4087,7 +4094,7 @@ h3.widget-title-modal {
     .product__info__detailed .review-fieldset .review_form_field .input__box input {
       background: #fff none repeat scroll 0 0;
       border: 1px solid #ebebeb;
-      border-radius: 1px;
+      border-radius: 5px;
       box-sizing: border-box;
       font-size: 14px;
       height: 40px;
@@ -4095,10 +4102,24 @@ h3.widget-title-modal {
       outline: medium none;
       padding: 0 9px;
       width: 100%; }
+
+    #nickname_field:hover{
+      background-color: #D3F5FD;
+      transition-duration: 0.3s;
+      }
+      #summery_field:hover{
+        background-color: #D3F5FD;
+        transition-duration: 0.3s;
+      }
+      #review_field:hover{
+          background-color: #D3F5FD;
+          transition-duration: 0.3s;
+      }
     .product__info__detailed .review-fieldset .review_form_field .input__box textarea {
       background: #fff none repeat scroll 0 0;
+      resize: none;
       border: 1px solid #ebebeb;
-      border-radius: 1px;
+      border-radius: 5px;
       box-sizing: border-box;
       font-size: 14px;
       height: 40px;
@@ -4108,10 +4129,10 @@ h3.widget-title-modal {
       width: 100%;
       min-height: 100px; }
   .product__info__detailed .review-fieldset .review_form_field .review-form-actions button {
-    background: #f2f2f2 none repeat scroll 0 0;
-    border: 1px solid #cdcdcd;
+    background: #0499F2 none repeat scroll 0 0;
     border-radius: 5px;
-    color: #333;
+    border: none;
+    color: white;
     display: inline-block;
     font-size: 12px;
     font-weight: 700;
@@ -4120,9 +4141,7 @@ h3.widget-title-modal {
     text-transform: uppercase;
     transition: 0.4s; }
     .product__info__detailed .review-fieldset .review_form_field .review-form-actions button:hover {
-      background: #e2e2e2 none repeat scroll 0 0;
-      border: 1px solid #cdcdcd;
-      color: #555; }
+      background: #2CEF91 none repeat scroll 0 0; }
 
 .pro__tab_label.tab-pane:not(.active) {
   display: none; }
@@ -5686,9 +5705,7 @@ a.checkout__title {
   margin-bottom: 25px;
   margin-top: 7px; }
 .shop__list__wrapper {
-  border-bottom: 1px solid #e1e1e1;
   border-top: 1px solid #e1e1e1;
-  margin: 0 0 30px;
   padding: 10px 0;
   width: 100%; }
   .shop__list__wrapper .shop__list a {

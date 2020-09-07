@@ -17,7 +17,8 @@
   <link rel="stylesheet" type = "text/css" href="/dropdown/css/style.css">
   <link rel="stylesheet" type = "text/css" href="/socicon/css/styles.css">
   <link rel="stylesheet" type = "text/css" href="/theme/css/style.css">
-  <link rel="preload" as="style" href="/mobirise/css/mbr-additional.css"><link rel="stylesheet" href="/mobirise/css/mbr-additional.css" type="text/css">
+  <link rel="preload" type = "text/css" as="style" href="/mobirise/css/mbr-additional.css">
+  <link rel="stylesheet" href="/mobirise/css/mbr-additional.css" type="text/css">
   <!-- custom style sheet -->
 	<link rel="stylesheet" type = "text/css" href="css/bootstrap.min.css">
 	<link rel="stylesheet" type = "text/css" href="css/plugins.css">
@@ -32,56 +33,54 @@
 <section class="menu menu2 cid-s9pQC51C9p" once="menu" id="menu2-14">
     
     <nav class="navbar navbar-dropdown navbar-fixed-top navbar-expand-lg">
-      <div class="container-fluid">
-          <div class="navbar-brand">
-              <span class="navbar-logo">
-                  <a href="index">
-                      <img src="/images/fav.gif" style="height: 3rem;">
-                  </a>
-              </span>
-              <span class="navbar-caption-wrap"><a class="navbar-caption text-warning text-primary display-7" href="index">Nookzada</a></span>
-          </div>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-              <div class="hamburger">
-                  <span></span>
-                  <span></span>
-                  <span></span>
-                  <span></span>
-              </div>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-              <ul class="navbar-nav nav-dropdown" data-app-modern-menu="true">
-                  <li class="nav-item"><a class="nav-link link text-warning text-primary display-4" href="shop">Shop</a></li>
-                  <li class="nav-item"><a class="nav-link link text-warning text-primary display-4" href="about">About Us</a></li>
-                  <li class="nav-item"><a class="nav-link link text-warning text-primary display-4" href="contact">Contact</a></li>
-                  <li class="nav-item dropdown">
-                    <a class="nav-link link text-warning dropdown-toggle display-4" href="#" data-toggle="dropdown-submenu" aria-expanded="false">User</a>
-                    <div class="dropdown-menu">
-                      <a class="text-warning dropdown-item text-primary display-4" href="login">Sign in</a>
-                      <a class="text-warning dropdown-item display-4" href="#" aria-expanded="false">Sign out</a>
-                    </div>
-                  </li>
-              </ul>
-              <!-- cart -->
-              <div class="navbar-buttons mbr-section-btn"><a class="btn btn-primary display-4" href="cart"><span class="mobi-mbri mobi-mbri-shopping-cart mbr-iconfont mbr-iconfont-btn"></span>
-                      CART</a></div>
-          </div>
-      </div>
-  </nav>
+        <div class="container-fluid">
+            <div class="navbar-brand">
+                <span class="navbar-logo">
+                    <a href="index">
+                        <img src="/images/fav.gif" style="height: 3rem;">
+                    </a>
+                </span>
+                <span class="navbar-caption-wrap"><a class="navbar-caption text-warning text-primary display-7" href="index">Nookzada</a></span>
+            </div>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav nav-dropdown" data-app-modern-menu="true">
+                    <li class="nav-item"><a class="nav-link link text-warning text-primary display-4" href="shop">Shop</a></li>
+                    <li class="nav-item"><a class="nav-link link text-warning text-primary display-4" href="about">About Us</a>
+                    <li class="nav-item"><a class="nav-link link text-warning text-primary display-4" href="contact">Contact</a>
+                    </li><li class="nav-item dropdown"><a class="nav-link link text-warning dropdown-toggle display-4" href="#" data-toggle="dropdown-submenu" aria-expanded="false">User</a><div class="dropdown-menu"><a class="text-warning dropdown-item text-primary display-4" href="login">Sign in</a><a class="text-warning dropdown-item display-4" href="#" aria-expanded="false">Sign out</a></div></li></ul>
+                <!-- search bar -->
+                <div class="search-container">
+                    <form action="/action_page.php">
+                      <input type="text" placeholder="Search.." name="search">
+                      <button type="submit"><i class="fa fa-search"></i></button>
+                    </form>
+                  </div>
+                <!-- cart -->
+                <div class="navbar-buttons mbr-section-btn"><a class="btn btn-primary display-4" href="cart"><span class="mobi-mbri mobi-mbri-shopping-cart mbr-iconfont mbr-iconfont-btn"></span>
+                        CART</a></div>
+            </div>
+        </div>
+    </nav>
     <div class="social-links">
             <a href="mailto:nookzadashop@gmail.com"><i class="fas fa-envelope"></i></a>
             <a href="tel:+62896706255135"><i class="fas fa-phone-alt"></i></a>
             <a href="https://twitter.com/nutellacooki"><i class="fab fa-twitter"></i></a>
     </div>
 </section>
-<div class="space"></div>
 <!-- Header -->
         <div class="ht__bradcaump__area bg-image--6"><br>
 		</div>
-		
  <!-- Start Shop Page -->
- <div class="page-shop-sidebar left--sidebar bg--white">
-	<h2 style="margin: 1em 0 1em 3px; text-align:center;"> All Products</h2>
+ <div class="page-shop-sidebar left--sidebar summer">
+	<h2 class="all_prod"> All Products</h2>
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-2 col-12 order-2 order-lg-1 md-mt-40 sm-mt-40">
@@ -90,9 +89,9 @@
 					</aside>
 				</div>
 			</div>
-			<div class="col-lg-9 col-12 order-1 order-lg-2">
+			<div class="col-lg-9 col-12 order-1 order-lg-2  bg--white">
 				<div class="row">
-					<div class="col-lg-12">
+					<div class="col-lg-12" style="background-color: #D3F5FD;">
 						<div class="shop__list__wrapper d-flex flex-wrap flex-md-nowrap justify-content-between">
 							<div class="shop__list nav justify-content-center" role="tablist">
 								<a class="nav-item nav-link active" data-toggle="tab" href="#nav-grid" role="tab"><i class="fa fa-th"></i></a>
@@ -111,16 +110,16 @@
 				</div>
 				<div class="tab__container">
 					<div class="shop-grid tab-pane fade show active" id="nav-grid" role="tabpanel">
-						<div class="row">
+						<div class="row" style="padding-top: 30px; justify-content: space-around; margin-bottom: 3em;">
 
 			<!-- nav-grid -->
 							<!-- Start Single Product -->
 							<div class="product product__style--3 col-lg-4 col-md-4 col-sm-6 col-12">
 								<div class="product__thumb">
-									<a class="first__img" href="single-product"><img src="images/270x340/norm.png"></a>
+									<a class="first__img" href="item"><img src="images/270x340/norm.png"></a>
 								</div>
 								<div class="product__content content--center">
-									<h4><a href="single-product">20 slots of custom materials</a></h4>
+									<h4><a href="item">20 slots of custom materials</a></h4>
 									<ul class="prize d-flex">
 										<li>P50</li>
 									</ul>
@@ -148,11 +147,11 @@
 							<!-- Start Single Product -->
 							<div class="product product__style--3 col-lg-4 col-md-4 col-sm-6 col-12">
 								<div class="product__thumb">
-									<a class="first__img" href="single-product"><img src="images/270x340/seasonal.png"></a>
+									<a class="first__img" href="item"><img src="images/270x340/seasonal.png"></a>
 
 								</div>
 								<div class="product__content content--center">
-									<h4><a href="single-product">20 slots of custom seasonal materials</a></h4>
+									<h4><a href="item">20 slots of custom seasonal materials</a></h4>
 									<ul class="prize d-flex">
 										<li>P100</li>
 									</ul>
@@ -180,13 +179,13 @@
 							<!-- Start Single Product -->
 							<div class="product product__style--3 col-lg-4 col-md-4 col-sm-6 col-12">
 								<div class="product__thumb">
-									<a class="first__img" href="single-product"><img src="images/270x340/bell.png"></a>
+									<a class="first__img" href="item"><img src="images/270x340/bell.png"></a>
 									<div class="hot__box">
 										<span class="hot-label">HOT</span>
 									</div>
 								</div>
 								<div class="product__content content--center">
-									<h4><a href="single-product">4 Million Bells</a></h4>
+									<h4><a href="item">4 Million Bells</a></h4>
 									<ul class="prize d-flex">
 										<li>P100</li>
 									</ul>
@@ -214,13 +213,13 @@
 							<!-- Start Single Product -->
 							<div class="product product__style--3 col-lg-4 col-md-4 col-sm-6 col-12">
 								<div class="product__thumb">
-									<a class="first__img" href="single-product"><img src="images/270x340/nmt.png"></a>
+									<a class="first__img" href="item"><img src="images/270x340/nmt.png"></a>
 									<div class="hot__box">
 										<span class="hot-label">Best Seller</span>
 									</div>
 								</div>
 								<div class="product__content content--center">
-									<h4><a href="single-product">400 Nook Miles Tickets</a></h4>
+									<h4><a href="item">400 Nook Miles Tickets</a></h4>
 									<ul class="prize d-flex">
 										<li>P200</li>
 									</ul>
@@ -248,11 +247,11 @@
 							<!-- Start Single Product -->
 							<div class="product product__style--3 col-lg-4 col-md-4 col-sm-6 col-12">
 								<div class="product__thumb">
-									<a class="first__img" href="single-product"><img src="images/270x340/celeste1.png"></a>
-									<a class="second__img" href="single-product"><img src="images/270x340/starset.png"></a>
+									<a class="first__img" href="item"><img src="images/270x340/celeste1.png"></a>
+									<a class="second__img" href="item"><img src="images/270x340/starset.png"></a>
 								</div>
 								<div class="product__content content--center">
-									<h4><a href="single-product">Celeste Star and Space DIYs</a></h4>
+									<h4><a href="item">Celeste Star and Space DIYs</a></h4>
 									<ul class="prize d-flex">
 										<li>P600</li>
 									</ul>
@@ -280,10 +279,10 @@
 							<!-- Start Single Product -->
 							<div class="product product__style--3 col-lg-4 col-md-4 col-sm-6 col-12">
 								<div class="product__thumb">
-									<a class="first__img" href="single-product"><img src="images/270x340/zodiac.png"></a>
+									<a class="first__img" href="item"><img src="images/270x340/zodiac.png"></a>
 								</div>
 								<div class="product__content content--center">
-									<h4><a href="single-product">Celeste Zodiac DIY Set Pack</a></h4>
+									<h4><a href="item">Celeste Zodiac DIY Set Pack</a></h4>
 									<ul class="prize d-flex">
 										<li>P400</li>
 									</ul>
@@ -311,10 +310,10 @@
 							<!-- Start Single Product -->
 							<div class="product product__style--3 col-lg-4 col-md-4 col-sm-6 col-12">
 								<div class="product__thumb">
-									<a class="first__img" href="single-product"><img src="images/270x340/tierA.png"></a>
+									<a class="first__img" href="item"><img src="images/270x340/tierA.png"></a>
 								</div>
 								<div class="product__content content--center">
-									<h4><a href="single-product">Custom Villager (Tier A)</a></h4>
+									<h4><a href="item">Custom Villager (Tier A)</a></h4>
 									<ul class="prize d-flex">
 										<li>P200</li>
 									</ul>
@@ -342,11 +341,11 @@
 							<!-- Start Single Product -->
 							<div class="product product__style--3 col-lg-4 col-md-4 col-sm-6 col-12">
 								<div class="product__thumb">
-									<a class="first__img" href="single-product"><img src="images/270x340/tierBD1.png"></a>
-									<a class="second__img" href="single-product"><img src="images/270x340/tierBD2.png"></a>
+									<a class="first__img" href="item"><img src="images/270x340/tierBD1.png"></a>
+									<a class="second__img" href="item"><img src="images/270x340/tierBD2.png"></a>
 								</div>
 								<div class="product__content content--center">
-									<h4><a href="single-product">Custom Villager (Tier B-D)</a></h4>
+									<h4><a href="item">Custom Villager (Tier B-D)</a></h4>
 									<ul class="prize d-flex">
 										<li>P150</li>
 									</ul>
@@ -374,10 +373,10 @@
 							<!-- Start Single Product -->
 							<div class="product product__style--3 col-lg-4 col-md-4 col-sm-6 col-12">
 								<div class="product__thumb">
-									<a class="first__img" href="single-product"><img src="images/270x340/tierS.png"></a>
+									<a class="first__img" href="item"><img src="images/270x340/tierS.png"></a>
 								</div>
 								<div class="product__content content--center">
-									<h4><a href="single-product">Custom Villager (Tier S)</a></h4>
+									<h4><a href="item">Custom Villager (Tier S)</a></h4>
 									<ul class="prize d-flex">
 										<li>P350</li>
 									</ul>
@@ -405,10 +404,10 @@
 							<!-- Start Single Product -->
 							<div class="product product__style--3 col-lg-4 col-md-4 col-sm-6 col-12">
 								<div class="product__thumb">
-									<a class="first__img" href="single-product"><img src="images/270x340/gold.png"></a>
+									<a class="first__img" href="item"><img src="images/270x340/gold.png"></a>
 								</div>
 								<div class="product__content content--center">
-									<h4><a href="single-product">Golden Tools DIY Pack</a></h4>
+									<h4><a href="item">Golden Tools DIY Pack</a></h4>
 									<ul class="prize d-flex">
 										<li>P150</li>
 									</ul>
@@ -436,11 +435,11 @@
 							<!-- Start Single Product -->
 							<div class="product product__style--3 col-lg-4 col-md-4 col-sm-6 col-12">
 								<div class="product__thumb">
-									<a class="first__img" href="single-product"><img src="images/270x340/pasc.png"></a>
-									<a class="second__img" href="single-product"><img src="images/270x340/mermaid.png"></a>
+									<a class="first__img" href="item"><img src="images/270x340/pasc.png"></a>
+									<a class="second__img" href="item"><img src="images/270x340/mermaid.png"></a>
 								</div>
 								<div class="product__content content--center">
-									<h4><a href="single-product">Pascal's Mermaid DIY Set</a></h4>
+									<h4><a href="item">Pascal's Mermaid DIY Set</a></h4>
 									<ul class="prize d-flex">
 										<li>P500</li>
 									</ul>
@@ -476,12 +475,12 @@
 						<div class="list__view__wrapper">
 
 						<!-- Start Single Product -->
-							<div class="list__view">
+							<div class="list__view" style="padding-top: 20px;">
 								<div class="thumb">
-									<a class="first__img" href="single-product"><img src="images/270x340/norm.png"></a>
+									<a class="first__img" href="item"><img src="images/270x340/norm.png"></a>
 								</div>
 								<div class="content">
-									<h2><a href="single-product">20 slots of custom materials</a></h2>
+									<h2><a href="item">20 slots of custom materials</a></h2>
 									<ul class="rating d-flex">
 										<li class="on"><i class="fas fa-star"></i></li>
 										<li class="on"><i class="fas fa-star"></i></li>
@@ -503,10 +502,10 @@
 							<!-- Start Single Product -->
 							<div class="list__view">
 								<div class="thumb">
-									<a class="first__img" href="single-product"><img src="images/270x340/seasonal.png"></a>
+									<a class="first__img" href="item"><img src="images/270x340/seasonal.png"></a>
 								</div>
 								<div class="content">
-									<h2><a href="single-product">20 slots of custom seasonal materials</a></h2>
+									<h2><a href="item">20 slots of custom seasonal materials</a></h2>
 									<ul class="rating d-flex">
 										<li class="on"><i class="fas fa-star"></i></li>
 										<li class="on"><i class="fas fa-star"></i></li>
@@ -528,10 +527,10 @@
 							<!-- Start Single Product -->
 							<div class="list__view">
 								<div class="thumb">
-									<a class="first__img" href="single-product"><img src="images/270x340/bell.png"></a>
+									<a class="first__img" href="item"><img src="images/270x340/bell.png"></a>
 								</div>
 								<div class="content">
-									<h2><a href="single-product">4 Million Bells</a></h2>
+									<h2><a href="item">4 Million Bells</a></h2>
 									<ul class="rating d-flex">
 										<li class="on"><i class="fas fa-star"></i></li>
 										<li class="on"><i class="fas fa-star"></i></li>
@@ -553,10 +552,10 @@
 							<!-- Start Single Product -->
 							<div class="list__view">
 								<div class="thumb">
-									<a class="first__img" href="single-product"><img src="images/270x340/nmt.png"></a>
+									<a class="first__img" href="item"><img src="images/270x340/nmt.png"></a>
 								</div>
 								<div class="content">
-									<h2><a href="single-product">400 Nook Miles Tickets</a></h2>
+									<h2><a href="item">400 Nook Miles Tickets</a></h2>
 									<ul class="rating d-flex">
 										<li class="on"><i class="fas fa-star"></i></li>
 										<li class="on"><i class="fas fa-star"></i></li>
@@ -578,11 +577,11 @@
 							<!-- Start Single Product -->
 							<div class="list__view">
 								<div class="thumb">
-									<a class="first__img" href="single-product"><img src="images/270x340/celeste1.png"></a>
-									<a class="second__img" href="single-product"><img src="images/270x340/starset.png"></a>
+									<a class="first__img" href="item"><img src="images/270x340/celeste1.png"></a>
+									<a class="second__img" href="item"><img src="images/270x340/starset.png"></a>
 								</div>
 								<div class="content">
-									<h2><a href="single-product">Celeste Star and Space DIYs</a></h2>
+									<h2><a href="item">Celeste Star and Space DIYs</a></h2>
 									<ul class="rating d-flex">
 										<li><i class="fa fa-star-o"></i></li>
 										<li><i class="fa fa-star-o"></i></li>
@@ -604,10 +603,10 @@
 							<!-- Start Single Product -->
 							<div class="list__view">
 								<div class="thumb">
-									<a class="first__img" href="single-product"><img src="images/270x340/zodiac.png"></a>
+									<a class="first__img" href="item"><img src="images/270x340/zodiac.png"></a>
 								</div>
 								<div class="content">
-									<h2><a href="single-product">Celeste Zodiac DIY Set Pack</a></h2>
+									<h2><a href="item">Celeste Zodiac DIY Set Pack</a></h2>
 									<ul class="rating d-flex">
 										<li><i class="fa fa-star-o"></i></li>
 										<li><i class="fa fa-star-o"></i></li>
@@ -629,10 +628,10 @@
 							<!-- Start Single Product -->
 							<div class="list__view">
 								<div class="thumb">
-									<a class="first__img" href="single-product"><img src="images/270x340/tierA.png"></a>
+									<a class="first__img" href="item"><img src="images/270x340/tierA.png"></a>
 								</div>
 								<div class="content">
-									<h2><a href="single-product">Custom Villager (Tier A)</a></h2>
+									<h2><a href="item">Custom Villager (Tier A)</a></h2>
 									<ul class="rating d-flex">
 										<li><i class="fa fa-star-o"></i></li>
 										<li><i class="fa fa-star-o"></i></li>
@@ -654,11 +653,11 @@
 							<!-- Start Single Product -->
 							<div class="list__view">
 								<div class="thumb">
-									<a class="first__img" href="single-product"><img src="images/270x340/tierBD1.png"></a>
-									<a class="first__img" href="single-product"><img src="images/270x340/tierBD2.png"></a>
+									<a class="first__img" href="item"><img src="images/270x340/tierBD1.png"></a>
+									<a class="first__img" href="item"><img src="images/270x340/tierBD2.png"></a>
 								</div>
 								<div class="content">
-									<h2><a href="single-product">Custom Villager (Tier B-D)</a></h2>
+									<h2><a href="item">Custom Villager (Tier B-D)</a></h2>
 									<ul class="rating d-flex">
 										<li><i class="fa fa-star-o"></i></li>
 										<li><i class="fa fa-star-o"></i></li>
@@ -680,10 +679,10 @@
 							<!-- Start Single Product -->
 							<div class="list__view">
 								<div class="thumb">
-									<a class="first__img" href="single-product"><img src="images/270x340/tierS.png"></a>
+									<a class="first__img" href="item"><img src="images/270x340/tierS.png"></a>
 								</div>
 								<div class="content">
-									<h2><a href="single-product">Custom Villager (Tier S)</a></h2>
+									<h2><a href="item">Custom Villager (Tier S)</a></h2>
 									<ul class="rating d-flex">
 										<li><i class="fa fa-star-o"></i></li>
 										<li><i class="fa fa-star-o"></i></li>
@@ -705,10 +704,10 @@
 							<!-- Start Single Product -->
 							<div class="list__view">
 								<div class="thumb">
-									<a class="first__img" href="single-product"><img src="images/270x340/gold.png"></a>
+									<a class="first__img" href="item"><img src="images/270x340/gold.png"></a>
 								</div>
 								<div class="content">
-									<h2><a href="single-product">Golden Tools DIY Pack</a></h2>
+									<h2><a href="item">Golden Tools DIY Pack</a></h2>
 									<ul class="rating d-flex">
 										<li><i class="fa fa-star-o"></i></li>
 										<li><i class="fa fa-star-o"></i></li>
@@ -730,11 +729,11 @@
 							<!-- Start Single Product -->
 							<div class="list__view">
 								<div class="thumb">
-									<a class="first__img" href="single-product"><img src="images/270x340/pasc.png"></a>
-									<a class="second__img" href="single-product"><img src="images/270x340/mermaid.png"></a>
+									<a class="first__img" href="item"><img src="images/270x340/pasc.png"></a>
+									<a class="second__img" href="item"><img src="images/270x340/mermaid.png"></a>
 								</div>
 								<div class="content">
-									<h2><a href="single-product">Pascal's Mermaid DIY Set</a></h2>
+									<h2><a href="item">Pascal's Mermaid DIY Set</a></h2>
 									<ul class="rating d-flex">
 										<li><i class="fa fa-star-o"></i></li>
 										<li><i class="fa fa-star-o"></i></li>
@@ -778,19 +777,19 @@
 		                            </div>
 		                        </div>
 		                        <!-- end product images -->
-		                        <div class="product-info">
+		                        <div class="product-info" style=" justify-content: space-between;">
 		                            <h1>20 slots of custom materials</h1>
 		                            <div class="rating__and__review">
-		                                <ul class="rating">
-		                                    <li class="on"><span class="ti-star"></span></li>
-		                                    <li class="on"><span class="ti-star"></span></li>
-		                                    <li class="on"><span class="ti-star"></span></li>
-		                                    <li class="on"><span class="ti-star"></span></li>
-		                                    <li><span class="ti-star"></span></li>
-		                                </ul>
-		                                <div class="review">
-		                                    <a href="#">4 customer reviews</a>
-		                                </div>
+										<div class="review">
+		                                    <a href="#"> 4 customer reviews</a>
+										</div>
+										<ul class="rating d-flex">
+											<li class="on"><i class="fas fa-star"></i></li>
+											<li class="on"><i class="fas fa-star"></i></li>
+											<li class="on"><i class="fas fa-star"></i></li>
+											<li class="on"><i class="fas fa-star"></i></li>
+											<li><i class="fa fa-star-o"></i></li>
+										</ul>
 		                            </div>
 		                            <div class="price-box-3">
 		                                <div class="s-price-box">
