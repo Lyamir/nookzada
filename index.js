@@ -81,6 +81,11 @@ app.get('/register', (req, res)=>{
 	res.render('register')
 })
 
+//item route
+app.get('/item', (req, res)=>{
+	res.render('item')
+})
+
 //logout route
 app.get('logout', (req, res)=>{
 	if(req.session.user){
