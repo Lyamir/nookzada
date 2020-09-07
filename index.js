@@ -98,7 +98,7 @@ app.get('logout', (req, res)=>{
 })
 
 //adds a user to the database
-app.post('/user/register', urlencoder, (req,res)=>{
+app.post('/register', urlencoder, (req,res)=>{
 	userModel.findOne({'email': req.body.email}, (err, user)=>{
 		if(user){
 			res.render('register', {
@@ -131,7 +131,7 @@ app.post('/user/register', urlencoder, (req,res)=>{
 })
 
 //user login
-app.post('/user/login', urlencoder, (req, res)=>{
+app.post('/login', urlencoder, (req, res)=>{
 	userModel.findOne({'email': req.body.email}, (err, user)=>{
 		if(!user){
 			res.render('login', {
@@ -215,7 +215,7 @@ app.get('/delete/:id', function(req, res){
 	});
 });
 //user logout
-app.get('/user/logout', function(req, res, next){
+app.get('/logout', function(req, res, next){
 	if(req.session.user){
 		req.session.destroy((err)=>{
 			if(err){
