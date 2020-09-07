@@ -58,8 +58,19 @@ app.get('/contact', (req, res)=>{
 })
 
 //shop route
-app.get('/shop', (req, res)=>{
-	res.render('shop')
+app.get('/shop', async (req, res)=>{
+	await itemModel.find({}, (err, item)=>{
+		res.render('shop', {
+			item:item,
+			name: item.name,
+			price: item.price,
+			id: item._id,
+			description: item.description,
+			itemList: item.itemList,
+			image: item.image,
+			stock: item.stock
+		})
+	})
 })
 
 app.get('/cart', (req, res)=>{
@@ -249,6 +260,7 @@ app.get('/edit/:id', function(req, res) {
 		res.redirect('/')
 	});
 });
+
 //display all items
 app.get('/items', function(req, res) {
 	itemModel.find(function(err, items) {
