@@ -32,11 +32,16 @@ app.use(bodyParser.json());
 
 //setting up session
 app.use(cookieParser())
-app.use(session({
+/*app.use(session({
 	secret: 'very super secret',
 	resave: false,
 	saveUninitialized: true
-}));
+}));*/
+app.use(session({
+	secret: 'very super secret',
+	resave: true,
+	saveUninitialized: true
+}))
 
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -150,7 +155,8 @@ app.post('/login', urlencoder, (req, res)=>{
 					})
 				}else{
 					req.session.user = user
-					res.render('index')
+					res.locals.user = user
+					res.render('index', {user:user})
 				}
 			})
 		}
@@ -220,6 +226,20 @@ app.get('/delete/:id', function(req, res){
 	});
 });
 //user logout
+/*app.get('/logout', function(req, res, next){
+	if(req.session.user){
+		req.session.destroy((err)=>{
+			if(err){
+				res.render('index', (req, res)=>{
+					error: "Error: " + err
+				})
+			}
+			else{
+				res.render('index')
+			}
+		})
+	}
+})*/
 app.get('/logout', function(req, res, next){
 	if(req.session.user){
 		req.session.destroy((err)=>{
