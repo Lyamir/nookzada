@@ -136,11 +136,38 @@ app.get('/register', (req, res)=>{
 })
 
 //item route
-app.get('/item', (req, res)=>{
-	if(req.session.user)
-		res.render('item', {user:req.session.user})
-	else
-		res.render('item')
+app.get('/item/:_id', async (req, res)=>{
+	console.log(req.params)
+	if(req.session.user){
+		await itemModel.findOne(req.params, 'name price _id description itemList image stock', (err, item)=>{
+			res.render('item', {
+				name: item.name,
+				price: item.price,
+				id: item._id,
+				description: item.description,
+				itemList: item.itemList,
+				image: item.image,
+				stock: item.stock,
+				user:req.session.user
+			})
+		})	
+	}
+	else{
+		console.log(req.params)
+			await itemModel.findOne(req.params, (err, item)=>{
+				console.log(item)
+				res.render('item', {
+					name: item.name,
+					price: item.price,
+					id: item._id,
+					description: item.description,
+					itemlist: item.itemlist,
+					image: item.image,
+					stock: item.stock
+				})
+			})
+	}
+		
 })
 
 //logout route
@@ -175,23 +202,34 @@ app.post('/register', urlencoder, (req,res)=>{
 	}
 	else{
 		let user = new userModel({
+			_id: new mongoose.Types.ObjectId(),
 			username: req.body.username,
 			password: req.body.password,
 			email: req.body.email,
 			userType: 'User',
 			reviewList: []
-		}).save((err,response)=>{
-			if(err){
-				res.render('register', {
-					error: "Error: " + err
+		})
+		
+		user.save(function (err){
+			if (err)
+				res.render('register',{
+					error: `Error: ${err}`
 				})
-			}else{
-				if(req.session.user)
-					res.render('login', {user:req.session.user})
-				else
-					res.render('login')
+			
+			let order = new orderModel({
+				userID: user._id
+			})
+
+			order.save(function (err){
+				if(err)
+					console.log(err)
+				res.render('login', {
+					success: "Successfully registered!"
+				})
 			}
-		})	
+			)
+
+		})
 	}
 })
 
@@ -295,20 +333,13 @@ app.get('/delete/:id', function(req, res){
 		})
 	}
 })*/
-app.get('/logout', function(req, res, next){
+app.get('/logout', function(req, res){
 	if(req.session.user){
-		req.session.destroy((err)=>{
-			if(err){
-				res.render('index', (req, res)=>{
-					error: "Error: " + err
-				})
-			}
-			else{
-				res.render('index')
-			}
-		})
+		req.session.destroy()
+		res.render('index')
 	}
 })
+
 //edit an item (admin feature)
 app.get('/edit/:id', function(req, res) {
 	var id = req.params.id;
