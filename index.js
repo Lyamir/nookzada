@@ -23,6 +23,7 @@ mongoose.connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_KEY}@clu
 const {userModel} = require('./model/user');
 const {itemModel} = require('./model/item.js');
 const {orderModel} = require('./model/order.js');
+const e = require('express');
 
 app.use(bodyParser.json());
 /*app.engine('hbs', exphbs({
@@ -32,11 +33,16 @@ app.use(bodyParser.json());
 
 //setting up session
 app.use(cookieParser())
-app.use(session({
+/*app.use(session({
 	secret: 'very super secret',
 	resave: false,
 	saveUninitialized: true
-}));
+}));*/
+app.use(session({
+	secret: 'very super secret',
+	resave: true,
+	saveUninitialized: true
+}))
 
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -44,52 +50,97 @@ app.set('view engine', 'hbs');
 
 //entry route
 app.get('/', (req, res) => {
-	 res.render('index');
+	if(req.session.user)
+		res.render('index', {user:req.session.user})
+	else
+		res.render('index')
 });
 
 //about route
 app.get('/about', (req, res)=>{
-	res.render('about');
+	if(req.session.user)
+		res.render('about', {user:req.session.user})
+	else
+		res.render('about')
 })
 
 //contact route
 app.get('/contact', (req, res)=>{
-	res.render('contact');
+	if(req.session.user)
+		res.render('contact', {user:req.session.user});
+	else
+		res.render('contact')
 })
 
 //shop route
 app.get('/shop', async (req, res)=>{
 	await itemModel.find({}, (err, item)=>{
-		res.render('shop', {
-			item:item,
-			name: item.name,
-			price: item.price,
-			id: item._id,
-			description: item.description,
-			itemList: item.itemList,
-			image: item.image,
-			stock: item.stock
-		})
+		if(req.session.user){
+			res.render('shop', {
+				user: req.session.user,
+				item:item,
+				name: item.name,
+				price: item.price,
+				id: item._id,
+				description: item.description,
+				itemList: item.itemList,
+				image: item.image,
+				stock: item.stock
+			})
+		}
+		else{
+			res.render('shop', {
+				item:item,
+				name: item.name,
+				price: item.price,
+				id: item._id,
+				description: item.description,
+				itemList: item.itemList,
+				image: item.image,
+				stock: item.stock
+			})
+		}
+
 	})
 })
 
 app.get('/cart', (req, res)=>{
-	res.render('cart')
+	if(req.session.user)
+		res.render('cart', {user:req.session.user})
+	else
+		res.render('cart')
 })
 
 //sign-in route
 app.get('/login', (req, res)=>{
-	res.render('login')
+	if(req.session.user)
+		res.render('login', {user:req.session.user})
+	else
+		res.render('login')
 })
 
 //index route
 app.get('/index', (req, res)=>{
-	res.render('index')
+	if(req.session.user)
+		res.render('index', {user:req.session.user})
+	else
+		res.render('index')
 })
 
 //register route
 app.get('/register', (req, res)=>{
-	res.render('register')
+	if(req.session.user)
+		res.render('register', {user:req.session.user})
+	else
+		res.render('register')
+})
+
+//item route
+app.get('/item', (req, res)=>{
+	if(req.session.user)
+		res.render('item', {user:req.session.user})
+	else
+		res.render('item')
 })
 
 //logout route
@@ -109,7 +160,7 @@ app.get('logout', (req, res)=>{
 })
 
 //adds a user to the database
-app.post('/user/register', urlencoder, (req,res)=>{
+app.post('/register', urlencoder, (req,res)=>{
 	userModel.findOne({'email': req.body.email}, (err, user)=>{
 		if(user){
 			res.render('register', {
@@ -135,14 +186,17 @@ app.post('/user/register', urlencoder, (req,res)=>{
 					error: "Error: " + err
 				})
 			}else{
-				res.render('login')
+				if(req.session.user)
+					res.render('login', {user:req.session.user})
+				else
+					res.render('login')
 			}
 		})	
 	}
 })
 
 //user login
-app.post('/user/login', urlencoder, (req, res)=>{
+app.post('/login', urlencoder, (req, res)=>{
 	userModel.findOne({'email': req.body.email}, (err, user)=>{
 		if(!user){
 			res.render('login', {
@@ -156,7 +210,8 @@ app.post('/user/login', urlencoder, (req, res)=>{
 					})
 				}else{
 					req.session.user = user
-					res.render('index')
+					res.locals.user = user
+					res.render('index', {user:user})
 				}
 			})
 		}
@@ -226,7 +281,21 @@ app.get('/delete/:id', function(req, res){
 	});
 });
 //user logout
-app.get('/user/logout', function(req, res, next){
+/*app.get('/logout', function(req, res, next){
+	if(req.session.user){
+		req.session.destroy((err)=>{
+			if(err){
+				res.render('index', (req, res)=>{
+					error: "Error: " + err
+				})
+			}
+			else{
+				res.render('index')
+			}
+		})
+	}
+})*/
+app.get('/logout', function(req, res, next){
 	if(req.session.user){
 		req.session.destroy((err)=>{
 			if(err){
