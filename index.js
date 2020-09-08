@@ -49,46 +49,73 @@ app.set('view engine', 'hbs');
 
 //entry route
 app.get('/', (req, res) => {
-	 res.render('index');
+	if(req.session.user)
+		res.render('index', {user:req.session.user})
+	else
+		res.render('index')
 });
 
 //about route
 app.get('/about', (req, res)=>{
-	res.render('about');
+	if(req.session.user)
+		res.render('about', {user:req.session.user})
+	else
+		res.render('about')
 })
 
 //contact route
 app.get('/contact', (req, res)=>{
-	res.render('contact');
+	if(req.session.user)
+		res.render('contact', {user:req.session.user});
+	else
+		res.render('contact')
 })
 
 //shop route
 app.get('/shop', (req, res)=>{
-	res.render('shop')
+	if(req.session.user)
+		res.render('shop', {user:req.session.user})
+	else
+		res.render('shop')
 })
 
 app.get('/cart', (req, res)=>{
-	res.render('cart')
+	if(req.session.user)
+		res.render('cart', {user:req.session.user})
+	else
+		res.render('cart')
 })
 
 //sign-in route
 app.get('/login', (req, res)=>{
-	res.render('login')
+	if(req.session.user)
+		res.render('login', {user:req.session.user})
+	else
+		res.render('login')
 })
 
 //index route
 app.get('/index', (req, res)=>{
-	res.render('index')
+	if(req.session.user)
+		res.render('index', {user:req.session.user})
+	else
+		res.render('index')
 })
 
 //register route
 app.get('/register', (req, res)=>{
-	res.render('register')
+	if(req.session.user)
+		res.render('register', {user:req.session.user})
+	else
+		res.render('register')
 })
 
 //item route
 app.get('/item', (req, res)=>{
-	res.render('item')
+	if(req.session.user)
+		res.render('item', {user:req.session.user})
+	else
+		res.render('item')
 })
 
 //logout route
@@ -134,7 +161,10 @@ app.post('/register', urlencoder, (req,res)=>{
 					error: "Error: " + err
 				})
 			}else{
-				res.render('login')
+				if(req.session.user)
+					res.render('login', {user:req.session.user})
+				else
+					res.render('login')
 			}
 		})	
 	}

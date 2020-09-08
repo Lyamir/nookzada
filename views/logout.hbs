@@ -52,10 +52,17 @@
                   <li class="nav-item"><a class="nav-link link text-warning text-primary display-4" href="about">About Us</a></li>
                   <li class="nav-item"><a class="nav-link link text-warning text-primary display-4" href="contact">Contact</a></li>
                   <li class="nav-item dropdown">
-                    <a class="nav-link link text-warning dropdown-toggle display-4" href="#" data-toggle="dropdown-submenu" aria-expanded="false">User</a>
+                    {{#if user}}
+                        <a class="nav-link link text-warning dropdown-toggle display-4" href="#" data-toggle="dropdown-submenu" aria-expanded="false">{{user.username}}</a>
+                    {{else}}
+                        <a class="nav-link link text-warning dropdown-toggle display-4" href="#" data-toggle="dropdown-submenu" aria-expanded="false">User</a>
+                    {{/if}}
                     <div class="dropdown-menu">
-                      <a class="text-warning dropdown-item text-primary display-4" href="login">Sign in</a>
-                      <a class="text-warning dropdown-item display-4" href="logout" aria-expanded="false">Sign out</a>
+                    {{#if user}}
+                      <a class="text-warning dropdown-item display-4" href="logout">Sign Out</a>
+                    {{else}}  
+                      <a class="text-warning dropdown-item display-4" href="login">Sign In</a>
+                    {{/if}}  
                     </div>
                   </li>
               </ul>
