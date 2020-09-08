@@ -100,6 +100,11 @@
             <a href="#">Forgot Password?</a>
             <p><input type="checkbox">Remember Me</p>
         </div><br>
+            {{#if error}}
+                <div class="alert alert-danger" role="alert">
+                    {{error}}
+                </div>
+            {{/if}}
         <button type="submit">Login</button><br><br>
         <button type="button" class="reg" onclick="document.location.href=this.getAttribute('href');" href="register">Register</button>
     </form>
