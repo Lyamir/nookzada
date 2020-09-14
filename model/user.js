@@ -20,8 +20,43 @@ const userSchema = mongoose.Schema({
             type: String,
             required: true
         },
-        reviewList: {
-            type: []
+        reviews: {
+            type: [],
+            itemID: {
+                type: mongoose.Types.ObjectId(),
+                required: true
+            },
+            itemname: {
+                type: String,
+                required: true
+            },
+            rating: {
+                type: Number,
+                required: true
+            },
+            description: {
+                type: String
+            },
+            date: {
+                type: Date
+            }
+        },
+        orders: {
+            type: [],
+            _id: {
+                type: mongoose.Types.ObjectId(),
+                required: true
+            },
+            items: {
+                type: [],
+                itemname: {
+                    type: String
+                },
+                price: {
+                    type: Number
+                }
+            },
+            totalprice: Number  
         }
     })
 
