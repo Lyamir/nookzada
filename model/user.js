@@ -34,20 +34,20 @@ const userSchema = mongoose.Schema({
         },
         cart: {
             type: [{
-                items: [{
-                    itemname: String, 
-                    price: Number
-                }], 
-                totalprice: Number
-            }]
-        },
-        orders: {
-            type: [{
                 itemID: ObjectId(), 
                 itemname: String, 
                 price: Number, 
                 quantity: Number
             }],
+        },
+        orders: {
+            type: [{
+                items: [{
+                    itemname: String, 
+                    price: Number, 
+                }], 
+                totalprice: Number
+            }]
         }
     })
 
