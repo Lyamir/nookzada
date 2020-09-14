@@ -10,21 +10,6 @@ const reviewSchema = mongoose.Schema({
     date: Date
 })
 
-const orderSchema = mongoose.Schema({
-    items: [{
-        itemname: String, 
-        price: Number
-    }], 
-    totalprice: Number
-})
-
-const cartSchema = mongoose.Schema({
-    itemID: ObjectId(), 
-    itemname: String, 
-    price: Number, 
-    quantity: Number
-})
-
 const userSchema = mongoose.Schema({
         username: {
             type: String,
@@ -48,10 +33,21 @@ const userSchema = mongoose.Schema({
             type: [reviewSchema]
         },
         cart: {
-            type: [cartSchema]
+            type: [{
+                items: [{
+                    itemname: String, 
+                    price: Number
+                }], 
+                totalprice: Number
+            }]
         },
         orders: {
-            type: [orderSchema],
+            type: [{
+                itemID: ObjectId(), 
+                itemname: String, 
+                price: Number, 
+                quantity: Number
+            }],
         }
     })
 
