@@ -1,6 +1,30 @@
 const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
 let SALT = 10
+
+const reviewSchema = mongoose.Schema({
+    itemID: ObjectId(),
+    itemname: String,
+    rating: Number,
+    description: String,
+    date: Date
+})
+
+const orderSchema = mongoose.Schema({
+    items: [{
+        itemname: String, 
+        price: Number
+    }], 
+    totalprice: Number
+})
+
+const cartSchema = mongoose.Schema({
+    itemID: ObjectId(), 
+    itemname: String, 
+    price: Number, 
+    quantity: Number
+})
+
 const userSchema = mongoose.Schema({
         username: {
             type: String,
@@ -21,10 +45,13 @@ const userSchema = mongoose.Schema({
             required: true
         },
         reviews: {
-            type: []
+            type: [reviewSchema]
+        },
+        cart: {
+            type: [cartSchema]
         },
         orders: {
-            type: [],
+            type: [orderSchema],
         }
     })
 

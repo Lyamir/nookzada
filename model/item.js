@@ -1,5 +1,13 @@
 const mongoose = require('mongoose')
 
+const reviewSchema = mongoose.Schema({
+    userID: ObjectId(),
+    username: String,
+    rating: Number,
+    description: String,
+    date: Date
+})
+
 const itemSchema = mongoose.Schema({
     _id: {
         type: Number,
@@ -32,6 +40,9 @@ const itemSchema = mongoose.Schema({
     timesSold: {
         type: Number,
         required: true
+    },
+    reviews: {
+        type: [reviewSchema]
     }
 })
 
