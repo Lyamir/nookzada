@@ -38,7 +38,8 @@ const userSchema = mongoose.Schema({
                 type: String
             },
             date: {
-                type: Date
+                type: Date,
+                required: true
             }
         },
         orders: {
@@ -50,13 +51,18 @@ const userSchema = mongoose.Schema({
             items: {
                 type: [],
                 itemname: {
-                    type: String
+                    type: String,
+                    required: true
                 },
                 price: {
-                    type: Number
+                    type: Number,
+                    required: true
                 }
             },
-            totalprice: Number  
+            totalprice: {
+                type: Number,
+                required: true
+            }
         }
     })
 
