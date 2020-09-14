@@ -21,48 +21,10 @@ const userSchema = mongoose.Schema({
             required: true
         },
         reviews: {
-            type: [],
-            itemID: {
-                type: mongoose.Types.ObjectId(),
-                required: true
-            },
-            itemname: {
-                type: String,
-                required: true
-            },
-            rating: {
-                type: Number,
-                required: true
-            },
-            description: {
-                type: String
-            },
-            date: {
-                type: Date,
-                required: true
-            }
+            type: []
         },
         orders: {
             type: [],
-            _id: {
-                type: mongoose.Types.ObjectId(),
-                required: true
-            },
-            items: {
-                type: [],
-                itemname: {
-                    type: String,
-                    required: true
-                },
-                price: {
-                    type: Number,
-                    required: true
-                }
-            },
-            totalprice: {
-                type: Number,
-                required: true
-            }
         }
     })
 
