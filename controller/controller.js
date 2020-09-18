@@ -35,7 +35,7 @@ const routerFunctions = {
             res.render('register', {user: req.session.user})
         else
             res.render('register')
-    
+    },
 
     getShop: async (req, res)=>{
         await itemModel.find({}, (err, item)=>{
