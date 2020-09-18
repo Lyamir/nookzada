@@ -181,7 +181,7 @@ app.get('logout', (req, res)=>{
 })
 
 //adds a user to the database
-app.post('/register', urlencoder, (req,res)=>{
+app.post('/signup', urlencoder, (req,res)=>{
 	userModel.findOne({'email': req.body.email}, (err, user)=>{
 		if(user){
 			res.render('register', {
