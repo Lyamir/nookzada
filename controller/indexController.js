@@ -4,7 +4,7 @@ const itemModel = require ('../model/item')
 const routerFunctions = {
     getIndex: (req, res)=>{
         if(req.session.user)
-		    res.render('index', {user:req.session.user})
+		    res.render('index', {user: req.session.user})
 	    else
 		    res.render('index')
     },
@@ -38,33 +38,45 @@ const routerFunctions = {
     },
 
     getShop: async (req, res)=>{
-        await itemModel.find({}, (err, item)=>{
-            if(req.session.user){
-                res.render('shop', {
-                    user: req.session.user,
-                    item:item,
-                    name: item.name,
-                    price: item.price,
-                    id: item._id,
-                    description: item.description,
-                    itemList: item.itemList,
-                    image: item.image,
-                    stock: item.stock
-                })
+        await itemModel.find({}).sort({name: +1}).exec(function(err, item) { 
+            if(err){
+                console.log("Error: " + err)
+                throw(err)
+            }else{
+                if(req.session.user){
+                    res.render('shop', {
+                        user: req.session.user,
+                        item:item,
+                        name: item.name,
+                        price: item.price,
+                        id: item._id,
+                        description: item.description,
+                        itemList: item.itemList,
+                        image: item.image,
+                        stock: item.stock,
+                        value_d: "shop",
+                        title_d: "Default sorting",
+                        value_p: "sort",
+                        title_p: "Popularity"
+                    })
+                }
+                else{
+                    res.render('shop', {
+                        item:item,
+                        name: item.name,
+                        price: item.price,
+                        id: item._id,
+                        description: item.description,
+                        itemList: item.itemList,
+                        image: item.image,
+                        stock: item.stock,
+                        value_d: "shop",
+                        title_d: "Default sorting",
+                        value_p: "sort",
+                        title_p: "Popularity"
+                    })
+                }
             }
-            else{
-                res.render('shop', {
-                    item:item,
-                    name: item.name,
-                    price: item.price,
-                    id: item._id,
-                    description: item.description,
-                    itemList: item.itemList,
-                    image: item.image,
-                    stock: item.stock
-                })
-            }
-    
         })
     },
 
@@ -117,15 +129,83 @@ const routerFunctions = {
     },
 
     sortShop: function(req, res){
-        itemModel.find({}).sort({timesSold: -1}).exec(function(err, docs) { 
+            itemModel.find({}).sort({timesSold: -1}).exec(function(err, item) { 
+                if(err){
+                    console.log("Error: " + err)
+                    throw(err)
+                }else{
+                    if(req.session.user){
+                        res.render('shop', {
+                            user: req.session.user,
+                            item:item,
+                            name: item.name,
+                            price: item.price,
+                            id: item._id,
+                            description: item.description,
+                            itemList: item.itemList,
+                            image: item.image,
+                            stock: item.stock,
+                            value_d: "sort",
+                            title_d: "Popularity",
+                            value_p: "shop",
+                            title_p: "Default sorting"
+                        })
+                    }
+                    else{
+                        res.render('shop', {
+                            item:item,
+                            name: item.name,
+                            price: item.price,
+                            id: item._id,
+                            description: item.description,
+                            itemList: item.itemList,
+                            image: item.image,
+                            stock: item.stock,
+                            value_d: "sort",
+                            title_d: "Popularity",
+                            value_p: "shop",
+                            title_p: "Default sorting"
+                        })
+                    }
+                }
+            });
+    },
+
+    defaultSort: function(req, res){
+        itemModel.find({}).sort({name: -1}).exec(function(err, item) { 
             if(err){
                 console.log("Error: " + err)
                 throw(err)
             }else{
-                res.json(docs)
+                if(req.session.user){
+                    res.render('shop', {
+                        user: req.session.user,
+                        item:item,
+                        name: item.name,
+                        price: item.price,
+                        id: item._id,
+                        description: item.description,
+                        itemList: item.itemList,
+                        image: item.image,
+                        stock: item.stock
+                    })
+                }
+                else{
+                    res.render('shop', {
+                        item:item,
+                        name: item.name,
+                        price: item.price,
+                        id: item._id,
+                        description: item.description,
+                        itemList: item.itemList,
+                        image: item.image,
+                        stock: item.stock
+                    })
+                }
             }
         });
-    },
+},
+
 
     postLogin: (req, res)=>{
         userModel.findOne({'email': req.body.email}, (err, user)=>{

@@ -105,7 +105,7 @@
 			</div>
 			<div class="col-lg-9 col-12 order-1 order-lg-2  bg--white">
 				<div class="row">
-					<div class="col-lg-12" style="background-color: #D3F5FD;">
+					<div class="col-lg-12" style="background-color: #D3F5FD">
 						<div class="shop__list__wrapper d-flex flex-wrap flex-md-nowrap justify-content-between">
 							<div class="shop__list nav justify-content-center" role="tablist">
 								<a class="nav-item nav-link active" data-toggle="tab" href="#nav-grid" role="tab"><i class="fa fa-th"></i></a>
@@ -113,12 +113,12 @@
 							</div>
 							<p>Showing 1–11 of 11 results</p>
 							<div class="orderby__wrapper">
-								<span>Sort By</span>
-								<select class="shot__byselect">
-									<option>Default sorting</option>
-									<option>Popularity</option>
-								</select>
-							</div>
+									<span>Sort By</span>
+									<select class="shot__byselect" id="sorted" name="sorted" onchange="window.location.href=this.value">
+										<option value="{{value_d}}">{{title_d}}</option>
+										<option value="{{value_p}}">{{title_p}}</option>
+									</select>								
+							</div>				
 						</div>
 					</div>
 				</div>
@@ -234,7 +234,23 @@
   <script src="/touchswipe/jquery.touch-swipe.min.js"></script>
   <script src="/viewportchecker/jquery.viewportchecker.js"></script>
   <script src="/theme/js/script.js"></script>
-
+  <script type="text/javascript">
+	var dropdown = ('#sorted')
+	$('#sorted').change(function(){
+		var value = $('#sorted').find(":selected").text();
+		$.ajax({
+			type:'GET',
+			url:"http://localhost:3000/sort",
+			data:{
+				'value':value
+			},
+			success: function(data){
+				console.log("success");
+				console.log(data);
+			}
+		})
+	})
+  </script>
 <!-- Scroll up -->  
  <div id="scrollToTop" class="scrollToTop mbr-arrow-up"><a style="text-align: center;"><i class="mbr-arrow-up-icon mbr-arrow-up-icon-cm cm-icon cm-icon-smallarrow-up"></i></a></div>
     <input name="animation" type="hidden">
