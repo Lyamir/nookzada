@@ -32,9 +32,9 @@ const routerFunctions = {
 
     getLogin: (req, res)=>{
         if(req.session.user)
-            res.render('register', {user: req.session.user})
+            res.render('login', {user: req.session.user})
         else
-            res.render('register')
+            res.render('login')
     },
 
     getShop: async (req, res)=>{
@@ -142,6 +142,7 @@ const routerFunctions = {
                     }else{
                         req.session.user = user
                         res.locals.user = user
+                        console.log(req.session.user.email)
                         res.render('index', {user:user})
                     }
                 })
@@ -273,7 +274,49 @@ const routerFunctions = {
             }
             res.redirect('/')
         });
-    }
+    },
+
+    //TODO: Add functions below to indexRouter
+    addCart: (req, res)=>{
+        let id = req.params.id
+
+        itemModel.findOne({_id: id}, (err, item)=>{
+            if(err)
+                console.err(err)
+            else{
+                userModel.findOne({email: req.session.user.email}, (err, user)=>{
+                    if(err)
+                        console.err(err)
+                    else
+                        user.cart.push({
+                        itemID: item._id, 
+                        itemname: item.name, 
+                        price: item.price, 
+                        quantity: req.body.quantity
+                    })
+                })
+            }
+                
+        })
+    },
+
+    deleteCart: (req, res)=>{
+        let id = req.params.id
+
+        itemModel.findOne({_id: id}, (err, item)=>{
+            if(err)
+                console.err(err)
+            else{
+                userModel.findOne({email: req.session.user.email}, (err, user)=>{
+                    var index = user.cart.findIndex(item => item.id === id)
+                    user.cart.splice(index, 1)
+                })
+            }
+                
+        })
+    },
+
+    
 }
 
 module.exports = routerFunctions
