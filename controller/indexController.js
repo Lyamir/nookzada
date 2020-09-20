@@ -81,10 +81,40 @@ const routerFunctions = {
     },
 
     getItem: async (req, res)=>{
-        console.log(req.params)
         if(req.session.user){
-            await itemModel.findOne(req.params, 'name price _id description itemList image stock', (err, item)=>{
+            await itemModel.findById(req.params.id, (function(err, item){
                 res.render('item', {
+                    name: item.name,
+                    price: item.price,
+                    id: item._id,
+                    description: item.description,
+                    itemList: item.itemList,
+                    image: item.image,
+                    stock: item.stock,
+                    user:req.session.user
+                })
+            }))
+        }else{
+            console.log(req.params.id)
+            await itemModel.findById(req.params.id, (function(err, item){
+                    console.log(item.name)
+                    res.render('item', {
+                        name: item.name,
+                        price: item.price,
+                        id: item._id,
+                        description: item.description,
+                        itemlist: item.itemlist,
+                        image: item.image,
+                        stock: item.stock
+                    })
+                }))
+        }
+    },
+
+    getEachItem: (req,res)=>{
+        if(req.session.user){
+            itemModel.findById(req.params.id, function(err, item){
+                res.render('shop', {
                     name: item.name,
                     price: item.price,
                     id: item._id,
@@ -97,19 +127,18 @@ const routerFunctions = {
             })	
         }
         else{
-            console.log(req.params)
-                await itemModel.findOne(req.params, (err, item)=>{
-                    console.log(item)
-                    res.render('item', {
-                        name: item.name,
-                        price: item.price,
-                        id: item._id,
-                        description: item.description,
-                        itemlist: item.itemlist,
-                        image: item.image,
-                        stock: item.stock
-                    })
+            itemModel.findById(req.params.id, function(err, item){
+                console.log(item)
+                res.render('shop', {
+                    name: item.name,
+                    price: item.price,
+                    id: item._id,
+                    description: item.description,
+                    itemlist: item.itemlist,
+                    image: item.image,
+                    stock: item.stock
                 })
+            })
         }
     },
 
@@ -170,42 +199,6 @@ const routerFunctions = {
                 }
             });
     },
-
-    defaultSort: function(req, res){
-        itemModel.find({}).sort({name: -1}).exec(function(err, item) { 
-            if(err){
-                console.log("Error: " + err)
-                throw(err)
-            }else{
-                if(req.session.user){
-                    res.render('shop', {
-                        user: req.session.user,
-                        item:item,
-                        name: item.name,
-                        price: item.price,
-                        id: item._id,
-                        description: item.description,
-                        itemList: item.itemList,
-                        image: item.image,
-                        stock: item.stock
-                    })
-                }
-                else{
-                    res.render('shop', {
-                        item:item,
-                        name: item.name,
-                        price: item.price,
-                        id: item._id,
-                        description: item.description,
-                        itemList: item.itemList,
-                        image: item.image,
-                        stock: item.stock
-                    })
-                }
-            }
-        });
-},
-
 
     postLogin: (req, res)=>{
         userModel.findOne({'email': req.body.email}, (err, user)=>{
