@@ -16,7 +16,7 @@ router.get('/login', controller.getLogin)
 router.get('/item/:_id', controller.getItem)
 router.get('/logout', controller.getLogout)
 router.get('/sort', controller.sortShop)
-// router.get('/productmodal/:id', controller.getEachItem)
+router.get('/cart', controller.getCart)
 
 
 router.post('/login', urlencoder, controller.postLogin)
