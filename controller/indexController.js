@@ -276,6 +276,13 @@ const routerFunctions = {
         });
     },
 
+    getCart: function(req, res){
+        if(req.session.user)
+        res.render('cart', {user: req.session.user})
+    else
+        res.render('cart')
+    },
+
     //TODO: Add functions below to indexRouter
     addCart: (req, res)=>{
         let id = req.params.id
