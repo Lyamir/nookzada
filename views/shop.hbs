@@ -141,8 +141,8 @@
 									<div class="action">
 										<div class="actions_inner">
 											<ul class="add_to_links">
-												<li><a class="cart" href="cart"><i class="bi bi-shopping-bag4"></i></a></li>
-												<li><a data-toggle="modal" title="Quick View" class="quickview modal-view detail-link" href="#productmodal"><i class="bi bi-search"></i></a></li>
+												<li><a class="cart" href="addCart/{{id}}"><i class="bi bi-shopping-bag4"></i></a></li>
+												<li><a data-id="{{id}}" data-toggle="modal" title="Quick View" class="quickview modal-view detail-link" href="#productmodal{{id}}"><i class="bi bi-search"></i></a></li>
 											</ul>
 										</div>
 									</div>
@@ -167,9 +167,10 @@
 </div>
 <!-- End Shop Page -->
 		<!-- QUICKVIEW PRODUCT -->
+		{{#each item}}
 		<div id="quickview-wrapper">
 		    <!-- Modal -->
-		    <div class="modal fade" id="productmodal" tabindex="-1" role="dialog">
+		    <div class="modal fade" id="productmodal{{id}}" tabindex="-1" role="dialog">
 		        <div class="modal-dialog modal__container" role="document">
 		            <div class="modal-content">
 		                <div class="modal-header modal__header">
@@ -180,12 +181,12 @@
 		                        <!-- Start product images -->
 		                        <div class="product-images">
 		                            <div class="main-image images">
-		                                <img alt="big images" src="/images/270x340/seasonal.png">
+		                                <img alt="big images" src="/images/items/{{{image}}}">
 		                            </div>
 		                        </div>
 		                        <!-- end product images -->
 		                        <div class="product-info" style=" justify-content: space-between;">
-									<h1>{20 slots of custom materials</h1>
+									<h1>{{name}}</h1>
 		                            <div class="rating__and__review">
 										<div class="review">
 		                                    <a href="#"> 4 customer reviews</a>
@@ -200,14 +201,14 @@
 		                            </div>
 		                            <div class="price-box-3">
 		                                <div class="s-price-box">
-		                                    <span class="new-price">PHP50</span>
+		                                    <span class="new-price">PHP{{price}}</span>
 		                                </div>
 		                            </div>
 		                            <div class="quick-desc">
-		                                Purchase this pack to receive 20 stacks of any materials of your choice for as low as P50!
+		                                {{description}}
 		                            </div>
 		                            <div class="addtocart-btn">
-		                                <a href="#">Add to cart</a>
+		                                <a href="addCart">Add to cart</a>
 		                            </div>
 		                        </div>
 		                    </div>
@@ -216,8 +217,9 @@
 		        </div>
 		    </div>
 		</div>
+		{{/each}}
 		<!-- END QUICKVIEW PRODUCT -->
-		</div>
+	</div>
 
 <!-- JS -->
   <script src="/web/assets/jquery/jquery.min.js"></script>

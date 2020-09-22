@@ -111,37 +111,6 @@ const routerFunctions = {
         }
     },
 
-    getEachItem: (req,res)=>{
-        if(req.session.user){
-            itemModel.findById(req.params.id, function(err, item){
-                res.render('shop', {
-                    name: item.name,
-                    price: item.price,
-                    id: item._id,
-                    description: item.description,
-                    itemList: item.itemList,
-                    image: item.image,
-                    stock: item.stock,
-                    user:req.session.user
-                })
-            })	
-        }
-        else{
-            itemModel.findById(req.params.id, function(err, item){
-                console.log(item)
-                res.render('shop', {
-                    name: item.name,
-                    price: item.price,
-                    id: item._id,
-                    description: item.description,
-                    itemlist: item.itemlist,
-                    image: item.image,
-                    stock: item.stock
-                })
-            })
-        }
-    },
-
     getLogout: (req, res)=>{
         if(req.session.user){
             req.session.destroy((err)=>{
@@ -360,13 +329,16 @@ const routerFunctions = {
                 userModel.findOne({email: req.session.user.email}, (err, user)=>{
                     if(err)
                         console.err(err)
-                    else
-                        user.cart.push({
-                        itemID: item._id, 
-                        itemname: item.name, 
-                        price: item.price, 
-                        quantity: req.body.quantity
-                    })
+                    else{
+                            user.cart.push({
+                            itemID: item._id, 
+                            itemname: item.name, 
+                            price: item.price, 
+                            quantity: req.body.quantity
+                        })  
+                        res.render('cart')                      
+                    }
+
                 })
             }
                 
@@ -388,8 +360,6 @@ const routerFunctions = {
                 
         })
     },
-
-    
 }
 
 module.exports = routerFunctions
