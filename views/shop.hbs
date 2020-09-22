@@ -105,7 +105,7 @@
 			</div>
 			<div class="col-lg-9 col-12 order-1 order-lg-2  bg--white">
 				<div class="row">
-					<div class="col-lg-12" style="background-color: #D3F5FD;">
+					<div class="col-lg-12" style="background-color: #D3F5FD">
 						<div class="shop__list__wrapper d-flex flex-wrap flex-md-nowrap justify-content-between">
 							<div class="shop__list nav justify-content-center" role="tablist">
 								<a class="nav-item nav-link active" data-toggle="tab" href="#nav-grid" role="tab"><i class="fa fa-th"></i></a>
@@ -113,12 +113,12 @@
 							</div>
 							<p style="margin-left: 10%;">Showing 1–11 of 11 results</p>
 							<div class="orderby__wrapper">
-								<span>Sort By</span>
-								<select class="shot__byselect">
-									<option>Default sorting</option>
-									<option>Popularity</option>
-								</select>
-							</div>
+									<span>Sort By</span>
+									<select class="shot__byselect" id="sorted" name="sorted" onchange="window.location.href=this.value">
+										<option value="{{value_d}}">{{title_d}}</option>
+										<option value="{{value_p}}">{{title_p}}</option>
+									</select>								
+							</div>				
 						</div>
 					</div>
 				</div>
@@ -158,9 +158,7 @@
 								</div>
 							</div>
 							<!-- End Single Product -->
-						{{/each}}
-
-							
+						{{/each}}		
 					</div>
 				</div>
 			</div>
@@ -168,7 +166,6 @@
 	</div>
 </div>
 <!-- End Shop Page -->
-
 		<!-- QUICKVIEW PRODUCT -->
 		<div id="quickview-wrapper">
 		    <!-- Modal -->
@@ -183,12 +180,12 @@
 		                        <!-- Start product images -->
 		                        <div class="product-images">
 		                            <div class="main-image images">
-		                                <img alt="big images" src="images/270x340/seasonal.png">
+		                                <img alt="big images" src="/images/270x340/seasonal.png">
 		                            </div>
 		                        </div>
 		                        <!-- end product images -->
 		                        <div class="product-info" style=" justify-content: space-between;">
-		                            <h1>20 slots of custom materials</h1>
+									<h1>{20 slots of custom materials</h1>
 		                            <div class="rating__and__review">
 										<div class="review">
 		                                    <a href="#"> 4 customer reviews</a>
@@ -203,12 +200,11 @@
 		                            </div>
 		                            <div class="price-box-3">
 		                                <div class="s-price-box">
-		                                    <span class="new-price">P50</span>
+		                                    <span class="new-price">PHP50</span>
 		                                </div>
 		                            </div>
 		                            <div class="quick-desc">
-		                                Purchase this pack to receive 20 stacks of any materials of your choice for as low as P50! This includes: Gold, star fragment,
-										large star fragment, wood, hardwood, softwood, iron stone, stone, clay, bamboo pieces, weeds, tree branch, wasp nest and any fruit.
+		                                Purchase this pack to receive 20 stacks of any materials of your choice for as low as P50!
 		                            </div>
 		                            <div class="addtocart-btn">
 		                                <a href="#">Add to cart</a>
@@ -234,7 +230,7 @@
   <script src="/touchswipe/jquery.touch-swipe.min.js"></script>
   <script src="/viewportchecker/jquery.viewportchecker.js"></script>
   <script src="/theme/js/script.js"></script>
-
+ 
 <!-- Scroll up -->  
  <div id="scrollToTop" class="scrollToTop mbr-arrow-up"><a style="text-align: center;"><i class="mbr-arrow-up-icon mbr-arrow-up-icon-cm cm-icon cm-icon-smallarrow-up"></i></a></div>
     <input name="animation" type="hidden">
