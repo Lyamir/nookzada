@@ -17,15 +17,14 @@ router.get('/item/:_id', controller.getItem)
 router.get('/logout', controller.getLogout)
 router.get('/sort', controller.sortShop)
 router.get('/cart', controller.getCart)
-
+router.get('/addCart/:id', controller.addCart)
+router.get('/deleteCart/:id', controller.deleteCart)
 router.post('/login', urlencoder, controller.postLogin)
 router.post('/register', urlencoder, controller.postSignup)
 router.post('/addItem', urlencoder, controller.addItem)
 router.post('/shop', controller.searchItem)
 router.post('/deleteItem', controller.deleteItem)
 router.post('/editItem', controller.editItem)
-router.post('/addCart/:id', urlencoder, controller.addCart)
-router.post('/deleteCart/:id', urlencoder, controller.deleteCart)
 
 module.exports = router
 

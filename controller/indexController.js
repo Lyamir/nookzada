@@ -325,6 +325,11 @@ const routerFunctions = {
                         res.render('cart', {
                             user: req.session.user,
                             cart: req.session.user.cart,
+                            itemname: req.session.user.cart.itemname,
+                            price: req.session.user.cart.price,
+                            quantity: req.session.user.cart.quantity,
+                            itemId: req.session.user.cart._id,
+                            total: req.session.user.cart.price * req.session.user.cart.quantity
                         })                                                 
                     }
                 })            
@@ -335,34 +340,44 @@ const routerFunctions = {
 
     addCart: (req, res)=>{
         let id = req.params.id
-
-        itemModel.findOne({_id: id}, (err, item)=>{
+        let qty;
+        if(req.body.quantity != null)
+            qty = req.body.quantity
+        else
+            qty = 1
+        itemModel.findById({_id: id}, (err, item)=>{
             if(err)
-                console.err(err)
+                console.log(err)
             else{
                 userModel.findOne({email: req.session.user.email}, (err, user)=>{
                     if(err)
                         console.err(err)
-                    else{
-                            user.cart.push({
-                            itemID: item._id, 
-                            itemname: item.name, 
-                            price: item.price, 
-                            quantity: req.body.quantity
-                        })  
-                        res.render('cart')                      
-                    }
-
-                })
-            }
-                
-        })
-    },
+                    else{       
+                            req.session.user.cart.push({
+                                itemID: item._id, 
+                                itemname: item.name, 
+                                price: item.price, 
+                                quantity: qty
+                            })
+                            res.render('cart', {
+                                user: req.session.user,
+                                cart: req.session.user.cart,
+                                itemname: req.session.user.cart.itemname,
+                                price: req.session.user.cart.price,
+                                quantity: req.session.user.cart.quantity,
+                                itemId: req.session.user.cart._id,
+                                total: req.session.user.cart.price
+                            })                          
+                        }
+                    })
+                }        
+            })
+        },
 
     deleteCart: (req, res)=>{
         let id = req.params.id
 
-        itemModel.findOne(id, (err, item)=>{
+        itemModel.findById({_id: id}, (err, item)=>{
             if(err)
                 console.err(err)
             else{

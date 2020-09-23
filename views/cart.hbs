@@ -111,8 +111,8 @@
                     <td class="product-name"><a href="#">{{itemname}}</a></td>
                     <td class="product-price"><span class="amount">PHP{{price}}</span></td>
                     <td class="product-quantity"><input type="number" value="{{quantity}}"></td>
-                    <td class="product-subtotal">PHP50</td>
-                    <td class="product-remove"><a href="#"><i class="fas fa-trash"></i></a></td>
+                    <td class="product-subtotal">PHP{{total}}</td>
+                    <td class="product-remove"><a href="deleteCart/{{itemId}}"><i class="fas fa-trash"></i></a></td>
                   </tr>
                 {{/each}}
 							</tbody>
@@ -129,7 +129,7 @@
 					</div>
 				</div>
 			</div>
-				<br><button type="submit"  class="update">Update</button>
+				<br><button type="submit"  class="update" onclick="document.location.href=this.getAttribute('href');" href="cart">Update</button>
 					<button type="submit" class="checkout">Checkout</button>
 
 		</div>
