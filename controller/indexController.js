@@ -304,9 +304,9 @@ const routerFunctions = {
         });
     },
 
-    getCart: function(req, res){
+    getCart: async function(req, res){
         if(req.session.user){
-            userModel.findOne(req.session.user, (err, user)=>{
+            await userModel.findOne(req.session.user, (err, user)=>{
                 if(err)
                     console.log(err)
                 else{   
