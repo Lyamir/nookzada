@@ -316,15 +316,6 @@ const routerFunctions = {
         });
     },
 
-    /*getCart: function(req, res){
-        if(req.session.user)
-            res.render('cart', {
-                user: req.session.user,
-            })
-        else
-            res.render('cart')
-    },*/
-
     getCart: function(req, res){
         if(req.session.user){
             userModel.findOne(req.session.user, (err, user)=>{
@@ -334,10 +325,6 @@ const routerFunctions = {
                         res.render('cart', {
                             user: req.session.user,
                             cart: req.session.user.cart,
-                            itemname: req.session.user.cart.itemname,
-                            price: req.session.user.cart.price,
-                            quantity: req.session.user.cart.quantity,
-                            itemId: req.session.user.cart._id,
                         })                                                 
                     }
                 })            
@@ -346,7 +333,6 @@ const routerFunctions = {
             }
     },
 
-    //TODO: Add functions below to indexRouter
     addCart: (req, res)=>{
         let id = req.params.id
 
@@ -376,7 +362,7 @@ const routerFunctions = {
     deleteCart: (req, res)=>{
         let id = req.params.id
 
-        itemModel.findOne({_id: id}, (err, item)=>{
+        itemModel.findOne(id, (err, item)=>{
             if(err)
                 console.err(err)
             else{
