@@ -1,5 +1,6 @@
 const userModel = require('../model/user')
 const itemModel = require ('../model/item')
+var mongoose = require('mongoose')
 
 const routerFunctions = {
     getIndex: (req, res)=>{
@@ -199,13 +200,12 @@ const routerFunctions = {
                     error: "Email already exist!"
                 })
             }
-        })
+            })
         if(req.body.password != req.body.confirmpassword){
             res.render('register', {
                 error: "Passwords do not match!"
             })
-        }
-        else{
+        }else{
             let user = new userModel({
                 _id: new mongoose.Types.ObjectId(),
                 username: req.body.username,
@@ -218,7 +218,7 @@ const routerFunctions = {
             user.save(function (err){
                 if (err)
                     res.render('register',{
-                        error: `Error: ${err}`
+                        error: "Error: ${err}"
                     })
                 
                 let order = new orderModel({
@@ -231,9 +231,7 @@ const routerFunctions = {
                     res.render('login', {
                         success: "Successfully registered!"
                     })
-                }
-                )
-    
+                })    
             })
         }
     },
@@ -318,11 +316,34 @@ const routerFunctions = {
         });
     },
 
-    getCart: function(req, res){
+    /*getCart: function(req, res){
         if(req.session.user)
-        res.render('cart', {user: req.session.user})
-    else
-        res.render('cart')
+            res.render('cart', {
+                user: req.session.user,
+            })
+        else
+            res.render('cart')
+    },*/
+
+    getCart: function(req, res){
+        if(req.session.user){
+            userModel.findOne(req.session.user, (err, user)=>{
+                if(err)
+                    console.log(err)
+                else{
+                        res.render('cart', {
+                            user: req.session.user,
+                            cart: req.session.user.cart,
+                            itemname: req.session.user.cart.itemname,
+                            price: req.session.user.cart.price,
+                            quantity: req.session.user.cart.quantity,
+                            itemId: req.session.user.cart._id,
+                        })                                                 
+                    }
+                })            
+            }else{
+                res.render('login')
+            }
     },
 
     //TODO: Add functions below to indexRouter
