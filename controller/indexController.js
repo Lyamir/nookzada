@@ -83,7 +83,7 @@ const routerFunctions = {
 
     getItem: async (req, res)=>{
         if(req.session.user){
-            await itemModel.findById(req.params.id, (function(err, item){
+            await itemModel.findById(req.params._id, (function(err, item){
                 res.render('item', {
                     name: item.name,
                     price: item.price,
@@ -97,7 +97,7 @@ const routerFunctions = {
             }))
         }else{
             console.log(req.params.id)
-            await itemModel.findById(req.params.id, (function(err, item){
+            await itemModel.findById(req.params._id, (function(err, item){
                     console.log(item.name)
                     res.render('item', {
                         name: item.name,
@@ -219,19 +219,7 @@ const routerFunctions = {
                 if (err)
                     res.render('register',{
                         error: "Error: ${err}"
-                    })
-                
-                let order = new orderModel({
-                    userID: user._id
-                })
-    
-                order.save(function (err){
-                    if(err)
-                        console.log(err)
-                    res.render('login', {
-                        success: "Successfully registered!"
-                    })
-                })    
+                    })    
             })
         }
     },
@@ -321,15 +309,10 @@ const routerFunctions = {
             userModel.findOne(req.session.user, (err, user)=>{
                 if(err)
                     console.log(err)
-                else{
+                else{   
                         res.render('cart', {
                             user: req.session.user,
                             cart: req.session.user.cart,
-                            itemname: req.session.user.cart.itemname,
-                            price: req.session.user.cart.price,
-                            quantity: req.session.user.cart.quantity,
-                            itemId: req.session.user.cart._id,
-                            total: req.session.user.cart.price * req.session.user.cart.quantity
                         })                                                 
                     }
                 })            
@@ -345,34 +328,31 @@ const routerFunctions = {
             qty = req.body.quantity
         else
             qty = 1
-        itemModel.findById({_id: id}, (err, item)=>{
+        itemModel.findById(id, (err, item)=>{
             if(err)
                 console.log(err)
             else{
-                userModel.findOne({email: req.session.user.email}, (err, user)=>{
+                console.log(item)
+                let query = {
+                    $push: {"cart": {
+                     itemID: item._id,
+                    itemname: item.name,
+                    image: item.image,
+                    price: item.price,
+                    quantity: qty   
+                    }}    
+                }
+                console.log(req.session.user._id)
+                userModel.findByIdAndUpdate(req.session.user._id, query, {safe: true, upsert: true}, (err, user)=>{
                     if(err)
-                        console.err(err)
-                    else{       
-                            req.session.user.cart.push({
-                                itemID: item._id, 
-                                itemname: item.name, 
-                                price: item.price, 
-                                quantity: qty
-                            })
-                            res.render('cart', {
-                                user: req.session.user,
-                                cart: req.session.user.cart,
-                                itemname: req.session.user.cart.itemname,
-                                price: req.session.user.cart.price,
-                                quantity: req.session.user.cart.quantity,
-                                itemId: req.session.user.cart._id,
-                                total: req.session.user.cart.price
-                            })                          
-                        }
-                    })
-                }        
-            })
-        },
+                        console.error(err)
+                    else    
+                        console.log("pushed to cart")
+                })
+                res.redirect('/cart')
+            }
+        })
+    },
 
     deleteCart: (req, res)=>{
         let id = req.params.id
