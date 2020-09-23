@@ -34,7 +34,7 @@ const userSchema = mongoose.Schema({
         },
         cart: {
             type: [{
-                itemID: mongoose.Schema.ObjectId, 
+                itemID: String, 
                 itemname: String, 
                 price: Number, 
                 quantity: Number
