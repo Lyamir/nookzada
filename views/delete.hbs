@@ -86,27 +86,15 @@
 								</tr>
 							</thead>
 							<tbody>
+              {{#each items}}
 								<tr>
-									<td class="product-thumbnail"><a href="#"><img src="images/270x340/bell.png" class="resize30"></a></td>
-									<td class="product-name"><a href="#">4 Million Bells</a></td>
-									<td class="product-price"><span class="amount">P200</span></td>
-									<td class="product-quantity"><span class="amount">10</span></td>
+									<td class="product-thumbnail"><a href="#"><img src="images/items/{{this.image}}" class="resize30"></a></td>
+									<td class="product-name"><a href="#">{{this.name}}</a></td>
+									<td class="product-price"><span class="amount">{{this.price}}</span></td>
+									<td class="product-quantity"><span class="amount">{{this.price}}</span></td>
 									<td class="product-remove"><a href="#"><i class="fas fa-trash"></i></a></td>
 								</tr>
-								<tr>
-									<td class="product-thumbnail"><a href="#"><img src="images/270x340/nmt.png" class="resize30"></a></td>
-									<td class="product-name"><a href="#">400 Nook Miles Tickets</a></td>
-									<td class="product-price"><span class="amount">P200</span></td>
-									<td class="product-quantity"><span class="amount">14</span></td>
-									<td class="product-remove"><i class="fas fa-trash"></i></td>
-								</tr>
-								<tr>
-									<td class="product-thumbnail"><a href="#"><img src="images/270x340/celeste1.png" class="resize30"></a></td>
-									<td class="product-name"><a href="#">Celeste Star and Space DIYs</a></td>
-									<td class="product-price"><span class="amount">P600</span></td>
-									<td class="product-quantity"><span class="amount">5</span></td>
-									<td class="product-remove"><i class="fas fa-trash"></i></td>
-								</tr>
+              {{/each}}
 							</tbody>
 						</table>
 					</div>
