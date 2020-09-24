@@ -363,14 +363,21 @@ const routerFunctions = {
 
     deleteCart: (req, res)=>{
         let id = req.params.id
+        let delID;
+
         itemModel.findById(id, (err, item)=>{
             if(err)
                 console.log(err)
             else{
+                for(let i = 0; i < req.session.user.cart.length; i ++){
+                    if(req.session.user.cart[i].itemID == req.params.id)
+                        delID = req.session.user.cart[i]._id
+                }
                 console.log(item)
                 let query = {
                     $pull: {"cart": {
-                        itemID: id 
+                        //itemID: id
+                        _id:delID 
                     }}    
                 }
                 console.log(req.session.user._id)

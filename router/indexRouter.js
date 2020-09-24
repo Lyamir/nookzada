@@ -26,7 +26,7 @@ router.post('/addItem', urlencoder, controller.addItem)
 router.post('/shop', controller.searchItem)
 router.post('/deleteItem', controller.deleteItem)
 router.post('/editItem', controller.editItem)
-
+router.post('/addCart/:id', urlencoder, controller.addCart)
 module.exports = router
 
 
