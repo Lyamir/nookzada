@@ -329,8 +329,9 @@ const routerFunctions = {
     addCart: (req, res)=>{
         let id = req.params.id
         let qty;
-        if(req.body.quantity != null)
-            qty = req.body.quantity
+        console.log(req.body.qty)
+        if(req.body.qty != null)
+            qty = req.body.qty
         else
             qty = 1
         itemModel.findById(id, (err, item)=>{
@@ -362,17 +363,25 @@ const routerFunctions = {
 
     deleteCart: (req, res)=>{
         let id = req.params.id
-
-        itemModel.findById({_id: id}, (err, item)=>{
+        itemModel.findById(id, (err, item)=>{
             if(err)
-                console.err(err)
+                console.log(err)
             else{
-                userModel.findOne({email: req.session.user.email}, (err, user)=>{
-                    var index = user.cart.findIndex(item => item.id === id)
-                    user.cart.splice(index, 1)
+                console.log(item)
+                let query = {
+                    $pull: {"cart": {
+                        itemID: id 
+                    }}    
+                }
+                console.log(req.session.user._id)
+                userModel.findByIdAndUpdate(req.session.user._id, query, {safe: true, upsert: true}, (err, user)=>{
+                    if(err)
+                        console.error(err)
+                    else    
+                        console.log("deleted from cart")
                 })
+                res.redirect('/cart')
             }
-                
         })
     },
 }
