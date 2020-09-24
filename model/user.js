@@ -35,7 +35,8 @@ const userSchema = mongoose.Schema({
         cart: {
             type: [{
                 itemID: String, 
-                itemname: String, 
+                itemname: String,
+                image: String, 
                 price: Number, 
                 quantity: Number,
                 subtotal: Number
