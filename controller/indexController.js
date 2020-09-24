@@ -305,15 +305,20 @@ const routerFunctions = {
     },
 
     getCart: async function(req, res){
+        let total = 0;
         if(req.session.user){
             await userModel.findOne(req.session.user, (err, user)=>{
                 if(err)
                     console.log(err)
                 else{   
+                        for(let i = 0; i < req.session.user.cart.length; i++){
+                            total += req.session.user.cart[i].subtotal;
+                        } 
                         res.render('cart', {
-                            user: req.session.user,
-                            cart: req.session.user.cart,
-                        })                                                 
+                                user: req.session.user,
+                                cart: req.session.user.cart,
+                                total: total
+                            })                    
                     }
                 })            
             }else{
@@ -324,8 +329,9 @@ const routerFunctions = {
     addCart: (req, res)=>{
         let id = req.params.id
         let qty;
-        if(req.body.quantity != null)
-            qty = req.body.quantity
+        console.log(req.body.qty)
+        if(req.body.qty != null)
+            qty = req.body.qty
         else
             qty = 1
         itemModel.findById(id, (err, item)=>{
@@ -335,11 +341,12 @@ const routerFunctions = {
                 console.log(item)
                 let query = {
                     $push: {"cart": {
-                     itemID: item._id,
-                    itemname: item.name,
-                    image: item.image,
-                    price: item.price,
-                    quantity: qty   
+                        itemID: item._id,
+                        itemname: item.name,
+                        image: item.image,
+                        price: item.price,
+                        quantity: qty,
+                        subtotal: item.price * qty   
                     }}    
                 }
                 console.log(req.session.user._id)
@@ -356,17 +363,32 @@ const routerFunctions = {
 
     deleteCart: (req, res)=>{
         let id = req.params.id
+        let delID;
 
-        itemModel.findById({_id: id}, (err, item)=>{
+        itemModel.findById(id, (err, item)=>{
             if(err)
-                console.err(err)
+                console.log(err)
             else{
-                userModel.findOne({email: req.session.user.email}, (err, user)=>{
-                    var index = user.cart.findIndex(item => item.id === id)
-                    user.cart.splice(index, 1)
+                for(let i = 0; i < req.session.user.cart.length; i ++){
+                    if(req.session.user.cart[i].itemID == req.params.id)
+                        delID = req.session.user.cart[i]._id
+                }
+                console.log(item)
+                let query = {
+                    $pull: {"cart": {
+                        //itemID: id
+                        _id:delID 
+                    }}    
+                }
+                console.log(req.session.user._id)
+                userModel.findByIdAndUpdate(req.session.user._id, query, {safe: true, upsert: true}, (err, user)=>{
+                    if(err)
+                        console.error(err)
+                    else    
+                        console.log("deleted from cart")
                 })
+                res.redirect('/cart')
             }
-                
         })
     },
 }
