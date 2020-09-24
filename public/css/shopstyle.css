@@ -13,11 +13,22 @@
   min-height: 100vh;
   background-size: cover;
 }
-.all_prod{
- margin: 1em 0 1em 1.5em; 
- text-align:center;
- margin-top: -16%;
- position: relative;
+.profile{
+  margin: 0;
+  padding: 0;
+ background-image: url(../images/balloon.jpg);
+  min-height: 100vh;
+  background-size: cover;
+}
+
+.review2onward{
+  float: left;
+  margin-top: 56px;
+  margin-right: 20px;
+}
+
+.yes:hover{
+  color: #2CEF91;
 }
 /* buttons */
 .update {
