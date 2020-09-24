@@ -19,6 +19,7 @@ router.get('/sort', controller.sortShop)
 router.get('/cart', controller.getCart)
 router.get('/addCart/:id', controller.addCart)
 router.get('/deleteCart/:id', controller.deleteCart)
+router.get('/profile', controller.getProfile)
 
 router.post('/login', urlencoder, controller.postLogin)
 router.post('/register', urlencoder, controller.postSignup)
