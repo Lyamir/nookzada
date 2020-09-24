@@ -305,15 +305,20 @@ const routerFunctions = {
     },
 
     getCart: async function(req, res){
+        let total = 0;
         if(req.session.user){
             await userModel.findOne(req.session.user, (err, user)=>{
                 if(err)
                     console.log(err)
                 else{   
+                        for(let i = 0; i < req.session.user.cart.length; i++){
+                            total += req.session.user.cart[i].subtotal;
+                        } 
                         res.render('cart', {
-                            user: req.session.user,
-                            cart: req.session.user.cart,
-                        })                                                 
+                                user: req.session.user,
+                                cart: req.session.user.cart,
+                                total: total
+                            })                    
                     }
                 })            
             }else{
@@ -335,11 +340,12 @@ const routerFunctions = {
                 console.log(item)
                 let query = {
                     $push: {"cart": {
-                     itemID: item._id,
-                    itemname: item.name,
-                    image: item.image,
-                    price: item.price,
-                    quantity: qty   
+                        itemID: item._id,
+                        itemname: item.name,
+                        image: item.image,
+                        price: item.price,
+                        quantity: qty,
+                        subtotal: item.price * qty   
                     }}    
                 }
                 console.log(req.session.user._id)

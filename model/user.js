@@ -37,7 +37,8 @@ const userSchema = mongoose.Schema({
                 itemID: String, 
                 itemname: String, 
                 price: Number, 
-                quantity: Number
+                quantity: Number,
+                subtotal: Number
             }],
         },
         orders: {

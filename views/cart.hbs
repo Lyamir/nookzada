@@ -111,8 +111,8 @@
                     <td class="product-name"><a href="#">{{this.itemname}}</a></td>
                     <td class="product-price"><span class="amount">PHP{{this.price}}</span></td>
                     <td class="product-quantity"><input type="number" value="{{this.quantity}}"></td>
-                    <td class="product-subtotal">PHP{{total}}</td>
-                    <td class="product-remove"><a href="deleteCart/{{itemId}}"><i class="fas fa-trash"></i></a></td>
+                    <td class="product-subtotal">PHP{{this.subtotal}}</td>
+                    <td class="product-remove"><a href="deleteCart/{{this.itemID}}"><i class="fas fa-trash"></i></a></td>
                   </tr>
                 {{/each}}
 							</tbody>
@@ -124,7 +124,7 @@
 						<div class="cartbox__total__area">
 							<div class="cart__total__amount">
 									<span>Total:  </span>
-									<span>P1200</span>
+									<span>PHP{{total}}</span>
 						</div>
 					</div>
 				</div>
