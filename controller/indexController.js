@@ -2,6 +2,13 @@ const userModel = require('../model/user')
 const itemModel = require ('../model/item')
 var mongoose = require('mongoose')
 
+
+function isAdmin(user) {
+    if(user === undefined)
+        return false
+    return user.userType === 'Admin'? true : false
+}
+
 const routerFunctions = {
     getIndex: (req, res)=>{
         if(req.session.user)
@@ -401,6 +408,35 @@ const routerFunctions = {
         else{
             res.redirect('/login')
         }
+    },
+    getAddItem: (req, res)=>{
+        if(isAdmin(req.session.user)){
+            res.render('add')
+        }
+        else
+            res.redirect('/')
+    },
+    getEditItem: (req, res)=>{
+        if(isAdmin(req.session.user)){
+            itemModel.find({}, (err, items)=>{
+                res.render('edit', {
+                    items: items
+                })
+            })
+        }
+        else
+            res.redirect('/')
+    },
+    getDeleteItem: (req, res)=>{
+        if(isAdmin(req.session.user)){
+            itemModel.find({}, (err, items)=>{
+                res.render('delete', {
+                    items: items
+                })
+            })
+        }
+        else
+            res.redirect('/')
     }
 }
 

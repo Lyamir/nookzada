@@ -20,6 +20,9 @@ router.get('/cart', controller.getCart)
 router.get('/addCart/:id', controller.addCart)
 router.get('/deleteCart/:id', controller.deleteCart)
 router.get('/profile', controller.getProfile)
+router.get('/addItem', controller.getAddItem)
+router.get('/editItem', controller.getEditItem)
+router.get('/deleteItem', controller.getDeleteItem)
 
 router.post('/login', urlencoder, controller.postLogin)
 router.post('/register', urlencoder, controller.postSignup)
@@ -28,6 +31,7 @@ router.post('/shop', controller.searchItem)
 router.post('/deleteItem', controller.deleteItem)
 router.post('/editItem', controller.editItem)
 router.post('/addCart/:id', urlencoder, controller.addCart)
+
 module.exports = router
 
 
