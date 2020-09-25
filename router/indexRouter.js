@@ -34,6 +34,7 @@ router.post('/shop', controller.searchItem)
 router.post('/deleteItem', controller.deleteItem)
 router.post('/editItem/:id', urlencoder, controller.editItem)
 router.post('/addCart/:id', urlencoder, controller.addCart)
+router.post('/addReview/:id', urlencoder, controller.addReview)
 
 
 module.exports = router

@@ -470,6 +470,33 @@ const routerFunctions = {
         }
         else
             res.redirect('/')
+    },
+    addReview: (req, res)=>{
+        itemModel.findById(req.params.id, (err, item)=>{
+            userModel.findById(req.session.user._id, (err, user)=>{
+                if(err)
+                    console.log(err)
+                else{
+                    let date = new Date()
+                    let description = req.body.description | ""
+                    user.reviews.push({
+                        itemID: item.id,
+                        itemname: item.name,
+                        rating: req.body.rating,
+                        description: description,
+                        date: `${date.getYear()}-${date.getMonth()}-${date.getDate()}`
+                    })
+                    item.reviews.push({
+                        userID: user._id,
+                        username: user.username,
+                        rating: req.body.rating,
+                        description: description,
+                        date: `${date.getYear()}-${date.getMonth()}-${date.getDate()}`
+                    })
+                    res.redirect(`item/${req.params.id}`)
+                }
+            })
+        })
     }
 }
 
