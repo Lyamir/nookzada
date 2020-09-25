@@ -478,7 +478,7 @@ const routerFunctions = {
                     console.log(err)
                 else{
                     let date = new Date()
-                    let description = req.body.description | ""
+                    let description = req.body.description || ""
                     user.reviews.push({
                         itemID: item.id,
                         itemname: item.name,
