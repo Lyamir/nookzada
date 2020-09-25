@@ -190,10 +190,19 @@ const routerFunctions = {
                             error: "Wrong password!"
                         })
                     }else{
-                        req.session.user = user
-                        res.locals.user = user
-                        console.log(req.session.user.email)
-                        res.render('index', {user:user})
+                        if(isAdmin(user)){
+                            req.session.user = user
+                            res.locals.user = user
+                            console.log(req.session.user.email)
+                            res.render('add', {user:user})    
+                        }
+                        else{
+                            req.session.user = user
+                            res.locals.user = user
+                            console.log(req.session.user.email)
+                            res.render('index', {user:user})                            
+                        }
+
                     }
                 })
             }
@@ -259,7 +268,7 @@ const routerFunctions = {
     
         item.save((err, item)=>{
             if(err)
-                return console.error(err)
+                console.log(err)
             else{
                 res.redirect('/')
                 console.log(`${item.name} added`)

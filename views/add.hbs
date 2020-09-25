@@ -75,26 +75,30 @@
 		<!-- name -->
 		<span>Product Name</span><span class="span2">*</span>
             <div class="group">
-                <input type="text" class="text" required="required" />
+                <input type="text" class="text" required="required" name="name"/>
 			</div>
 		<!-- price -->
 		<span>Price</span><span class="span2">*</span>
             <div class="group">
-                <input type="text" class="text" required="required" />
+                <input type="text" class="text" required="required" name="price"/>
             </div>
 		<!-- stocks -->
 		<span>Stocks</span><span class="span2">*</span>
             <div class="group">
-                <input type="number" class="text" required="required" />
+                <input type="number" class="text" required="required" name="stock"/>
 			</div>
 		</div>
 		<!-- description -->
 		<div style="vertical-align: top; float: right; width: 48%;">
 		<span>Description</span><span class="span2">*</span>
             <div class="group">
-                <textarea id="subject" name="subject"></textarea>
+                <textarea id="subject" name="desc" required="required"></textarea>
 			</div>
-			<button type="button" class="upload">Upload Images</button>
+        <span>Image</span><span class="span2">*</span>
+            <div class="group">
+                <input type="file" class="text" required="required" name="image"/>
+			</div>
+			{{!-- <button type="button" class="upload">Upload Images</button> --}}
 		</div>
         <br>
         <button type="submit" class="addBut">Add</button>

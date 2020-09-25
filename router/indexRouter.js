@@ -23,6 +23,9 @@ router.get('/profile', controller.getProfile)
 router.get('/addItem', controller.getAddItem)
 router.get('/editItem', controller.getEditItem)
 router.get('/deleteItem', controller.getDeleteItem)
+router.get('/add', controller.getAddItem)
+router.get('/edit', controller.getEditItem)
+router.get('/delete', controller.getDeleteItem)
 
 router.post('/login', urlencoder, controller.postLogin)
 router.post('/register', urlencoder, controller.postSignup)
@@ -31,6 +34,7 @@ router.post('/shop', controller.searchItem)
 router.post('/deleteItem', controller.deleteItem)
 router.post('/editItem', controller.editItem)
 router.post('/addCart/:id', urlencoder, controller.addCart)
+
 
 module.exports = router
 
