@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Nookzada | Cancel</title>
+    <!-- Meta tag Keywords -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8" />
+    <!-- google fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:400,400i,700,900&display=swap" type="text/css" rel="stylesheet">
+    <!--/Style-CSS -->
+    <link rel="stylesheet" type="text/css" href="css/cancel.css">
+    <link rel="shortcut icon" href="images/fav.gif" type="image/x-icon">
+</head>
+
+<body>
+    <div class="w3l-error-block">
+        <div class="page">
+            <div class="content">
+                <br>
+                <div class="w3l-error-grid">
+                <!-- important part -->
+                        <div class="card">
+                            <div style="border-radius:200px; height:200px; width:200px; background:rgba(255, 0, 0, 0.10); margin:0 auto;">
+                            <i class="checkmark" style="font-style: normal; font-family: Arial, Helvetica, sans-serif; font-weight:500; margin-left: 1px;">
+                                X</i>
+                             </div>
+                            <h1 class="head1" style="color: red;">Canceled</h1> 
+                            <p>Payment not acknowledged; <br/>your checkout was canceled.</p>
+
+                            <button onClick="location.href='index.html'" class="home" style="text-decoration:none; color:white;">Go Back Home</button> 
+                        </div>
+                <!-- important part -->
+                </div>
+            </div>
+            <img src="images/balloon.jpg" class="img-responsive" style="opacity: 0.9;"/>
+        </div>
+
+        <script src="web/assets/jquery/jquery.min.js"></script>
+        <script>
+            var lFollowX = 0,
+                lFollowY = 0,
+                x = 0,
+                y = 0,
+                friction = 1 / 30;
+
+            function animate() {
+                x += (lFollowX - x) * friction;
+                y += (lFollowY - y) * friction;
+
+                translate = 'translate(' + x + 'px, ' + y + 'px) scale(1.1)';
+
+                $('img').css({
+                    '-webit-transform': translate,
+                    '-moz-transform': translate,
+                    'transform': translate
+                });
+
+                window.requestAnimationFrame(animate);
+            }
+
+            $(window).on('mousemove click', function (e) {
+
+                var lMouseX = Math.max(-100, Math.min(100, $(window).width() / 2 - e.clientX));
+                var lMouseY = Math.max(-100, Math.min(100, $(window).height() / 2 - e.clientY));
+                lFollowX = (20 * lMouseX) / 100; // 100 : 12 = lMouxeX : lFollow
+                lFollowY = (10 * lMouseY) / 100;
+
+            });
+
+            animate();
+        </script>
+    </div>
+</body>
+
+</html>
