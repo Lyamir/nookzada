@@ -72,7 +72,7 @@
 		<h2 style="margin: 0 0 1em 3px; text-align:center; color: white;"></h2>
 		<div class="row">
 			<div class="col-md-12 col-sm-12 ol-lg-12">
-				<form action="#">               
+				<form method="post" action="editItem/{{id}}">        
 					<div class="table-content wnro__table table-responsive">
 						<table style="border:none;">
 							<thead>
@@ -84,20 +84,23 @@
 								</tr>
 							</thead>
 							<tbody>
+                {{#each items}}
 								<tr>
-                  <td class="product-thumbnail"><a href="#"><img src="images/270x340/bell.png" class="resize30"></a>
-                    <button type="submit" class="upload">Upload New Photo</button>
+                  <td class="product-thumbnail"><a href="#"><img src="images/items/{{{image}}}" class="resize30"></a>
+                    <input type="file" class="upload" name="image">Upload New Photo</input>
                   </td>
-                  <td class="product-name"><a href="#"><input type="text" placeholder="4 Million Bells"/></a></td>
-									<td class="product-price"><input type="number" value="200"></td>
-                  <td class="product-quantity"><input type="number" value="10"></td>
+                  <td class="product-name" name="name"><input type="text" placeholder="{{name}}"/></td>
+									<td class="product-price" name="price"><input type="number" value="{{price}}"></td>
+                  <td class="product-quantity" name="quantity"><input type="number" value="{{stock}}"></td>
 								</tr>
+                {{/each}}
 							</tbody>
 						</table>
 					</div>
+          <button type="submit" class="done-edit">Done Editing</button>
 				</form>
 				<br>
-				<button type="submit" class="done-edit">Done Editing</button>
+				{{!-- <button type="submit" class="done-edit" onclick="document.location.href=this.getAttribute('href');" href="editItem/{{id}}">Done Editing</button> --}}
 
 		</div>
 

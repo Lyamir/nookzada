@@ -443,7 +443,12 @@ const routerFunctions = {
         if(isAdmin(req.session.user)){
             itemModel.find({}, (err, items)=>{
                 res.render('edit', {
-                    items: items
+                    items: items,
+                    id: items._id,
+                    name: items.name,
+                    price: items.price,
+                    stock: items.stock,
+                    image: items.image
                 })
             })
         }
@@ -454,7 +459,12 @@ const routerFunctions = {
         if(isAdmin(req.session.user)){
             itemModel.find({}, (err, items)=>{
                 res.render('delete', {
-                    items: items
+                    items: items,
+                    id: items._id,
+                    name: items.name,
+                    price: items.price,
+                    stock: items.stock,
+                    image: items.image
                 })
             })
         }
