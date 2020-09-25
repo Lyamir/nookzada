@@ -98,6 +98,7 @@ const routerFunctions = {
                     description: item.description,
                     itemList: item.itemList,
                     image: item.image,
+                    reviews: item.reviews,
                     stock: item.stock,
                     user:req.session.user
                 })
