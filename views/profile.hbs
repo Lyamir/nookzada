@@ -86,11 +86,11 @@
 						<div class="col-lg-7 col-12" style="margin: 5% 0 0 2%;">
 						<!-- name -->
 							<div class="product__info__main" style="margin: 5% 0 0 10%;">
-								<h2>Hi! Insert name</h2>
+								<h2>Hi! {{username}}</h2>
 						<!-- No. of reviews -->
                                 <div class="price-box reviewNo" style="margin: 20px 0 0 0;">
                                     <a>You made </a>
-									<a>3</a> 
+									<a>{{numReview}}</a> 
 									<a> reviews</a>
                                 </div>
                         <!-- Change password question -->
@@ -117,10 +117,11 @@
 
 					<!-- Review -->
 						<!-- Start 1st Review -->
+						{{#each user.reviews}}
 						<div id="nav-details" role="tabpanel">
 							<div class="review__attribute" style="float: left; margin-right: 20px;">
 								<h2>Review History</h2>
-								<h4>4 Million Bells</h4>
+								<h4>{{r_itemname}}</h4>
 								<div class="review__ratings__type d-flex">
 									<div class="review-ratings" style="margin-left: -5%;">
 										<div class="rating-summary d-flex">
@@ -134,58 +135,12 @@
 										</div>
 
 									<div class="review-content" style="margin: 0 -10% 0 27%;">
-										<p>Posted on 09/06/2020</p>
+										<p>{{r_date}}</p>
 									</div>
 								</div>
 							</div>
                         </div>
-                        
-                        <!-- Start 2nd Review -->
-                        <div id="nav-details" role="tabpanel">
-							<div class="review__attribute review2onward">
-								<h4>20 slots of custom seasonal materials</h4>
-								<div class="review__ratings__type d-flex">
-									<div class="review-ratings" style="margin-left: -5%;">
-										<div class="rating-summary d-flex">
-											<ul class="rating d-flex">
-												<li><i class="zmdi zmdi-star"></i></li>
-												<li><i class="zmdi zmdi-star"></i></li>
-												<li><i class="zmdi zmdi-star"></i></li>
-												<li class="off"><i class="zmdi zmdi-star"></i></li>
-												<li class="off"><i class="zmdi zmdi-star"></i></li>
-											</ul>
-										</div>
-
-									<div class="review-content" style="margin: 0 -10% 0 27%;">
-										<p>Posted on 09/06/2020</p>
-									</div>
-								</div>
-                            </div>
-						</div>
-                    </div>
-                        <!-- Start 2nd Review -->                        
-                        <div id="nav-details" role="tabpanel">
-							<div class="review__attribute review2onward">
-								<h4>400 Nook Miles Tickets</h4>
-								<div class="review__ratings__type d-flex">
-									<div class="review-ratings" style="margin-left: -5%;">
-										<div class="rating-summary d-flex">
-											<ul class="rating d-flex">
-												<li><i class="zmdi zmdi-star"></i></li>
-												<li><i class="zmdi zmdi-star"></i></li>
-												<li><i class="zmdi zmdi-star"></i></li>
-												<li class="off"><i class="zmdi zmdi-star"></i></li>
-												<li class="off"><i class="zmdi zmdi-star"></i></li>
-											</ul>
-										</div>
-
-									<div class="review-content" style="margin: 0 -10% 0 27%;">
-										<p>Posted on 09/06/2020</p>
-									</div>
-								</div>
-                            </div>
-						</div>
-                    </div>
+						{{/each}}
 				</div>
 			</div>
 		</div>

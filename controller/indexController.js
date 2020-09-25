@@ -314,7 +314,7 @@ const routerFunctions = {
     getCart: async function(req, res){
         let total = 0;
         if(req.session.user){
-            await userModel.findOne(req.session.user, (err, user)=>{
+            await userModel.findById(req.session.user._id, (err, user)=>{
                 if(err)
                     console.log(err)
                 else{   
@@ -322,14 +322,14 @@ const routerFunctions = {
                             total += req.session.user.cart[i].subtotal;
                         } 
                         res.render('cart', {
-                                user: req.session.user,
-                                cart: req.session.user.cart,
+                                user: user,
+                                cart: user.cart,
                                 total: total
                             })                    
                     }
                 })            
             }else{
-                res.render('login')
+                res.redirect('/login')
             }
     },
 
@@ -400,9 +400,20 @@ const routerFunctions = {
     },
 
     getProfile: (req, res)=>{
+        let numReview = 0;
         if(req.session.user){
+            for(let i = 0; i < req.session.user.reviews.length; i++){
+                numReview++; 
+            }
             res.render('profile', {
-                user: req.session.user
+                user: req.session.user,
+                username: req.session.user.username,
+                numReview: numReview,
+                reviews: req.session.user.reviews,
+                r_itemname: req.session.user.reviews.itemname,
+                r_rating: req.session.user.reviews.rating,
+                r_description: req.session.user.reviews.description,
+                r_date: req.session.user.reviews.Date
             })     
         }
         else{
