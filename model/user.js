@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt')
 let SALT = 10
 
 const reviewSchema = mongoose.Schema({
-    itemID: mongoose.Schema.ObjectId,
+    itemID: String,
     itemname: String,
     rating: Number,
     description: String,
