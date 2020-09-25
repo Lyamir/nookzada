@@ -249,12 +249,12 @@ const routerFunctions = {
         let id;
         itemModel.countDocuments({}, function(err, result) {
             if (err) {
-              console.log(err);
+              console.log(err)
             } else {
-              id = result+1;
+              id = result + 1;
             }
-          });
-    
+       
+          console.log(id)
         let item = new itemModel({
             _id: id,
             name: name,
@@ -271,9 +271,10 @@ const routerFunctions = {
                 console.log(err)
             else{
                 res.redirect('/')
-                console.log(`${item.name} added`)
+                console.log('${item.name} added')
             }
         })
+    });
     },
     
     searchItem: (req,res)=>{
