@@ -318,8 +318,8 @@ const routerFunctions = {
                 if(err)
                     console.log(err)
                 else{   
-                        for(let i = 0; i < req.session.user.cart.length; i++){
-                            total += req.session.user.cart[i].subtotal;
+                        for(let i = 0; i < user.cart.length; i++){
+                            total += user.cart[i].subtotal;
                         } 
                         res.render('cart', {
                                 user: user,
@@ -336,6 +336,7 @@ const routerFunctions = {
     addCart: (req, res)=>{
         let id = req.params.id
         let qty;
+        let total = 0;
         console.log(req.body.qty)
         if(req.body.qty != null)
             qty = req.body.qty
@@ -360,7 +361,7 @@ const routerFunctions = {
                 userModel.findByIdAndUpdate(req.session.user._id, query, {safe: true, upsert: true}, (err, user)=>{
                     if(err)
                         console.error(err)
-                    else    
+                    else   
                         console.log("pushed to cart")
                 })
                 res.redirect('/cart')
@@ -371,6 +372,7 @@ const routerFunctions = {
     deleteCart: (req, res)=>{
         let id = req.params.id
         let delID;
+        let total = 0;
 
         itemModel.findById(id, (err, item)=>{
             if(err)
@@ -391,7 +393,7 @@ const routerFunctions = {
                 userModel.findByIdAndUpdate(req.session.user._id, query, {safe: true, upsert: true}, (err, user)=>{
                     if(err)
                         console.error(err)
-                    else    
+                    else   
                         console.log("deleted from cart")
                 })
                 res.redirect('/cart')
