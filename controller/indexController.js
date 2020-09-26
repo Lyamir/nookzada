@@ -7,7 +7,6 @@ function isAdmin(user) {
         return false
     return user.userType === 'Admin'? true : false
 }
-
 hbs.registerHelper('times', function(n, block) {
     var accum = '';
     for(var i = 0; i < n; ++i)
@@ -17,6 +16,8 @@ hbs.registerHelper('times', function(n, block) {
 
 const routerFunctions = {
     getIndex: (req, res)=>{
+        if(req.cookies.user)
+            req.session.user = req.cookies.user
         if(req.session.user)
 		    res.render('index', {user: req.session.user})
 	    else
@@ -24,6 +25,8 @@ const routerFunctions = {
     },
 
     getAbout: (req, res)=>{
+        if(req.cookies.user)
+            req.session.user = req.cookies.user
         if(req.session.user)
 		    res.render('about', {user:req.session.user})
 	    else
@@ -31,6 +34,8 @@ const routerFunctions = {
     },
 
     getContact: (req, res)=>{
+        if(req.cookies.user)
+            req.session.user = req.cookies.user
         if(req.session.user)
 		    res.render('contact', {user:req.session.user})
 	    else
@@ -38,6 +43,8 @@ const routerFunctions = {
     },
 
     getSignup: (req, res)=>{
+        if(req.cookies.user)
+            req.session.user = req.cookies.user
         if(req.session.user)
             res.render('register', {user: req.session.user})
         else
@@ -45,6 +52,8 @@ const routerFunctions = {
     },
 
     getLogin: (req, res)=>{
+        if(req.cookies.user)
+            req.session.user = req.cookies.user
         if(req.session.user)
             res.render('login', {user: req.session.user})
         else
@@ -57,6 +66,8 @@ const routerFunctions = {
                 console.log("Error: " + err)
                 throw(err)
             }else{
+                if(req.cookies.user)
+                    req.session.user = req.cookies.user
                 if(req.session.user){
                     res.render('shop', {
                         user: req.session.user,
@@ -95,6 +106,8 @@ const routerFunctions = {
     },
 
     getItem: async (req, res)=>{
+        if(req.cookies.user)
+            req.session.user = req.cookies.user
         if(req.session.user){
             await itemModel.findById(req.params._id, (function(err, item){
                 console.log(item.getAverageStars())
@@ -130,6 +143,8 @@ const routerFunctions = {
     },
 
     getLogout: (req, res)=>{
+        if(req.cookies.user)
+            req.session.user = req.cookies.user
         if(req.session.user){
             req.session.destroy((err)=>{
                 if(err){
@@ -150,6 +165,8 @@ const routerFunctions = {
                     console.log("Error: " + err)
                     throw(err)
                 }else{
+                    if(req.cookies.user)
+                        req.session.user = req.cookies.user
                     if(req.session.user){
                         res.render('shop', {
                             user: req.session.user,
@@ -204,12 +221,26 @@ const routerFunctions = {
                             req.session.user = user
                             res.locals.user = user
                             console.log(req.session.user.email)
+                            if(req.body.remember){
+                                console.log("remember me!")
+                                res.cookie("user", req.session.user,{
+                                    maxAge:1000*60*60*24*365,
+                                    httpOnly:true
+                                })
+                            }
                             res.render('add', {user:user})    
                         }
                         else{
                             req.session.user = user
                             res.locals.user = user
                             console.log(req.session.user.email)
+                            if(req.body.remember){
+                                console.log("remember me!")
+                                res.cookie("user", req.session.user,{
+                                    maxAge:1000*60*60*24*365,
+                                    httpOnly:true
+                                })
+                            }
                             res.render('index', {user:user})                            
                         }
 
@@ -341,6 +372,8 @@ const routerFunctions = {
 
     getCart: async function(req, res){
         let total = 0;
+        if(req.cookies.user)
+            req.session.user = req.cookies.user
         if(req.session.user){
             await userModel.findById(req.session.user._id, (err, user)=>{
                 if(err)
@@ -431,6 +464,8 @@ const routerFunctions = {
 
     getProfile: (req, res)=>{
         let numReview = 0;
+        if(req.cookies.user)
+            req.session.user = req.cookies.user
         if(req.session.user){
             for(let i = 0; i < req.session.user.reviews.length; i++){
                 numReview++; 
@@ -458,6 +493,8 @@ const routerFunctions = {
             res.redirect('/')
     },
     getEditItem: (req, res)=>{
+        if(req.cookies.user)
+            req.session.user = req.cookies.user
         if(isAdmin(req.session.user)){
             itemModel.find({}, (err, items)=>{
                 res.render('edit', {
@@ -474,6 +511,8 @@ const routerFunctions = {
             res.redirect('/')
     },
     getDeleteItem: (req, res)=>{
+        if(req.cookies.user)
+            req.session.user = req.cookies.user
         if(isAdmin(req.session.user)){
             itemModel.find({}, (err, items)=>{
                 res.render('delete', {
