@@ -293,14 +293,17 @@ const routerFunctions = {
     },
     
     searchItem: (req,res)=>{
-        let search = new RegExp (req.query.search, "i");
+        let search = new RegExp (req.body.search, 'gi');
     
-        itemsModel.aggregate([{$match: {name: search}}], (err, data)=>{
-            if (data === undefined)
-                console.log('ops wala')
+        itemModel.aggregate([{$match: {name: search}}], (err, items)=>{
+            if (items.length == 0)
+               res.render('shop', {
+                   item: items,
+                   none:  `No items named ${req.body.search} were found`
+               })
             else{
-                res.render('index', {
-                    searchname: JSON.parse(JSON.stringify(data))
+                res.render('shop', {
+                    item: items
                 })
             }
         })

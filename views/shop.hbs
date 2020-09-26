@@ -73,9 +73,9 @@
 				  </ul>
                 <!-- search bar -->
                 <div class="search-container">
-                    <form action="/action_page.php">
+                    <form action="/shop" method="POST" id="searchbar">
                       <input type="text" placeholder="Search.." name="search">
-                      <button type="submit"><i class="fa fa-search"></i></button>
+                      <button type="submit" onclick="document.getElementById('searchbar').submit()"><i class="fa fa-search"></i></button>
                     </form>
                   </div>
                 <!-- cart -->
@@ -126,7 +126,11 @@
 				<div class="tab__container">
 					<div class="shop-grid tab-pane fade show active" id="nav-grid" role="tabpanel">
 						<div class="row" style="padding-top: 30px; justify-content: space-around; margin-bottom: 3em;">
-
+						        {{#if none}}
+           							<div class="alert alert-danger" role="alert">
+                						{{none}}
+            						</div>
+        						{{/if}}
 			<!-- nav-grid -->
 							<!-- Start Single Product -->
 						{{#each item}}
