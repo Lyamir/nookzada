@@ -118,11 +118,12 @@
 								<div class="product-reviews-summary d-flex">
 						<!-- rating -->
 									<ul class="rating-summary d-flex">
+										{{#times stars}}
 										<li class="on"><i class="fas fa-star"></i></li>
-										<li class="on"><i class="fas fa-star"></i></li>
-										<li class="on"><i class="fas fa-star"></i></li>
-										<li class="on"><i class="fas fa-star"></i></li>
+										{{/times}}
+										{{#times emptystars}}
 										<li><i class="fa fa-star-o"></i></li>
+										{{/times}}
 									</ul>
 								</div>
 						<!-- price -->
