@@ -1,13 +1,19 @@
 const userModel = require('../model/user')
 const itemModel = require ('../model/item')
 var mongoose = require('mongoose')
-
-
+const hbs = require('hbs')
 function isAdmin(user) {
     if(user === undefined)
         return false
     return user.userType === 'Admin'? true : false
 }
+
+hbs.registerHelper('times', function(n, block) {
+    var accum = '';
+    for(var i = 0; i < n; ++i)
+        accum += block.fn(i);
+    return accum;
+});
 
 const routerFunctions = {
     getIndex: (req, res)=>{
@@ -91,6 +97,7 @@ const routerFunctions = {
     getItem: async (req, res)=>{
         if(req.session.user){
             await itemModel.findById(req.params._id, (function(err, item){
+                console.log(item.getAverageStars())
                 res.render('item', {
                     name: item.name,
                     price: item.price,
@@ -104,9 +111,9 @@ const routerFunctions = {
                 })
             }))
         }else{
-            console.log(req.params.id)
             await itemModel.findById(req.params._id, (function(err, item){
                     console.log(item.name)
+                    console.log(item.getAverageStars())
                     res.render('item', {
                         name: item.name,
                         price: item.price,
@@ -114,7 +121,9 @@ const routerFunctions = {
                         description: item.description,
                         itemlist: item.itemlist,
                         image: item.image,
-                        stock: item.stock
+                        stock: item.stock,
+                        stars: item.getAverageStars(),
+                        emptystars: 5-item.getAverageStars()
                     })
                 }))
         }
@@ -237,7 +246,12 @@ const routerFunctions = {
                     res.render('register',{
                         error: "Error: ${err}"
                     })    
+                else
+                    res.render('login', {
+                        success: "Succesfully registered account!"
+                    })
             })
+
         }
     },
 
