@@ -1,6 +1,9 @@
 const userModel = require('../model/user')
 const itemModel = require ('../model/item')
 var mongoose = require('mongoose')
+var multer = require('multer')
+var upload = multer({dest: '/images/items/'})
+
 const hbs = require('hbs')
 function isAdmin(user) {
     if(user === undefined)
@@ -18,8 +21,15 @@ const routerFunctions = {
     getIndex: (req, res)=>{
         if(req.cookies.user)
             req.session.user = req.cookies.user
-        if(req.session.user)
-		    res.render('index', {user: req.session.user})
+        if(req.session.user){
+            if(isAdmin(req.session.user)){
+                res.render('index', {
+                    user: req.session.user,
+                    admin: true
+                })
+            }else
+                res.render('index', {user: req.session.user})
+        }
 	    else
 		    res.render('index')
     },
@@ -27,8 +37,15 @@ const routerFunctions = {
     getAbout: (req, res)=>{
         if(req.cookies.user)
             req.session.user = req.cookies.user
-        if(req.session.user)
-		    res.render('about', {user:req.session.user})
+        if(req.session.user){
+            if(isAdmin(req.session.user)){
+                res.render('about', {
+                    user: req.session.user,
+                    admin: true
+                })
+            }else
+                res.render('about', {user: req.session.user})
+        }
 	    else
 		    res.render('about')
     },
@@ -36,8 +53,15 @@ const routerFunctions = {
     getContact: (req, res)=>{
         if(req.cookies.user)
             req.session.user = req.cookies.user
-        if(req.session.user)
-		    res.render('contact', {user:req.session.user})
+        if(req.session.user){
+            if(isAdmin(req.session.user)){
+                res.render('contact', {
+                    user: req.session.user,
+                    admin: true
+                })
+            }else
+                res.render('contact', {user: req.session.user})
+        }
 	    else
 		    res.render('contact')
     },
@@ -45,8 +69,15 @@ const routerFunctions = {
     getSignup: (req, res)=>{
         if(req.cookies.user)
             req.session.user = req.cookies.user
-        if(req.session.user)
-            res.render('register', {user: req.session.user})
+        if(req.session.user){
+            if(isAdmin(req.session.user)){
+                res.render('register', {
+                    user: req.session.user,
+                    admin: true
+                })
+            }else
+                res.render('register', {user: req.session.user})
+        }
         else
             res.render('register')
     },
@@ -54,8 +85,15 @@ const routerFunctions = {
     getLogin: (req, res)=>{
         if(req.cookies.user)
             req.session.user = req.cookies.user
-        if(req.session.user)
-            res.render('login', {user: req.session.user})
+        if(req.session.user){
+            if(isAdmin(req.session.user)){
+                res.render('login', {
+                    user: req.session.user,
+                    admin: true
+                })
+            }else
+                res.render('login', {user: req.session.user})
+        }
         else
             res.render('login')
     },
@@ -69,21 +107,39 @@ const routerFunctions = {
                 if(req.cookies.user)
                     req.session.user = req.cookies.user
                 if(req.session.user){
-                    res.render('shop', {
-                        user: req.session.user,
-                        item:item,
-                        name: item.name,
-                        price: item.price,
-                        id: item._id,
-                        description: item.description,
-                        itemList: item.itemList,
-                        image: item.image,
-                        stock: item.stock,
-                        value_d: "shop",
-                        title_d: "Default sorting",
-                        value_p: "sort",
-                        title_p: "Popularity"
-                    })
+                    if(isAdmin(req.session.user)){
+                        res.render('index', {
+                            user: req.session.user,
+                            admin: true,
+                            item:item,
+                            name: item.name,
+                            price: item.price,
+                            id: item._id,
+                            description: item.description,
+                            itemList: item.itemList,
+                            image: item.image,
+                            stock: item.stock,
+                            value_d: "shop",
+                            title_d: "Default sorting",
+                            value_p: "sort",
+                            title_p: "Popularity"
+                        })
+                    }else
+                        res.render('shop', {
+                            user: req.session.user,
+                            item:item,
+                            name: item.name,
+                            price: item.price,
+                            id: item._id,
+                            description: item.description,
+                            itemList: item.itemList,
+                            image: item.image,
+                            stock: item.stock,
+                            value_d: "shop",
+                            title_d: "Default sorting",
+                            value_p: "sort",
+                            title_p: "Popularity"
+                        })
                 }
                 else{
                     res.render('shop', {
@@ -111,17 +167,31 @@ const routerFunctions = {
         if(req.session.user){
             await itemModel.findById(req.params._id, (function(err, item){
                 console.log(item.getAverageStars())
-                res.render('item', {
-                    name: item.name,
-                    price: item.price,
-                    id: item._id,
-                    description: item.description,
-                    itemList: item.itemList,
-                    image: item.image,
-                    reviews: item.reviews,
-                    stock: item.stock,
-                    user:req.session.user
-                })
+                if(isAdmin(req.session.user)){
+                    res.render('login', {
+                        user: req.session.user,
+                        admin: true,
+                        name: item.name,
+                        price: item.price,
+                        id: item._id,
+                        description: item.description,
+                        itemList: item.itemList,
+                        image: item.image,
+                        reviews: item.reviews,
+                        stock: item.stock,
+                    })
+                }else
+                    res.render('item', {
+                        name: item.name,
+                        price: item.price,
+                        id: item._id,
+                        description: item.description,
+                        itemList: item.itemList,
+                        image: item.image,
+                        reviews: item.reviews,
+                        stock: item.stock,
+                        user:req.session.user
+                    })
             }))
         }else{
             await itemModel.findById(req.params._id, (function(err, item){
@@ -168,21 +238,39 @@ const routerFunctions = {
                     if(req.cookies.user)
                         req.session.user = req.cookies.user
                     if(req.session.user){
-                        res.render('shop', {
-                            user: req.session.user,
-                            item:item,
-                            name: item.name,
-                            price: item.price,
-                            id: item._id,
-                            description: item.description,
-                            itemList: item.itemList,
-                            image: item.image,
-                            stock: item.stock,
-                            value_d: "sort",
-                            title_d: "Popularity",
-                            value_p: "shop",
-                            title_p: "Default sorting"
-                        })
+                            if(isAdmin(req.session.user)){
+                                res.render('login', {
+                                    user: req.session.user,
+                                    admin: true,
+                                    item:item,
+                                    name: item.name,
+                                    price: item.price,
+                                    id: item._id,
+                                    description: item.description,
+                                    itemList: item.itemList,
+                                    image: item.image,
+                                    stock: item.stock,
+                                    value_d: "sort",
+                                    title_d: "Popularity",
+                                    value_p: "shop",
+                                    title_p: "Default sorting"
+                                })
+                            }else
+                                res.render('shop', {
+                                    user: req.session.user,
+                                    item:item,
+                                    name: item.name,
+                                    price: item.price,
+                                    id: item._id,
+                                    description: item.description,
+                                    itemList: item.itemList,
+                                    image: item.image,
+                                    stock: item.stock,
+                                    value_d: "sort",
+                                    title_d: "Popularity",
+                                    value_p: "shop",
+                                    title_p: "Default sorting"
+                                })
                     }
                     else{
                         res.render('shop', {
@@ -293,6 +381,7 @@ const routerFunctions = {
         let image = req.body.image;
         let stock = req.body.stock;
         let id;
+        
         itemModel.countDocuments({}, function(err, result) {
             if (err) {
               console.log(err)
@@ -301,6 +390,9 @@ const routerFunctions = {
             }
        
           console.log(id)
+
+          
+
         let item = new itemModel({
             _id: id,
             name: name,
@@ -487,7 +579,9 @@ const routerFunctions = {
     },
     getAddItem: (req, res)=>{
         if(isAdmin(req.session.user)){
-            res.render('add')
+            res.render('add',{
+                user:req.session.user
+            })
         }
         else
             res.redirect('/')
@@ -498,6 +592,7 @@ const routerFunctions = {
         if(isAdmin(req.session.user)){
             itemModel.find({}, (err, items)=>{
                 res.render('edit', {
+                    user:req.session.user,
                     items: items,
                     id: items._id,
                     name: items.name,
@@ -516,6 +611,7 @@ const routerFunctions = {
         if(isAdmin(req.session.user)){
             itemModel.find({}, (err, items)=>{
                 res.render('delete', {
+                    user:req.session.user,
                     items: items,
                     id: items._id,
                     name: items.name,
