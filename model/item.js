@@ -46,6 +46,18 @@ const itemSchema = mongoose.Schema({
     }
 })
 
+itemSchema.methods.getAverageStars = function(){
+    let average, sum;
+    if(this.reviews.length == 0)
+        return 0
+    else{
+        for(let i = 0; i < this.reviews.length; i++){
+            sum += this.reviews[i].rating
+        }
+        average = sum/this.reviews.length
+        return Math.round(average)
+    }
+}
 const itemModel = mongoose.model('items', itemSchema)
 
 module.exports = itemModel
