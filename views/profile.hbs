@@ -121,7 +121,7 @@
 						<!-- No. of reviews -->
                                 <div class="price-box reviewNo" style="margin: 20px 0 0 0;">
                                     <a>You made </a>
-									<a>3</a> 
+									<a>{{numReview}}</a> 
 									<a> reviews</a>
                                 </div>
                         <!-- Change password question -->
@@ -142,21 +142,21 @@
 						<div id="nav-details" role="tabpanel">
 							<div class="review__attribute" style="float: left; margin-right: 20px;">
 								<h2>Review History</h2>
-								<h4>4 Million Bells</h4>
+								<h4>{{review1.itemname}}</h4>
 								<div class="review__ratings__type d-flex">
 									<div class="review-ratings" style="margin-left: -5%;">
-										<div class="rating-summary d-flex">
+										<div class="rating-summary d-flex">     
 											<ul class="rating d-flex">
+                        {{#times review1.rating}}
 												<li><i class="zmdi zmdi-star"></i></li>
-												<li><i class="zmdi zmdi-star"></i></li>
-												<li><i class="zmdi zmdi-star"></i></li>
+                        {{/times}}
+                        {{#times (5-review1.rating)}}
 												<li class="off"><i class="zmdi zmdi-star"></i></li>
-												<li class="off"><i class="zmdi zmdi-star"></i></li>
+                        {{/times}}
 											</ul>
 										</div>
-
 									  <div class="review-content" style="margin: 0 -10% 0 27%;">
-										  <p>Posted on 09/06/2020</p>
+										  <p>Posted on {{review1.date}}</p>
 									  </div>
 								  </div>
 							  </div>
@@ -186,7 +186,7 @@
 						</div>
             </div>
                         <!-- Start 2nd Review -->                        
-                        <div id="nav-details" role="tabpanel">
+            <div id="nav-details" role="tabpanel">
 							<div class="review__attribute review2onward">
 								<h4>400 Nook Miles Tickets</h4>
 								<div class="review__ratings__type d-flex">
@@ -200,14 +200,13 @@
 												<li class="off"><i class="zmdi zmdi-star"></i></li>
 											</ul>
 										</div>
-
-									<div class="review-content" style="margin: 0 -10% 0 27%;">
-										<p>Posted on 09/06/2020</p>
-									</div>
-								</div>
-                            </div>
-						</div>
+                    <div class="review-content" style="margin: 0 -10% 0 27%;">
+                      <p>Posted on 09/06/2020</p>
                     </div>
+								  </div>
+                </div>
+						  </div>
+            </div>
 				</div>
 			</div>
 		</div>

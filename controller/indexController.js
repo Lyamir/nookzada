@@ -166,7 +166,6 @@ const routerFunctions = {
             req.session.user = req.cookies.user
         if(req.session.user){
             await itemModel.findById(req.params._id, (function(err, item){
-                console.log(item.getAverageStars())
                 if(isAdmin(req.session.user)){
                     res.render('login', {
                         user: req.session.user,
@@ -562,11 +561,13 @@ const routerFunctions = {
             for(let i = 0; i < req.session.user.reviews.length; i++){
                 numReview++; 
             }
+            let reviews2 = req.session.user.reviews.shift()
             res.render('profile', {
                 user: req.session.user,
                 username: req.session.user.username,
                 numReview: numReview,
-                reviews: req.session.user.reviews,
+                review1: req.session.user.reviews[0],
+                reviews: reviews2,
                 r_itemname: req.session.user.reviews.itemname,
                 r_rating: req.session.user.reviews.rating,
                 r_description: req.session.user.reviews.description,
