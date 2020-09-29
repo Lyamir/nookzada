@@ -102,7 +102,7 @@
 		</div>
  <!-- Start main Content -->
  <div class="maincontent summer pt--30 pb--55">
-	<h2 class="all_prod"> Item Page</h2>
+	<h2 class="all_prod" style="text-align: center"> Item Page</h2>
 	<div class="container">
 		<div class="row bg--white" style="padding: 30px 0 40px 20px; border-radius: 7px; justify-content: space-around;">
 			<div class="col-lg-9 col-12">
@@ -220,34 +220,30 @@
 									</div>
 								</div>
 							</div>
-							<div class="review-fieldset">
-								<h2>You're reviewing:</h2>
-								<h3>20 slots of custom materials</h3>
-								<div class="review-field-ratings">
-									<fieldset class="rating">
-										<input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
-										<input type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="Pretty good - 4 stars"></label>
-										<input type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" title="Meh - 3 stars"></label>
-										<input type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
-										<input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Terrible - 1 star"></label>
-										</fieldset>
-								</div><br><br>
-								<h4 style="float: left; padding: 20px 0">Optional</h4>
-								<div class="review_form_field">
-									<div class="input__box">
-										<input id="nickname_field" type="text" placeholder="Nickname">
-									</div>
-									<div class="input__box">
-										<input id="summery_field" type="text" placeholder="Title">
-									</div>
-									<div class="input__box">
-										<textarea id="review_field" placeholder="Write your review here.."></textarea>
-									</div>
-									<div class="review-form-actions">
-										<button>Submit Review</button>
+							<form>
+								<div class="review-fieldset">
+									<h2>You're reviewing:</h2>
+									<h3>20 slots of custom materials</h3>
+									<div class="review-field-ratings">
+										<fieldset class="rating">
+											<input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
+											<input type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="Pretty good - 4 stars"></label>
+											<input type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" title="Meh - 3 stars"></label>
+											<input type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
+											<input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Terrible - 1 star"></label>
+											</fieldset>
+									</div><br><br>
+									<h4 style="float: left; padding: 20px 0">Optional</h4>
+									<div class="review_form_field">
+										<div class="input__box">
+											<textarea id="review_field" placeholder="Write your review here.."></textarea>
+										</div>
+										<div class="review-form-actions">
+											<button onclick="../../addReview/{{id}}">Submit Review</button>
+										</div>
 									</div>
 								</div>
-							</div>
+							</form>
 						</div>
 						<!-- End Single Tab Content -->
 					</div>

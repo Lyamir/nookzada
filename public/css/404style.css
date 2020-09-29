@@ -1,7 +1,61 @@
-/*
-Author: W3layouts
-Author URL: http://w3layouts.com
-*/
+
+.social-links {
+	position: fixed;
+	right: 39px;
+	top: 240px;
+	z-index: 99;
+}
+
+.social-links a {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	align-items: center;
+	-webkit-box-pack: center;
+	-ms-flex-pack: center;
+	justify-content: center;
+	width: 48px;
+	height: 48px;
+	margin-bottom: 22px;
+	color: rgb(68, 68, 68);
+	font-size: 13px;
+	border-radius: 50%;
+  background: white;
+  opacity: 0.8;
+}
+
+.social-links a:hover{
+  background-color: rgb(154,215,224);
+  color: rgb(68, 68, 68);
+}
+.social-links {
+  top: 120px;
+}
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .social-links {
+    top: 120px;
+    right: 15px;
+}
+}
+@media only screen and (max-width: 767px) {
+  .social-links {
+		width: 100%;
+		top: 0;
+		left: 0;
+		text-align: center;
+		top: 80px;
+	}
+	.social-links a {
+		display: -webkit-inline-box;
+		display: -ms-inline-flexbox;
+		display: inline-flex;
+		margin-right: 10px;
+		margin-bottom: 0;
+	}
+}
+
 :root {
   --para-color: #555555;
   --theme-color: #fff;

@@ -9,6 +9,30 @@
 
   
   <title>Nookzada | Cart</title>
+  <style>
+    html{
+    height: 100%;
+    }
+
+    body{
+    display: flex;
+    display: -webkit-flex;
+    flex-direction: column;
+    -webkit-flex-direction: column;
+    height: 100%;
+    }
+
+    .content{
+    flex: 1 0 auto;
+    -webkit-flex: 1 0 auto;
+    min-height: 200px;
+    }
+
+    #myFooter{
+    flex: 0 0 auto;
+    -webkit-flex: 0 0 auto;
+    }
+</style>
 <!-- CSS -->
   <link rel="stylesheet" type = "text/css" href="/web/assets/mobirise-icons2/mobirise2.css">
   <link rel="stylesheet" type = "text/css" href="/tether/tether.min.css">
@@ -23,6 +47,7 @@
 	<link rel="stylesheet" type = "text/css" href="/css/bootstrap.min.css">
 	<link rel="stylesheet" type = "text/css" href="/css/plugins.css">
 	<link rel="stylesheet" type = "text/css" href="/css/shopstyle.css">
+  <link rel="stylesheet" type = "text/css" href="/css/footer.css">
   <script src="https://kit.fontawesome.com/917f90ecf4.js" crossorigin="anonymous"></script>
   <!-- google fonts-->
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@600&family=Barlow:wght@400;600&display=swap" rel="stylesheet">
@@ -143,6 +168,13 @@
 	</div>  
 </div>
 <!-- cart-main-area end -->
+
+<!-- Footer -->
+<footer id="myFooter">
+  <div class="footer-copyright" style="margin-left: 3%;">
+      <p>© 2020 Nookzada. All rights reserved.</p>
+  </div>
+</footer>
 
 <!-- JS -->
   <script src="/web/assets/jquery/jquery.min.js"></script>
