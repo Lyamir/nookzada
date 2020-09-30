@@ -17,6 +17,15 @@ hbs.registerHelper('times', function(n, block) {
     return accum;
 });
 
+hbs.registerHelper('emptystars', function(n, block) {
+    var accum = '';
+    for(var i = 0; i < n; ++i)
+        accum += block.fn(i);
+    if(isNaN(5-accum))
+        return ""
+    return 5-accum;
+});
+
 const routerFunctions = {
     getIndex: (req, res)=>{
         if(req.cookies.user)
@@ -178,8 +187,11 @@ const routerFunctions = {
                         image: item.image,
                         reviews: item.reviews,
                         stock: item.stock,
+                        stars: item.getAverageStars(),
+                        emptystars: 5-item.getAverageStars()
                     })
-                }else
+                }else{                 
+                    console.log(item.reviews[0])
                     res.render('item', {
                         name: item.name,
                         price: item.price,
@@ -189,12 +201,17 @@ const routerFunctions = {
                         image: item.image,
                         reviews: item.reviews,
                         stock: item.stock,
-                        user:req.session.user
+                        user:req.session.user,
+                        stars: item.getAverageStars(),
+                        emptystars: 5-item.getAverageStars()
                     })
+                }
+   
             }))
         }else{
             await itemModel.findById(req.params._id, (function(err, item){
                     console.log(item.name)
+                    console.log(item.reviews)
                     console.log(item.getAverageStars())
                     res.render('item', {
                         name: item.name,
@@ -203,6 +220,7 @@ const routerFunctions = {
                         description: item.description,
                         itemlist: item.itemlist,
                         image: item.image,
+                        reviews: item.reviews,
                         stock: item.stock,
                         stars: item.getAverageStars(),
                         emptystars: 5-item.getAverageStars()
@@ -645,16 +663,20 @@ const routerFunctions = {
                         itemname: item.name,
                         rating: req.body.rating,
                         description: description,
-                        date: `${date.getYear()}-${date.getMonth()}-${date.getDate()}`
+                        date: `${date.getYear()+1900}-${date.getMonth()+1}-${date.getDate()}`
                     })
                     item.reviews.push({
                         userID: user._id,
                         username: user.username,
                         rating: req.body.rating,
                         description: description,
-                        date: `${date.getYear()}-${date.getMonth()}-${date.getDate()}`
+                        date: `${date.getYear()+1900}-${date.getMonth()+1}-${date.getDate()}`
                     })
-                    res.redirect(`item/${req.params.id}`)
+
+                    user.save()
+                    item.save()
+                    console.log("review added")
+                    res.redirect(`/item/${req.params.id}`)
                 }
             })
         })

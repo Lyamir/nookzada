@@ -35,7 +35,6 @@ router.post('/shop', controller.searchItem)
 router.post('/deleteItem', controller.deleteItem)
 router.post('/editItem/:id', urlencoder, controller.editItem)
 router.post('/addCart/:id', urlencoder, controller.addCart)
-router.post('/addReview/item/:id', urlencoder, controller.addReview)
 router.post('/addReview/:id', urlencoder, controller.addReview)
 
 

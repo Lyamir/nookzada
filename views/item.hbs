@@ -117,7 +117,7 @@
 						</div>
 						<div class="col-lg-6 col-12">
 						<!-- name -->
-							<form method="post" action="../../addCart/{{id}}">
+							<form id="cartForm" name="cartForm" method="post" action="../../addCart/{{id}}">
 							<div class="product__info__main">
 								<h1>{{name}}</h1>
 								<div class="product-reviews-summary d-flex">
@@ -176,54 +176,35 @@
 				<!-- Customer Review -->
 						<!-- Start Single Tab Content -->
 						<div class="pro__tab_label tab-pane fade" id="nav-review" role="tabpanel">
+							<h3>Customer Review</h3>
+							
+							{{#each reviews}}
 							<div class="review__attribute">
-								<h2>Customer Review</h2>
-								<h4>Hastech</h4>
+								<h4>{{this.username}}</h4>
 								<div class="review__ratings__type d-flex">
 									<div class="review-ratings">
-										<div class="rating-summary d-flex">
-											<span>Quality</span>
-											<ul class="rating d-flex">
-												<li><i class="zmdi zmdi-star"></i></li>
-												<li><i class="zmdi zmdi-star"></i></li>
-												<li><i class="zmdi zmdi-star"></i></li>
-												<li class="off"><i class="zmdi zmdi-star"></i></li>
-												<li class="off"><i class="zmdi zmdi-star"></i></li>
-											</ul>
-										</div>
-
-										<div class="rating-summary d-flex">
-											<span>Price</span>
-											<ul class="rating d-flex" style="margin-left: 12.4px;">
-												<li><i class="zmdi zmdi-star"></i></li>
-												<li><i class="zmdi zmdi-star"></i></li>
-												<li><i class="zmdi zmdi-star"></i></li>
-												<li class="off"><i class="zmdi zmdi-star"></i></li>
-												<li class="off"><i class="zmdi zmdi-star"></i></li>
-											</ul>
-										</div>
 										<div class="rating-summary d-flex" style="margin-left: 9.8px;">
-											<span>Value</span>
 											<ul class="rating d-flex">
+												{{#times this.rating}}
 												<li><i class="zmdi zmdi-star"></i></li>
-												<li><i class="zmdi zmdi-star"></i></li>
-												<li><i class="zmdi zmdi-star"></i></li>
+												{{/times}}
+												{{#emptystars this.rating}}
 												<li class="off"><i class="zmdi zmdi-star"></i></li>
-												<li class="off"><i class="zmdi zmdi-star"></i></li>
+												{{/emptystars}}
 											</ul>
 										</div>
 									</div>
 									<div class="review-content">
-										<p>Hastech</p>
-										<p>Review by Hastech</p>
-										<p>Posted on 09/06/2020</p>
+										<p>{{this.description}}</p>
+										<p>Posted on {{this.date}}</p>
 									</div>
 								</div>
 							</div>
-							<form id="reviewForm" method="POST"action="/addReview/{{id}}">
+							{{/each}}
+							<form id="reviewForm" name="reviewForm" method="POST"action="../../addReview/{{id}}">
 								<div class="review-fieldset">
 									<h2>You're reviewing:</h2>
-									<h3>20 slots of custom materials</h3>
+									<h3>{{name}}</h3>
 									<div class="review-field-ratings">
 										<fieldset class="rating">
 											<input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
@@ -238,8 +219,9 @@
 										<div class="input__box">
 											<textarea form="reviewForm" name="description"id="review_field" placeholder="Write your review here.."></textarea>
 										</div>
+									
 										<div class="review-form-actions">
-											<button onclick="document.getElementById('reviewForm').submit()">Submit Review</button>
+											<a href="../../addReview/{{id}}"><button>Submit Review</button></a>
 										</div>
 									</div>
 								</div>

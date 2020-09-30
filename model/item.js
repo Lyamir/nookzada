@@ -47,7 +47,7 @@ const itemSchema = mongoose.Schema({
 })
 
 itemSchema.methods.getAverageStars = function(){
-    let average, sum;
+    let average, sum = 0;
     if(this.reviews.length == 0)
         return 0
     else{
