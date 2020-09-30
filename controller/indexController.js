@@ -336,9 +336,7 @@ const routerFunctions = {
                         if(isAdmin(user)){
                             req.session.user = user
                             res.locals.user = user
-                            console.log(req.session.user.email)
                             if(req.body.remember){
-                                console.log("remember me!")
                                 res.cookie("user", req.session.user,{
                                     maxAge:1000*60*60*24*365,
                                     httpOnly:true
