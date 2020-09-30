@@ -150,9 +150,6 @@
                         {{#times review1.rating}}
 												<li><i class="zmdi zmdi-star"></i></li>
                         {{/times}}
-                        {{#times (5-review1.rating)}}
-												<li class="off"><i class="zmdi zmdi-star"></i></li>
-                        {{/times}}
 											</ul>
 										</div>
 									  <div class="review-content" style="margin: 0 -10% 0 27%;">
@@ -161,53 +158,31 @@
 								  </div>
 							  </div>
               </div>
-                        
-                        <!-- Start 2nd Review -->
-                        <div id="nav-details" role="tabpanel">
-							<div class="review__attribute review2onward">
-								<h4>20 slots of custom seasonal materials</h4>
-								<div class="review__ratings__type d-flex">
-									<div class="review-ratings" style="margin-left: -5%;">
-										<div class="rating-summary d-flex">
-											<ul class="rating d-flex">
-												<li><i class="zmdi zmdi-star"></i></li>
-												<li><i class="zmdi zmdi-star"></i></li>
-												<li><i class="zmdi zmdi-star"></i></li>
-												<li class="off"><i class="zmdi zmdi-star"></i></li>
-												<li class="off"><i class="zmdi zmdi-star"></i></li>
-											</ul>
-										</div>
-
-									<div class="review-content" style="margin: 0 -10% 0 27%;">
-										<p>Posted on 09/06/2020</p>
-									</div>
-								</div>
-                </div>
-						</div>
             </div>
-                        <!-- Start 2nd Review -->                        
-            <div id="nav-details" role="tabpanel">
-							<div class="review__attribute review2onward">
-								<h4>400 Nook Miles Tickets</h4>
-								<div class="review__ratings__type d-flex">
-									<div class="review-ratings" style="margin-left: -5%;">
-										<div class="rating-summary d-flex">
-											<ul class="rating d-flex">
-												<li><i class="zmdi zmdi-star"></i></li>
-												<li><i class="zmdi zmdi-star"></i></li>
-												<li><i class="zmdi zmdi-star"></i></li>
-												<li class="off"><i class="zmdi zmdi-star"></i></li>
-												<li class="off"><i class="zmdi zmdi-star"></i></li>
-											</ul>
-										</div>
-                    <div class="review-content" style="margin: 0 -10% 0 27%;">
-                      <p>Posted on 09/06/2020</p>
+            
+            {{#if reviews}}
+            {{#each reviews}}
+              <div id="nav-details" role="tabpanel">
+                <div class="review__attribute review2onward">
+                  <h4>{{this.itemname}}</h4>
+                  <div class="review__ratings__type d-flex">
+                    <div class="review-ratings" style="margin-left: -5%;">
+                      <div class="rating-summary d-flex">
+                        <ul class="rating d-flex">
+                          {{#times this.rating}}
+                          <li><i class="zmdi zmdi-star"></i></li>
+                          {{/times}}
+                        </ul>
+                      </div>
+                      <div class="review-content" style="margin: 0 -10% 0 27%;">
+                        <p>Posted on {{this.date}}</p>
+                      </div>
                     </div>
-								  </div>
+                  </div>
                 </div>
-						  </div>
-            </div>
-				</div>
+              </div>  
+            {{/each}}
+            {{/if}}
 			</div>
 		</div>
 	</div>

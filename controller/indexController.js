@@ -558,21 +558,28 @@ const routerFunctions = {
         if(req.cookies.user)
             req.session.user = req.cookies.user
         if(req.session.user){
-            for(let i = 0; i < req.session.user.reviews.length; i++){
-                numReview++; 
-            }
-            let reviews2 = req.session.user.reviews.shift()
-            res.render('profile', {
-                user: req.session.user,
-                username: req.session.user.username,
+            
+            userModel.findById(req.session.user._id, (err, user)=>{
+                for(let i = 0; i < req.session.user.reviews.length; i++){
+                    numReview++; 
+                }
+
+                let reviews2 = [user.reviews.shift()] || false
+
+                console.log(reviews2)
+                res.render('profile', {
+                user: user,
+                username: user.username,
                 numReview: numReview,
-                review1: req.session.user.reviews[0],
+                review1: user.reviews[0],
                 reviews: reviews2,
                 r_itemname: req.session.user.reviews.itemname,
                 r_rating: req.session.user.reviews.rating,
                 r_description: req.session.user.reviews.description,
                 r_date: req.session.user.reviews.Date
-            })     
+            })  
+            })
+   
         }
         else{
             res.redirect('/login')
