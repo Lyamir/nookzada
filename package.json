@@ -22,6 +22,8 @@
     "body-parser": "^1.19.0",
     "cookie-parser": "^1.4.5",
     "dotenv": "^8.2.0",
+    "emailjs": "^3.3.0",
+    "emailjs-com": "^2.6.3",
     "express": "^4.17.1",
     "express-handlebars": "^5.1.0",
     "express-session": "^1.17.1",

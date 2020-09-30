@@ -92,18 +92,18 @@
 <!-- Register -->
 <div class=" w3l-contact-form">
     <h2>Contact us!</h2>
-    <form action="#" method="POST">
+    <form action="../sendEmail" method="POST">
         <!-- name -->
             <div class="group">
-                <input type="text" class="form-control" placeholder="Name" required="required" />
+                <input type="text" name="name" class="form-control" placeholder="Name" required="required" />
             </div>
         <!-- email -->
             <div class="group">
-                <input type="email" class="form-control" placeholder="Email" required="required" />
+                <input type="email" name="email"class="form-control" placeholder="Email" required="required" />
             </div>
         <!-- message -->
             <div class="group" >
-                <textarea id="subject" name="subject" placeholder="Write something.."></textarea>
+                <textarea id="subject" name="description" name="subject" placeholder="Write something.."></textarea>
             </div>
         <br>
         <button type="submit">Submit</button>

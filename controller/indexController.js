@@ -3,6 +3,17 @@ const itemModel = require ('../model/item')
 var mongoose = require('mongoose')
 var multer = require('multer')
 var upload = multer({dest: '/images/items/'})
+const emailjs = require('emailjs');
+require('dotenv').config();
+
+const client = new emailjs.SMTPClient({
+    user: process.env.EMAIL_USER,
+    password: process.env.EMAIL_PASS,
+    host: 'smtp-mail.outlook.com',
+    tls: {
+        ciphers: 'SSLv3',
+    },
+});
 
 const hbs = require('hbs')
 function isAdmin(user) {
@@ -680,6 +691,20 @@ const routerFunctions = {
                 }
             })
         })
+    },
+    sendEmail : (req, res)=>{
+        const message = new emailjs.Message({
+            text: req.body.description,
+            from: `${req.body.name} ${req.body.email}`,
+            subject: 'Nookzada Inquiry',
+            to: 'Nookzada carlos_doble@dlsu.edu.ph',
+        });
+
+        client.send(message, (err, message) => {
+            console.log(err || message);    
+        });
+
+        res.redirect('/contact')
     }
 }
 
