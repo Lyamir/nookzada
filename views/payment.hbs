@@ -74,48 +74,49 @@
 <div class=" w3l-contact-form">
     <h2 style="text-align: left; margin-left: 25px;">Pay with Card</h2>
     <h4 style="float: right; color: rgb(61, 57, 57); margin: -85px 22% 0 0">accepted cards</h4>
-    <img src="images/mastercard.png" style="float: right;  padding: 0 20px; margin-top: -12.2%;" ><img src="images/visa.png" style="float: right; margin: -12% 11.5% 0 0;">
+    <img src="images/mastercard.png" style="float: right;  padding: 0 20px; margin-top: -12.2%; 
+    height: 100px; width: 120px" >
+    <img src="images/visa.png" style="float: right; margin: -12% 11.5% 0 0; height: 100px; width: 100px">
     <hr style="margin-top: -30px;">
     <form action="#" method="POST">
 	<div style="float: left; margin-right: 30px; width: 47%;">
     <div class="col-25">
       <div class="container">
-        <h4 style="font-weight: bold;">Cart <span class="price" style="color:black; width: 50px;"><i class="fa fa-shopping-cart"></i> <b>4</b></span></h4>
-        <p><a href="#">Product 1</a> <span class="price">100php</span></p>
-        <p><a href="#">Product 2</a> <span class="price">100php</span></p>
-        <p><a href="#">Product 3</a> <span class="price">200php</span></p>
-        <p><a href="#">Product 4</a> <span class="price">300php</span></p>
+        <h4 style="font-weight: bold;">Cart <span class="price" style="color:black; width: 50px;"><i class="fa fa-shopping-cart"></i> <b>{{carttotal}}</b></span></h4>
+        {{#each cart}}
+        <p><a href="#">{{this.itemname}}</a> <span class="price">{{this.subtotal}}</span></p>
+        {{/each}}
         <hr>
-        <p>Total <span class="price" style="color:black"><b>700php</b></span></p>
+        <p>Total <span class="price" style="color:black"><b>{{this.total}}</b></span></p>
       </div>
     </div>
 		</div>
 <!-- name -->
 <span>Cardholder's Name</span>
 <div class="group">
-    <input type="text" class="text" required="required" />
+    <input type="text" class="text" required />
 </div>
 <!-- card -->
 <span>Card Number</span>
 <div class="group">
-    <input type="text" class="text" required="required" />
+    <input type="text" class="text" required />
 </div>
 <!-- Valid through/ CVC -->
 <span>Valid thru</span>
 <div class="group">
   <div style="float: left; width: 48%;">
-    <input type="number" class="text" required="required" placeholder="MM/YY" />
+    <input type="text" class="text" required placeholder="MM/YY" />
   </div>
   <span class="right">CVC</span>
   <div style="float: left; width: 48%; margin-left: -20%;">
-    <input type="number" class="text" required="required" />
+    <input type="text" class="text" required />
   </div>
 </div>
 
         <br>
 
-        <button type="submit" class="paybut" style="float: right;">Pay</button>
-        <button type="button" class="backbut" style="float: left;" onClick="location.href='cart.html'">Back</button>
+        <a href="success"><button type="button" class="paybut" style="float: right;">Pay</button></a>
+        <a href="cart"><button type="button" class="backbut" style="float: left;">Back</button></a>
     </form>
 </div>
 

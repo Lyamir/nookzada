@@ -705,6 +705,41 @@ const routerFunctions = {
         });
 
         res.redirect('/contact')
+    },
+    getPayment: async (req, res)=>{
+        let total = 0;
+        if(req.cookies.user)
+            req.session.user = req.cookies.user
+        if(req.session.user){
+            await userModel.findById(req.session.user._id, (err, user)=>{
+                if(err)
+                    console.log(err)
+                else{   
+                        for(let i = 0; i < user.cart.length; i++){
+                            total += user.cart[i].subtotal;
+                        } 
+                        res.render('payment', {
+                                user: user,
+                                cart: user.cart,
+                                total: total,
+                                carttotal: user.cart.length
+                            })                    
+                    }
+                })            
+            }else{
+                res.redirect('/login')
+            }
+    },
+
+    getSuccess: (req, res)=>{
+        let total = 0;
+        if(req.cookies.user)
+            req.session.user = req.cookies.user
+        if(req.session.user){
+            res.render('success')
+            }else{
+                res.redirect('/login')
+            }
     }
 }
 

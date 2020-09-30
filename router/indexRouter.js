@@ -27,6 +27,8 @@ router.get('/add', controller.getAddItem)
 router.get('/edit', controller.getEditItem)
 router.get('/delete', controller.getDeleteItem)
 router.get('/profile', controller.getProfile)
+router.get('/payment', controller.getPayment)
+router.get('/success', controller.getSuccess)
 
 router.post('/login', urlencoder, controller.postLogin)
 router.post('/register', urlencoder, controller.postSignup)
