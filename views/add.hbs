@@ -84,6 +84,11 @@
 <!-- Add -->
 <div class=" w3l-contact-form">
     <h2 style="text-align: center;">Add Items</h2>
+    {{#if success}}
+    <div class="alert alert-success">
+        Item Added!
+    </div>
+    {{/if}}
     <form action="addItem" method="POST">
 	<div style="float: left; margin-right: 30px; width: 47%;">
 		<!-- name -->

@@ -436,7 +436,9 @@ const routerFunctions = {
                         if(err)
                             console.log(err)
                         else{
-                            res.redirect('/')
+                            res.render('add', {
+                                success: true
+                            })
                             console.log('${item.name} added')
                         }
                     })  
