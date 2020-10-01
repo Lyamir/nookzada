@@ -407,7 +407,8 @@ const routerFunctions = {
         let image = req.body.image;
         let stock = req.body.stock;
         let id;
-        
+        // var upload = multer({dest: __dirname + 'public/images/items/'}).single(req.body.image)
+
         itemModel.countDocuments({}, function(err, result) {
             if (err) {
               console.log(err)
@@ -416,28 +417,52 @@ const routerFunctions = {
             }
        
           console.log(id)
+            if (err) {  
+                console.log("Something went wrong!");  
+            }  
+            // upload.single(req.body.image)
+            // return res.send("File uploaded sucessfully!."); 
+            let item = new itemModel({
+                        _id: id,
+                        name: name,
+                        price: price,
+                        description: description,
+                        itemList: [],
+                        image: image,
+                        stock: stock,
+                        timesSold: 0
+                    })
+            console.log(item)
+            item.save((err, item)=>{
+                        if(err)
+                            console.log(err)
+                        else{
+                            res.redirect('/')
+                            console.log('${item.name} added')
+                        }
+                    })  
 
-          
-
-        let item = new itemModel({
-            _id: id,
-            name: name,
-            price: price,
-            description: description,
-            itemList: [],
-            image: image,
-            stock: stock,
-            timesSold: 0
-        })
-    
-        item.save((err, item)=>{
-            if(err)
-                console.log(err)
-            else{
-                res.redirect('/')
-                console.log('${item.name} added')
-            }
-        })
+        // let item = new itemModel({
+        //     _id: id,
+        //     name: name,
+        //     price: price,
+        //     description: description,
+        //     itemList: [],
+        //     image: image,
+        //     stock: stock,
+        //     timesSold: 0
+        // })
+        // console.log(item)
+        // item.save((err, item)=>{
+        //             if(err)
+        //                 console.log(err)
+        //             else{
+        //                 res.redirect('/')
+        //                 console.log('${item.name} added')
+        //             }
+        //         })
+        // upload.single(req.body.image)
+        
     });
     },
     
