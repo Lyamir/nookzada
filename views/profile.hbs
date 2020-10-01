@@ -153,6 +153,7 @@
 											</ul>
 										</div>
 									  <div class="review-content" style="margin: 0 -10% 0 27%;">
+                      <p>{{review1.description}}</p>
 										  <p>Posted on {{review1.date}}</p>
 									  </div>
 								  </div>
@@ -175,6 +176,9 @@
                         </ul>
                       </div>
                       <div class="review-content" style="margin: 0 -10% 0 27%;">
+                        {{#if description}}
+                        <p>{{this.description}}</p>
+                        {{/if}}
                         <p>Posted on {{this.date}}</p>
                       </div>
                     </div>
