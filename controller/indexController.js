@@ -591,7 +591,11 @@ const routerFunctions = {
                     numReview++; 
                 }
 
-                let reviews2 = [user.reviews.shift()] || false
+                let reviews2 = []
+
+                for(let i = 1; i < numReview; i++){
+                    reviews2.push(user.reviews[i]);
+                }
 
                 console.log(reviews2)
                 res.render('profile', {
@@ -704,6 +708,7 @@ const routerFunctions = {
 
         res.redirect('/contact')
     },
+    
     getPayment: async (req, res)=>{
         let total = 0;
         if(req.session.user){
@@ -729,7 +734,7 @@ const routerFunctions = {
 
     getSuccess: (req, res)=>{
         if(req.session.user){
-            userModel.findById(req.session.user._id, (err, user)=>{
+            userModel.findById(req.session.user._id, async (err, user)=>{
                 let itemList = []
                 user.cart.forEach(item => {
                     itemList.push({
@@ -747,7 +752,8 @@ const routerFunctions = {
                     totalprice: totalprice
                 })
                 console.log("order added");
-                user.save()
+                user.cart = [];
+                await user.save()
             })
             res.render('success')
             }else{
