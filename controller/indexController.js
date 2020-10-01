@@ -706,8 +706,6 @@ const routerFunctions = {
     },
     getPayment: async (req, res)=>{
         let total = 0;
-        if(req.cookies.user)
-            req.session.user = req.cookies.user
         if(req.session.user){
             await userModel.findById(req.session.user._id, (err, user)=>{
                 if(err)
@@ -730,10 +728,27 @@ const routerFunctions = {
     },
 
     getSuccess: (req, res)=>{
-        let total = 0;
-        if(req.cookies.user)
-            req.session.user = req.cookies.user
         if(req.session.user){
+            userModel.findById(req.session.user._id, (err, user)=>{
+                let itemList = []
+                user.cart.forEach(item => {
+                    itemList.push({
+                        items: item.itemname, 
+                        quantity: item.quantity, 
+                        subtotal: item.subtotal
+                    })
+                });
+                let totalprice = 0;
+                itemList.forEach(item => {
+                    totalprice += item.subtotal;
+                });
+                user.orders.push({
+                    items: itemList,
+                    totalprice: totalprice
+                })
+                console.log("order added");
+                user.save()
+            })
             res.render('success')
             }else{
                 res.redirect('/login')

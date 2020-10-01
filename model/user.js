@@ -45,8 +45,9 @@ const userSchema = mongoose.Schema({
         orders: {
             type: [{
                 items: [{
-                    itemname: String, 
-                    price: Number, 
+                    itemname: String,
+                    quantity: Number,
+                    subtotal: Number, 
                 }], 
                 totalprice: Number
             }]
