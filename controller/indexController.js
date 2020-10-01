@@ -407,7 +407,6 @@ const routerFunctions = {
         let image = req.body.image;
         let stock = req.body.stock;
         let id;
-        // var upload = multer({dest: __dirname + 'public/images/items/'}).single(req.body.image)
 
         itemModel.countDocuments({}, function(err, result) {
             if (err) {
@@ -484,12 +483,12 @@ const routerFunctions = {
     },
 
     deleteItem: function(req, res){
-        itemModel.remove({_id:req.params.id}, function(err, delItem){
+        itemModel.deleteOne({_id:req.params.id}, function(err, delItem){
             if(err){
                 console.log("Error: " + err)
                 throw(err)
             }
-            res.redirect('/')
+            res.redirect('/delete')
         });
     },
 
@@ -616,7 +615,11 @@ const routerFunctions = {
                     numReview++; 
                 }
 
-                let reviews2 = [user.reviews.shift()] || false
+                let reviews2 = []
+
+                for(let i = 1; i < numReview; i++){
+                    reviews2.push(user.reviews[i]);
+                }
 
                 console.log(reviews2)
                 res.render('profile', {
@@ -729,6 +732,7 @@ const routerFunctions = {
 
         res.redirect('/contact')
     },
+    
     getPayment: async (req, res)=>{
         let total = 0;
         if(req.session.user){
@@ -754,7 +758,7 @@ const routerFunctions = {
 
     getSuccess: (req, res)=>{
         if(req.session.user){
-            userModel.findById(req.session.user._id, (err, user)=>{
+            userModel.findById(req.session.user._id, async (err, user)=>{
                 let itemList = []
                 user.cart.forEach(item => {
                     itemList.push({
@@ -772,7 +776,8 @@ const routerFunctions = {
                     totalprice: totalprice
                 })
                 console.log("order added");
-                user.save()
+                user.cart = [];
+                await user.save()
             })
             res.render('success')
             }else{

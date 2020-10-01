@@ -106,7 +106,7 @@
 									<td class="product-name"><a href="#">{{this.name}}</a></td>
 									<td class="product-price"><span class="amount">{{this.price}}</span></td>
 									<td class="product-quantity"><span class="amount">{{this.price}}</span></td>
-									<td class="product-remove"><a href="#"><i class="fas fa-trash"></i></a></td>
+									<td class="product-remove"><a href="/deleteItem/{{this.id}}"><i class="fas fa-trash"></i></a></td>
 								</tr>
               {{/each}}
 							</tbody>
@@ -114,7 +114,7 @@
 					</div>
 				</form>
 				<br>
-				<button type="submit" class="done-delete">Done Deleting</button>
+				<a href="/add"><button type="submit" class="done-delete">Done Deleting</button></a>
 
 		</div>
 
