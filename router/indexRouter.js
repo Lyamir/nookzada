@@ -20,25 +20,23 @@ router.get('/cart', controller.getCart)
 router.get('/addCart/:id', controller.addCart)
 router.get('/deleteCart/:id', controller.deleteCart)
 router.get('/profile', controller.getProfile)
-router.get('/addItem', controller.getAddItem)
-router.get('/editItem', controller.getEditItem)
-router.get('/deleteItem', controller.getDeleteItem)
 router.get('/add', controller.getAddItem)
 router.get('/edit', controller.getEditItem)
 router.get('/delete', controller.getDeleteItem)
 router.get('/profile', controller.getProfile)
 router.get('/payment', controller.getPayment)
 router.get('/success', controller.getSuccess)
+router.get('/deleteItem/:id', controller.deleteItem)
 
 router.post('/login', urlencoder, controller.postLogin)
 router.post('/register', urlencoder, controller.postSignup)
 router.post('/addItem', urlencoder, controller.addItem)
 router.post('/shop', controller.searchItem)
-router.post('/deleteItem', controller.deleteItem)
-router.post('/editItem/:id', urlencoder, controller.editItem)
+router.post('/editItem', urlencoder, controller.editItem)
 router.post('/addCart/:id', urlencoder, controller.addCart)
 router.post('/addReview/:id', urlencoder, controller.addReview)
 router.post('/sendEmail', urlencoder, controller.sendEmail)
+
 
 
 module.exports = router

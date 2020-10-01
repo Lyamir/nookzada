@@ -407,7 +407,7 @@ const routerFunctions = {
         let image = req.body.image;
         let stock = req.body.stock;
         let id;
-        
+
         itemModel.countDocuments({}, function(err, result) {
             if (err) {
               console.log(err)
@@ -459,12 +459,12 @@ const routerFunctions = {
     },
 
     deleteItem: function(req, res){
-        itemModel.remove({_id:req.params.id}, function(err, delItem){
+        itemModel.deleteOne({_id:req.params.id}, function(err, delItem){
             if(err){
                 console.log("Error: " + err)
                 throw(err)
             }
-            res.redirect('/')
+            res.redirect('/delete')
         });
     },
 
