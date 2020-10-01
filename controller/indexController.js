@@ -2,7 +2,7 @@ const userModel = require('../model/user')
 const itemModel = require ('../model/item')
 var mongoose = require('mongoose')
 var multer = require('multer')
-var upload = multer({dest: '/images/items/'})
+var upload = multer({dest: __dirname + 'public/images/items/'})
 const emailjs = require('emailjs');
 require('dotenv').config();
 
